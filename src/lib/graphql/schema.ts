@@ -74,7 +74,7 @@ const resolvers = {
         select: { chapter: true },
         orderBy: { chapter: "asc" },
       });
-      return rows.map((r) => r.chapter);
+      return rows.map((r: { chapter: string }) => r.chapter);
     },
     sessionWords: async (
       _: unknown,

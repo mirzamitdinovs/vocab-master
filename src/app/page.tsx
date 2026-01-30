@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -94,7 +94,7 @@ export default function HomePage() {
     if (!user) return;
     fetchChapters(user.id);
     fetchStats(user.id);
-  }, [user]);
+  }, [user, fetchChapters, fetchStats]);
 
   useEffect(() => {
     if (mode !== "handwriting") return;
@@ -134,24 +134,27 @@ export default function HomePage() {
     }
   }
 
-  async function fetchChapters(userId: string) {
-    const data = await graphqlRequest<{ chapters: string[] }>(
-      `query Chapters($userId: ID!) { chapters(userId: $userId) }`,
-      { userId }
-    );
-    setChapters(data.chapters);
-    if (data.chapters.length && selectedChapters.length === 0) {
-      setSelectedChapters(data.chapters);
-    }
-  }
+  const fetchChapters = useCallback(
+    async (userId: string) => {
+      const data = await graphqlRequest<{ chapters: string[] }>(
+        `query Chapters($userId: ID!) { chapters(userId: $userId) }`,
+        { userId }
+      );
+      setChapters(data.chapters);
+      if (data.chapters.length && selectedChapters.length === 0) {
+        setSelectedChapters(data.chapters);
+      }
+    },
+    [selectedChapters.length]
+  );
 
-  async function fetchStats(userId: string) {
+  const fetchStats = useCallback(async (userId: string) => {
     const data = await graphqlRequest<{ stats: UserStats }>(
       `query Stats($userId: ID!) { stats(userId: $userId) { wordsLearned sessionsCompleted totalWords correctTotal incorrectTotal } }`,
       { userId }
     );
     setStats(data.stats);
-  }
+  }, []);
 
   function handleChapterToggle(chapter: string) {
     setSelectedChapters((prev) =>
@@ -254,7 +257,7 @@ export default function HomePage() {
     handleFileUpload(file);
   }
 
-  function buildQuiz() {
+  const buildQuiz = useCallback(() => {
     if (!currentWord) return;
     const options = new Set<string>();
     options.add(currentWord.translation);
@@ -264,7 +267,7 @@ export default function HomePage() {
     }
     const shuffled = Array.from(options).sort(() => Math.random() - 0.5);
     setQuizOptions(shuffled);
-  }
+  }, [currentWord, sessionWords]);
 
   function handleQuizAnswer(option: string) {
     if (!currentWord) return;
@@ -312,7 +315,7 @@ export default function HomePage() {
     if (mode === "quiz" && sessionWords.length > 0) {
       buildQuiz();
     }
-  }, [mode, currentIndex, sessionWords]);
+  }, [mode, currentIndex, sessionWords, buildQuiz]);
 
   if (loadingUser) {
     return <div className="text-sm text-muted-foreground">Loading...</div>;
