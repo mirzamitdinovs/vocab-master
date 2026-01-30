@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String     @id @default(cuid())
+  name      String
+  phone     String     @unique
+  createdAt DateTime   @default(now())
+  vocabulary Vocabulary[]
+  wordStats  WordStat[]
+  userStats  UserStat?
+}
+
+model Vocabulary {
+  id        String   @id @default(cuid())
+  userId    String
+  order     Int?
+  korean    String
+  translation String
+  chapter   String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  wordStats WordStat[]
+
+  @@unique([userId, korean, translation, chapter])
+  @@index([userId, chapter])
+}
+
+model WordStat {
+  id            String   @id @default(cuid())
+  userId        String
+  wordId        String
+  correctCount  Int      @default(0)
+  incorrectCount Int     @default(0)
+  lastSeenAt    DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  word Vocabulary @relation(fields: [wordId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, wordId])
+}
+
+model UserStat {
+  id                String   @id @default(cuid())
+  userId            String   @unique
+  wordsLearned      Int      @default(0)
+  sessionsCompleted Int      @default(0)
+  updatedAt         DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
