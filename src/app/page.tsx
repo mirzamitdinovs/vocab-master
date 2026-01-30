@@ -90,6 +90,28 @@ export default function HomePage() {
       .finally(() => setLoadingUser(false));
   }, []);
 
+  const fetchChapters = useCallback(
+    async (userId: string) => {
+      const data = await graphqlRequest<{ chapters: string[] }>(
+        `query Chapters($userId: ID!) { chapters(userId: $userId) }`,
+        { userId }
+      );
+      setChapters(data.chapters);
+      if (data.chapters.length && selectedChapters.length === 0) {
+        setSelectedChapters(data.chapters);
+      }
+    },
+    [selectedChapters.length]
+  );
+
+  const fetchStats = useCallback(async (userId: string) => {
+    const data = await graphqlRequest<{ stats: UserStats }>(
+      `query Stats($userId: ID!) { stats(userId: $userId) { wordsLearned sessionsCompleted totalWords correctTotal incorrectTotal } }`,
+      { userId }
+    );
+    setStats(data.stats);
+  }, []);
+
   useEffect(() => {
     if (!user) return;
     fetchChapters(user.id);
@@ -133,28 +155,6 @@ export default function HomePage() {
       setError(err instanceof Error ? err.message : "Failed to create user.");
     }
   }
-
-  const fetchChapters = useCallback(
-    async (userId: string) => {
-      const data = await graphqlRequest<{ chapters: string[] }>(
-        `query Chapters($userId: ID!) { chapters(userId: $userId) }`,
-        { userId }
-      );
-      setChapters(data.chapters);
-      if (data.chapters.length && selectedChapters.length === 0) {
-        setSelectedChapters(data.chapters);
-      }
-    },
-    [selectedChapters.length]
-  );
-
-  const fetchStats = useCallback(async (userId: string) => {
-    const data = await graphqlRequest<{ stats: UserStats }>(
-      `query Stats($userId: ID!) { stats(userId: $userId) { wordsLearned sessionsCompleted totalWords correctTotal incorrectTotal } }`,
-      { userId }
-    );
-    setStats(data.stats);
-  }, []);
 
   function handleChapterToggle(chapter: string) {
     setSelectedChapters((prev) =>
