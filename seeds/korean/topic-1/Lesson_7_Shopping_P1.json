@@ -1,0 +1,152 @@
+[
+  {
+    "order": 1,
+    "korean": "\ubb3c\uac74 \uc0ac\uae30",
+    "translation": "Buying things"
+  },
+  {
+    "order": 2,
+    "korean": "\uc5ec\ub7ec \uac1c",
+    "translation": "Several things"
+  },
+  {
+    "order": 3,
+    "korean": "\uac1c",
+    "translation": "Piece, unit"
+  },
+  {
+    "order": 4,
+    "korean": "\uba85/ \uc0ac\ub78c",
+    "translation": "Person"
+  },
+  {
+    "order": 5,
+    "korean": "\ub9c8\ub9ac",
+    "translation": "Counter for animals"
+  },
+  {
+    "order": 6,
+    "korean": "\uc794",
+    "translation": "Counter for glasses"
+  },
+  {
+    "order": 7,
+    "korean": "\ub300",
+    "translation": "Counter for cars, planes, bicycles, machines,..."
+  },
+  {
+    "order": 8,
+    "korean": "\ubcd1",
+    "translation": "Counter for bottles"
+  },
+  {
+    "order": 9,
+    "korean": "\ucf24\ub808",
+    "translation": "Counter for pairs of shoes"
+  },
+  {
+    "order": 10,
+    "korean": "\uad8c",
+    "translation": "Counter for books"
+  },
+  {
+    "order": 11,
+    "korean": "\uc7a5",
+    "translation": "Counter for pieces of paper"
+  },
+  {
+    "order": 12,
+    "korean": "\ucc44\uc18c",
+    "translation": "Vegetable"
+  },
+  {
+    "order": 13,
+    "korean": "\uc74c\ub8cc\uc218",
+    "translation": "Drinking water"
+  },
+  {
+    "order": 14,
+    "korean": "\uad6c\ub450",
+    "translation": "Shoes"
+  },
+  {
+    "order": 15,
+    "korean": "\uc190\ub2d8",
+    "translation": "Visitor, guest, customer"
+  },
+  {
+    "order": 16,
+    "korean": "\uc8fc\uc778",
+    "translation": "Owner"
+  },
+  {
+    "order": 17,
+    "korean": "\ubc1c\uc74c",
+    "translation": "Pronunciation"
+  },
+  {
+    "order": 18,
+    "korean": "\uacfc\uc790",
+    "translation": "Cracker, cookie, biscuit"
+  },
+  {
+    "order": 19,
+    "korean": "\uc8fc\uc2a4",
+    "translation": "Juice"
+  },
+  {
+    "order": 20,
+    "korean": "\uade4",
+    "translation": "Tangerine, mandarin orange"
+  },
+  {
+    "order": 21,
+    "korean": "\uce74\uba54\ub77c",
+    "translation": "Camera"
+  },
+  {
+    "order": 22,
+    "korean": "\ub514\uc790\uc778",
+    "translation": "Design"
+  },
+  {
+    "order": 23,
+    "korean": "\uc138\uc77c",
+    "translation": "Sale"
+  },
+  {
+    "order": 24,
+    "korean": "\ud2f0\uc154\uce20",
+    "translation": "T-shirt"
+  },
+  {
+    "order": 25,
+    "korean": "\ub9c8\ud2b8",
+    "translation": "Mart"
+  },
+  {
+    "order": 26,
+    "korean": "\uc18c\uc124\ucc45",
+    "translation": "Novel"
+  },
+  {
+    "order": 27,
+    "korean": "\ub9dd\uace0",
+    "translation": "Mango"
+  },
+  {
+    "order": 28,
+    "korean": "\uc218\ubc15",
+    "translation": "Watermelon"
+  },
+  {
+    "order": 29,
+    "korean": "\ubb38\uad6c\uc810",
+    "translation": "Stationery store"
+  },
+  {
+    "order": 30,
+    "korean": "\uc804\uc790\uc0c1\uac00",
+    "translation": "Electronic store"
+  }
+]

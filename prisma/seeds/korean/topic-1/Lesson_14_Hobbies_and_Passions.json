@@ -1,0 +1,327 @@
+[
+  {
+    "order": 1,
+    "korean": "운동",
+    "translation": "Exercise, sports"
+  },
+  {
+    "order": 2,
+    "korean": "축구",
+    "translation": "Soccer"
+  },
+  {
+    "order": 3,
+    "korean": "족구",
+    "translation": "Foot volleyball"
+  },
+  {
+    "order": 4,
+    "korean": "탁구",
+    "translation": "Table tennis"
+  },
+  {
+    "order": 5,
+    "korean": "배드민턴",
+    "translation": "Badminton"
+  },
+  {
+    "order": 6,
+    "korean": "테니스",
+    "translation": "Tennis"
+  },
+  {
+    "order": 7,
+    "korean": "태권도",
+    "translation": "Taekwondo"
+  },
+  {
+    "order": 8,
+    "korean": "골프",
+    "translation": "Golf"
+  },
+  {
+    "order": 9,
+    "korean": "요가",
+    "translation": "Yoga"
+  },
+  {
+    "order": 10,
+    "korean": "마라톤",
+    "translation": "Marathon"
+  },
+  {
+    "order": 11,
+    "korean": "스케이트",
+    "translation": "Skate, skating"
+  },
+  {
+    "order": 12,
+    "korean": "볼링",
+    "translation": "Bowling"
+  },
+  {
+    "order": 13,
+    "korean": "조깅",
+    "translation": "Jogging"
+  },
+  {
+    "order": 14,
+    "korean": "수영",
+    "translation": "Swimming"
+  },
+  {
+    "order": 15,
+    "korean": "취미",
+    "translation": "Hobby"
+  },
+  {
+    "order": 16,
+    "korean": "책 읽기, 독서",
+    "translation": "Reading a book"
+  },
+  {
+    "order": 17,
+    "korean": "사진 찍기",
+    "translation": "Taking pictures"
+  },
+  {
+    "order": 18,
+    "korean": "그림 그리기",
+    "translation": "Painting"
+  },
+  {
+    "order": 19,
+    "korean": "음악 감상 (하기)",
+    "translation": "Listening to music"
+  },
+  {
+    "order": 20,
+    "korean": "여행 (하기)",
+    "translation": "Traveling"
+  },
+  {
+    "order": 21,
+    "korean": "운동 (하기)",
+    "translation": "Exercising"
+  },
+  {
+    "order": 22,
+    "korean": "영화 보기",
+    "translation": "Seeing a movie"
+  },
+  {
+    "order": 23,
+    "korean": "우표 수집/ 우표 모으기",
+    "translation": "Stamp collecting"
+  },
+  {
+    "order": 24,
+    "korean": "컴퓨터 게임 (하기)",
+    "translation": "Playing computer game"
+  },
+  {
+    "order": 25,
+    "korean": "항상, 언제나",
+    "translation": "Always, all the time"
+  },
+  {
+    "order": 26,
+    "korean": "자주",
+    "translation": "Often, frequently"
+  },
+  {
+    "order": 27,
+    "korean": "가끔",
+    "translation": "Sometimes, occasionally"
+  },
+  {
+    "order": 28,
+    "korean": "거의 안~",
+    "translation": "Almost, nearly"
+  },
+  {
+    "order": 29,
+    "korean": "전혀",
+    "translation": "Completely, absolutely, entirely"
+  },
+  {
+    "order": 30,
+    "korean": "잘하다",
+    "translation": "To do a right thing, to do well"
+  },
+  {
+    "order": 31,
+    "korean": "못하다",
+    "translation": "Cannot"
+  },
+  {
+    "order": 32,
+    "korean": "보통이다",
+    "translation": "Be par for the course"
+  },
+  {
+    "order": 33,
+    "korean": "조금 하다",
+    "translation": "To do a little"
+  },
+  {
+    "order": 34,
+    "korean": "가곡",
+    "translation": "Song"
+  },
+  {
+    "order": 35,
+    "korean": "믿다",
+    "translation": "To believe, to trust"
+  },
+  {
+    "order": 36,
+    "korean": "채팅하다",
+    "translation": "To chat online"
+  },
+  {
+    "order": 37,
+    "korean": "가요",
+    "translation": "Song"
+  },
+  {
+    "order": 38,
+    "korean": "사진을 찍다",
+    "translation": "To take pictures"
+  },
+  {
+    "order": 39,
+    "korean": "걱정하다",
+    "translation": "To worry, to be worried"
+  },
+  {
+    "order": 40,
+    "korean": "소설책",
+    "translation": "Novel"
+  },
+  {
+    "order": 41,
+    "korean": "건강",
+    "translation": "Health"
+  },
+  {
+    "order": 42,
+    "korean": "아침마다",
+    "translation": "Every morning"
+  },
+  {
+    "order": 43,
+    "korean": "타다",
+    "translation": "To ride, to get on, to board, to take"
+  },
+  {
+    "order": 44,
+    "korean": "걷다",
+    "translation": "To walk"
+  },
+  {
+    "order": 45,
+    "korean": "앞으로",
+    "translation": "In the future, in front of"
+  },
+  {
+    "order": 46,
+    "korean": "경기",
+    "translation": "Game, match"
+  },
+  {
+    "order": 47,
+    "korean": "어렵다",
+    "translation": "To be difficult"
+  },
+  {
+    "order": 48,
+    "korean": "통역하다",
+    "translation": "To interpret"
+  },
+  {
+    "order": 49,
+    "korean": "경치",
+    "translation": "Scenery, scene, view"
+  },
+  {
+    "order": 50,
+    "korean": "고등학교",
+    "translation": "High school"
+  },
+  {
+    "order": 51,
+    "korean": "오토바이",
+    "translation": "Motorcycle"
+  },
+  {
+    "order": 52,
+    "korean": "피아노",
+    "translation": "Piano"
+  },
+  {
+    "order": 53,
+    "korean": "기초",
+    "translation": "Base, foundation"
+  },
+  {
+    "order": 54,
+    "korean": "도시락",
+    "translation": "Box lunch"
+  },
+  {
+    "order": 55,
+    "korean": "유럽",
+    "translation": "Europe"
+  },
+  {
+    "order": 56,
+    "korean": "한글",
+    "translation": "Hangeul, Korean alphabet"
+  },
+  {
+    "order": 57,
+    "korean": "동아리",
+    "translation": "Club"
+  },
+  {
+    "order": 58,
+    "korean": "자막",
+    "translation": "Subtitles, caption"
+  },
+  {
+    "order": 59,
+    "korean": "해외여행",
+    "translation": "Trip abroad, overseas travel"
+  },
+  {
+    "order": 60,
+    "korean": "디지털카메라",
+    "translation": "Digital camera"
+  },
+  {
+    "order": 61,
+    "korean": "정도",
+    "translation": "Degree, being approximate"
+  },
+  {
+    "order": 62,
+    "korean": "만화책",
+    "translation": "Comic book"
+  },
+  {
+    "order": 63,
+    "korean": "주로",
+    "translation": "Mostly, mainly"
+  },
+  {
+    "order": 64,
+    "korean": "묻다",
+    "translation": "To ask"
+  },
+  {
+    "order": 65,
+    "korean": "준비물",
+    "translation": "Supplies"
+  }
+]

@@ -1,0 +1,182 @@
+[
+  {
+    "order": 1,
+    "korean": "날짜와 요일",
+    "translation": "Date and day"
+  },
+  {
+    "order": 2,
+    "korean": "요일",
+    "translation": "Day of the week"
+  },
+  {
+    "order": 3,
+    "korean": "월요일",
+    "translation": "Monday"
+  },
+  {
+    "order": 4,
+    "korean": "화요일",
+    "translation": "Tuesday"
+  },
+  {
+    "order": 5,
+    "korean": "수요일",
+    "translation": "Wednesday"
+  },
+  {
+    "order": 6,
+    "korean": "목요일",
+    "translation": "Thursday"
+  },
+  {
+    "order": 7,
+    "korean": "금요일",
+    "translation": "Friday"
+  },
+  {
+    "order": 8,
+    "korean": "토요일",
+    "translation": "Saturday"
+  },
+  {
+    "order": 9,
+    "korean": "일요일",
+    "translation": "Sunday"
+  },
+  {
+    "order": 10,
+    "korean": "년",
+    "translation": "Year"
+  },
+  {
+    "order": 11,
+    "korean": "월",
+    "translation": "Month"
+  },
+  {
+    "order": 12,
+    "korean": "일",
+    "translation": "Day"
+  },
+  {
+    "order": 13,
+    "korean": "시",
+    "translation": "O'clock"
+  },
+  {
+    "order": 14,
+    "korean": "일월",
+    "translation": "January"
+  },
+  {
+    "order": 15,
+    "korean": "이월",
+    "translation": "February"
+  },
+  {
+    "order": 16,
+    "korean": "삼월",
+    "translation": "March"
+  },
+  {
+    "order": 17,
+    "korean": "사월",
+    "translation": "April"
+  },
+  {
+    "order": 18,
+    "korean": "오월",
+    "translation": "May"
+  },
+  {
+    "order": 19,
+    "korean": "유월 (육월)",
+    "translation": "June"
+  },
+  {
+    "order": 20,
+    "korean": "칠월",
+    "translation": "July"
+  },
+  {
+    "order": 21,
+    "korean": "팔월",
+    "translation": "August"
+  },
+  {
+    "order": 22,
+    "korean": "구월",
+    "translation": "September"
+  },
+  {
+    "order": 23,
+    "korean": "시월 (십월)",
+    "translation": "October"
+  },
+  {
+    "order": 24,
+    "korean": "십일월",
+    "translation": "November"
+  },
+  {
+    "order": 25,
+    "korean": "십이월",
+    "translation": "December"
+  },
+  {
+    "order": 26,
+    "korean": "그저께",
+    "translation": "The day before yesterday"
+  },
+  {
+    "order": 27,
+    "korean": "어제",
+    "translation": "Yesterday"
+  },
+  {
+    "order": 28,
+    "korean": "오늘",
+    "translation": "Today"
+  },
+  {
+    "order": 29,
+    "korean": "내일",
+    "translation": "Tomorrow"
+  },
+  {
+    "order": 30,
+    "korean": "모레",
+    "translation": "The day after tomorrow"
+  },
+  {
+    "order": 31,
+    "korean": "지난해 (작년)",
+    "translation": "Last year"
+  },
+  {
+    "order": 32,
+    "korean": "올해 (금년)",
+    "translation": "This year"
+  },
+  {
+    "order": 33,
+    "korean": "다음 해 (내년)",
+    "translation": "Next year"
+  },
+  {
+    "order": 34,
+    "korean": "지난달",
+    "translation": "Last month"
+  },
+  {
+    "order": 35,
+    "korean": "이번 달",
+    "translation": "This month"
+  },
+  {
+    "order": 36,
+    "korean": "다음 달",
+    "translation": "Next month"
+  }
+]

@@ -1,0 +1,242 @@
+[
+  {
+    "order": 1,
+    "korean": "무슨",
+    "translation": "What"
+  },
+  {
+    "order": 2,
+    "korean": "어떤",
+    "translation": "What, which"
+  },
+  {
+    "order": 3,
+    "korean": "어느",
+    "translation": "Which"
+  },
+  {
+    "order": 4,
+    "korean": "등산하다",
+    "translation": "To hike, to climb"
+  },
+  {
+    "order": 5,
+    "korean": "영화를 보다",
+    "translation": "To see a movie"
+  },
+  {
+    "order": 6,
+    "korean": "운동하다",
+    "translation": "To exercise, to take exercise"
+  },
+  {
+    "order": 7,
+    "korean": "여행하다",
+    "translation": "To travel"
+  },
+  {
+    "order": 8,
+    "korean": "수영하다",
+    "translation": "To swim"
+  },
+  {
+    "order": 9,
+    "korean": "외식하다",
+    "translation": "To eat out"
+  },
+  {
+    "order": 10,
+    "korean": "친구를 만나다",
+    "translation": "To see friend"
+  },
+  {
+    "order": 11,
+    "korean": "소풍가다",
+    "translation": "To go on a picnic"
+  },
+  {
+    "order": 12,
+    "korean": "책을 읽다",
+    "translation": "To read a book"
+  },
+  {
+    "order": 13,
+    "korean": "생략",
+    "translation": "Omission"
+  },
+  {
+    "order": 14,
+    "korean": "축약",
+    "translation": "Abbreviation"
+  },
+  {
+    "order": 15,
+    "korean": "가수",
+    "translation": "Singer"
+  },
+  {
+    "order": 16,
+    "korean": "싫어하다",
+    "translation": "To hate, to dislike"
+  },
+  {
+    "order": 17,
+    "korean": "갈비",
+    "translation": "Korean barbecued rib dish"
+  },
+  {
+    "order": 18,
+    "korean": "라면",
+    "translation": "Ramen, instant noodles"
+  },
+  {
+    "order": 19,
+    "korean": "액션 영화",
+    "translation": "Action film"
+  },
+  {
+    "order": 20,
+    "korean": "개",
+    "translation": "Dog"
+  },
+  {
+    "order": 21,
+    "korean": "야구",
+    "translation": "Baseball"
+  },
+  {
+    "order": 22,
+    "korean": "고양이",
+    "translation": "Cat"
+  },
+  {
+    "order": 23,
+    "korean": "바다",
+    "translation": "Sea"
+  },
+  {
+    "order": 24,
+    "korean": "요리하다",
+    "translation": "To cook"
+  },
+  {
+    "order": 25,
+    "korean": "골프",
+    "translation": "Golf"
+  },
+  {
+    "order": 26,
+    "korean": "일찍",
+    "translation": "Early"
+  },
+  {
+    "order": 27,
+    "korean": "공포 영화",
+    "translation": "Horror film"
+  },
+  {
+    "order": 28,
+    "korean": "배",
+    "translation": "Pear"
+  },
+  {
+    "order": 29,
+    "korean": "축구",
+    "translation": "Soccer"
+  },
+  {
+    "order": 30,
+    "korean": "과일",
+    "translation": "Fruit"
+  },
+  {
+    "order": 31,
+    "korean": "배구",
+    "translation": "Volleyball"
+  },
+  {
+    "order": 32,
+    "korean": "춤을 추다",
+    "translation": "To dance"
+  },
+  {
+    "order": 33,
+    "korean": "김밥",
+    "translation": "Gimbap"
+  },
+  {
+    "order": 34,
+    "korean": "보내다",
+    "translation": "To spend"
+  },
+  {
+    "order": 35,
+    "korean": "치다",
+    "translation": "To play, to beat"
+  },
+  {
+    "order": 36,
+    "korean": "나무",
+    "translation": "Tree, wood"
+  },
+  {
+    "order": 37,
+    "korean": "불고기",
+    "translation": "Bulgogi, barbequed beef"
+  },
+  {
+    "order": 38,
+    "korean": "낚시",
+    "translation": "Fishing"
+  },
+  {
+    "order": 39,
+    "korean": "비빔밥",
+    "translation": "Bibimbap, Korean mixed rice dish"
+  },
+  {
+    "order": 40,
+    "korean": "테니스",
+    "translation": "Tennis"
+  },
+  {
+    "order": 41,
+    "korean": "농구",
+    "translation": "Basketball"
+  },
+  {
+    "order": 42,
+    "korean": "빨래하다",
+    "translation": "To wash clothes"
+  },
+  {
+    "order": 43,
+    "korean": "포도",
+    "translation": "Grape"
+  },
+  {
+    "order": 44,
+    "korean": "동물",
+    "translation": "Animal"
+  },
+  {
+    "order": 45,
+    "korean": "새",
+    "translation": "Bird"
+  },
+  {
+    "order": 46,
+    "korean": "피곤하다",
+    "translation": "To be tired, to be exhausted"
+  },
+  {
+    "order": 47,
+    "korean": "드라마",
+    "translation": "Drama"
+  },
+  {
+    "order": 48,
+    "korean": "선물",
+    "translation": "Gift, present"
+  }
+]

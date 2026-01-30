@@ -1,0 +1,267 @@
+[
+  {
+    "order": 1,
+    "korean": "일상생활",
+    "translation": "Everyday life, daily life"
+  },
+  {
+    "order": 2,
+    "korean": "가다",
+    "translation": "To go"
+  },
+  {
+    "order": 3,
+    "korean": "오다",
+    "translation": "To come"
+  },
+  {
+    "order": 4,
+    "korean": "자다",
+    "translation": "To sleep"
+  },
+  {
+    "order": 5,
+    "korean": "먹다",
+    "translation": "To eat"
+  },
+  {
+    "order": 6,
+    "korean": "마시다",
+    "translation": "To drink"
+  },
+  {
+    "order": 7,
+    "korean": "이야기하다",
+    "translation": "To tell, to say, to speak, to talk"
+  },
+  {
+    "order": 8,
+    "korean": "읽다",
+    "translation": "To read"
+  },
+  {
+    "order": 9,
+    "korean": "듣다",
+    "translation": "To listen"
+  },
+  {
+    "order": 10,
+    "korean": "보다",
+    "translation": "To see, to look, to watch, to read"
+  },
+  {
+    "order": 11,
+    "korean": "일하다",
+    "translation": "To work"
+  },
+  {
+    "order": 12,
+    "korean": "공부하다",
+    "translation": "To study"
+  },
+  {
+    "order": 13,
+    "korean": "운동하다",
+    "translation": "To exercise"
+  },
+  {
+    "order": 14,
+    "korean": "쉬다",
+    "translation": "To rest, to relax"
+  },
+  {
+    "order": 15,
+    "korean": "만나다",
+    "translation": "To meet"
+  },
+  {
+    "order": 16,
+    "korean": "사다",
+    "translation": "To buy, to purchase"
+  },
+  {
+    "order": 17,
+    "korean": "좋아하다",
+    "translation": "To like, to love"
+  },
+  {
+    "order": 18,
+    "korean": "크다",
+    "translation": "To be big, to be large"
+  },
+  {
+    "order": 19,
+    "korean": "작다",
+    "translation": "To be small, to be little"
+  },
+  {
+    "order": 20,
+    "korean": "많다",
+    "translation": "A lot of, lots of, many, much"
+  },
+  {
+    "order": 21,
+    "korean": "적다",
+    "translation": "Few, little, small"
+  },
+  {
+    "order": 22,
+    "korean": "좋다",
+    "translation": "To be good"
+  },
+  {
+    "order": 23,
+    "korean": "나쁘다",
+    "translation": "To be bad"
+  },
+  {
+    "order": 24,
+    "korean": "재미없다",
+    "translation": "To be boring"
+  },
+  {
+    "order": 25,
+    "korean": "차",
+    "translation": "Tea"
+  },
+  {
+    "order": 26,
+    "korean": "커피",
+    "translation": "Coffee"
+  },
+  {
+    "order": 27,
+    "korean": "빵",
+    "translation": "Bread"
+  },
+  {
+    "order": 28,
+    "korean": "영화",
+    "translation": "Film, movie"
+  },
+  {
+    "order": 29,
+    "korean": "음악",
+    "translation": "Music"
+  },
+  {
+    "order": 30,
+    "korean": "신문",
+    "translation": "Newspaper"
+  },
+  {
+    "order": 31,
+    "korean": "친구",
+    "translation": "Friend"
+  },
+  {
+    "order": 32,
+    "korean": "누구",
+    "translation": "Who"
+  },
+  {
+    "order": 33,
+    "korean": "언제",
+    "translation": "When"
+  },
+  {
+    "order": 34,
+    "korean": "공원",
+    "translation": "Park"
+  },
+  {
+    "order": 35,
+    "korean": "시장",
+    "translation": "Market"
+  },
+  {
+    "order": 36,
+    "korean": "위",
+    "translation": "Top"
+  },
+  {
+    "order": 37,
+    "korean": "노래",
+    "translation": "Song, music"
+  },
+  {
+    "order": 38,
+    "korean": "식사하다",
+    "translation": "To eat"
+  },
+  {
+    "order": 39,
+    "korean": "자주",
+    "translation": "Often, frequently"
+  },
+  {
+    "order": 40,
+    "korean": "대한빌딩",
+    "translation": "Daehan building"
+  },
+  {
+    "order": 41,
+    "korean": "전화하다",
+    "translation": "To call, to phone"
+  },
+  {
+    "order": 42,
+    "korean": "방",
+    "translation": "Room"
+  },
+  {
+    "order": 43,
+    "korean": "아이스크림",
+    "translation": "Ice cream"
+  },
+  {
+    "order": 44,
+    "korean": "지금",
+    "translation": "Now"
+  },
+  {
+    "order": 45,
+    "korean": "아주",
+    "translation": "Very, so, extremely"
+  },
+  {
+    "order": 46,
+    "korean": "축구를 하다",
+    "translation": "To play football"
+  },
+  {
+    "order": 47,
+    "korean": "산책하다",
+    "translation": "To walk"
+  },
+  {
+    "order": 48,
+    "korean": "여행",
+    "translation": "Travel, trip"
+  },
+  {
+    "order": 49,
+    "korean": "카페",
+    "translation": "Coffee shop"
+  },
+  {
+    "order": 50,
+    "korean": "쇼핑하다",
+    "translation": "To do the shopping"
+  },
+  {
+    "order": 51,
+    "korean": "옷",
+    "translation": "Clothes"
+  },
+  {
+    "order": 52,
+    "korean": "헬스클럽",
+    "translation": "Health club, fitness center"
+  },
+  {
+    "order": 53,
+    "korean": "시내",
+    "translation": "Downtown"
+  }
+]

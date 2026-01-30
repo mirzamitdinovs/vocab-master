@@ -1,0 +1,182 @@
+[
+  {
+    "order": 1,
+    "korean": "학생",
+    "translation": "Student"
+  },
+  {
+    "order": 2,
+    "korean": "회사원",
+    "translation": "Employee, company, staff"
+  },
+  {
+    "order": 3,
+    "korean": "은행원",
+    "translation": "Bank clerk"
+  },
+  {
+    "order": 4,
+    "korean": "선생님",
+    "translation": "Teacher"
+  },
+  {
+    "order": 5,
+    "korean": "의사",
+    "translation": "Doctor"
+  },
+  {
+    "order": 6,
+    "korean": "공무원",
+    "translation": "Civil servant"
+  },
+  {
+    "order": 7,
+    "korean": "관광 가이드",
+    "translation": "Tour guide"
+  },
+  {
+    "order": 8,
+    "korean": "주부",
+    "translation": "Housewife"
+  },
+  {
+    "order": 9,
+    "korean": "약사",
+    "translation": "Pharmacist"
+  },
+  {
+    "order": 10,
+    "korean": "운전기사",
+    "translation": "Driver"
+  },
+  {
+    "order": 11,
+    "korean": "처음 뵙겠습니다.",
+    "translation": "Nice to meet you."
+  },
+  {
+    "order": 12,
+    "korean": "인사말",
+    "translation": "Greeting, words of greeting"
+  },
+  {
+    "order": 13,
+    "korean": "기본",
+    "translation": "Basic"
+  },
+  {
+    "order": 14,
+    "korean": "국어국문학과",
+    "translation": "Department of Korean Language and Literature"
+  },
+  {
+    "order": 15,
+    "korean": "아니요",
+    "translation": "No, nope"
+  },
+  {
+    "order": 16,
+    "korean": "주소",
+    "translation": "Address"
+  },
+  {
+    "order": 17,
+    "korean": "국적",
+    "translation": "Nationality"
+  },
+  {
+    "order": 18,
+    "korean": "은행",
+    "translation": "Bank"
+  },
+  {
+    "order": 19,
+    "korean": "직업",
+    "translation": "Occupation, job"
+  },
+  {
+    "order": 20,
+    "korean": "네",
+    "translation": "Yes"
+  },
+  {
+    "order": 21,
+    "korean": "이",
+    "translation": "This"
+  },
+  {
+    "order": 22,
+    "korean": "학과",
+    "translation": "Major, department"
+  },
+  {
+    "order": 23,
+    "korean": "대학교",
+    "translation": "University, college"
+  },
+  {
+    "order": 24,
+    "korean": "이름",
+    "translation": "Name"
+  },
+  {
+    "order": 25,
+    "korean": "학번",
+    "translation": "Student ID number"
+  },
+  {
+    "order": 26,
+    "korean": "대학생",
+    "translation": "College student"
+  },
+  {
+    "order": 27,
+    "korean": "이메일",
+    "translation": "E-mail, electronic mail"
+  },
+  {
+    "order": 28,
+    "korean": "학생증",
+    "translation": "Student identification"
+  },
+  {
+    "order": 29,
+    "korean": "보기",
+    "translation": "Example"
+  },
+  {
+    "order": 30,
+    "korean": "저",
+    "translation": "I, me"
+  },
+  {
+    "order": 31,
+    "korean": "한국어",
+    "translation": "Korean, Korean language"
+  },
+  {
+    "order": 32,
+    "korean": "사람",
+    "translation": "Human, man, person"
+  },
+  {
+    "order": 33,
+    "korean": "전화",
+    "translation": "Call, phone call, telephone"
+  },
+  {
+    "order": 34,
+    "korean": "한국어학과",
+    "translation": "Korean language major"
+  },
+  {
+    "order": 35,
+    "korean": "씨",
+    "translation": "Mr., Ms., Mrs."
+  },
+  {
+    "order": 36,
+    "korean": "제",
+    "translation": "My"
+  }
+]

@@ -1,15 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import { graphqlRequest } from "@/lib/graphql/client";
 
 export function SessionStarter({
@@ -18,99 +10,126 @@ export function SessionStarter({
   label = "Start session",
 }: {
   userId: string;
-  onStart: (chapters: string[], limit: number) => void;
+  onStart: (chapterIds: string[], limit?: number | null) => void;
   label?: string;
 }) {
-  const [open, setOpen] = useState(false);
-  const [chapters, setChapters] = useState<string[]>([]);
-  const [selectedChapters, setSelectedChapters] = useState<string[]>([]);
-  const [limit, setLimit] = useState<number | null>(null);
-
-  const fetchChapters = useCallback(async () => {
-    const data = await graphqlRequest<{ chapters: string[] }>(
-      `query Chapters($userId: ID!) { chapters(userId: $userId) }`,
-      { userId }
-    );
-    setChapters(data.chapters);
-    if (data.chapters.length && selectedChapters.length === 0) {
-      setSelectedChapters([data.chapters[0]]);
-    }
-  }, [userId, selectedChapters.length]);
+  const [loading, setLoading] = useState(false);
+  const [languages, setLanguages] = useState<{ id: string; title: string }[]>([]);
+  const [levels, setLevels] = useState<{ id: string; title: string }[]>([]);
+  const [chapters, setChapters] = useState<{ id: string; title: string }[]>([]);
+  const [languageId, setLanguageId] = useState("");
+  const [levelId, setLevelId] = useState("");
+  const [chapterId, setChapterId] = useState("");
 
   useEffect(() => {
-    if (open) fetchChapters();
-  }, [open, fetchChapters]);
+    async function loadLanguages() {
+      const data = await graphqlRequest<{ languages: { id: string; title: string }[] }>(
+        `query { languages { id title } }`
+      );
+      setLanguages(data.languages);
+      if (data.languages[0]) {
+        setLanguageId(data.languages[0].id);
+      }
+    }
+    loadLanguages();
+  }, []);
 
-  function toggleChapter(chapter: string) {
-    setSelectedChapters((prev) =>
-      prev.includes(chapter) ? prev.filter((c) => c !== chapter) : [...prev, chapter]
-    );
-  }
+  useEffect(() => {
+    async function loadLevels() {
+      if (!languageId) return;
+      const data = await graphqlRequest<{ levels: { id: string; title: string }[] }>(
+        `query Levels($languageId: ID!) { levels(languageId: $languageId) { id title } }`,
+        { languageId }
+      );
+      setLevels(data.levels);
+      if (data.levels[0]) {
+        setLevelId(data.levels[0].id);
+      }
+    }
+    loadLevels();
+  }, [languageId]);
 
-  function start() {
-    if (!limit || selectedChapters.length === 0) return;
-    onStart(selectedChapters, limit);
-    setOpen(false);
+  useEffect(() => {
+    async function loadChapters() {
+      if (!levelId) return;
+      const data = await graphqlRequest<{ chapters: { id: string; title: string }[] }>(
+        `query Chapters($levelId: ID!) { chapters(levelId: $levelId) { id title } }`,
+        { levelId }
+      );
+      setChapters(data.chapters);
+      if (data.chapters[0]) {
+        setChapterId(data.chapters[0].id);
+      }
+    }
+    loadChapters();
+  }, [levelId]);
+
+  async function start() {
+    if (!chapterId) return;
+    setLoading(true);
+    onStart([chapterId], null);
+    setLoading(false);
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button className="w-full h-12 text-base bg-gradient-to-r from-blue-500 to-indigo-500 text-white hover:opacity-90">
-          {label}
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="left-1/2 top-auto bottom-0 w-full max-w-none translate-x-[-50%] translate-y-0 rounded-t-2xl sm:max-w-lg sm:rounded-lg">
-        <DialogHeader>
-          <DialogTitle>Start a session</DialogTitle>
-          <DialogDescription>Select topics then choose word count.</DialogDescription>
-        </DialogHeader>
-        <div className="space-y-4">
-          <div>
-            <div className="text-sm font-medium mb-2">Topics</div>
-            <div className="flex flex-wrap gap-2">
-              {chapters.map((chapter) => (
-                <button
-                  key={chapter}
-                  className={`rounded-full border px-3 py-1 text-sm transition ${
-                    selectedChapters.includes(chapter)
-                      ? "bg-emerald-100 text-emerald-700 border-emerald-200"
-                      : "bg-white"
-                  }`}
-                  onClick={() => toggleChapter(chapter)}
-                >
-                  {chapter}
-                </button>
-              ))}
-            </div>
+    <div className="space-y-4">
+      <div className="grid gap-3 sm:grid-cols-3">
+        <div className="space-y-2">
+          <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            Language
           </div>
-          <div>
-            <div className="text-sm font-medium mb-2">Word count</div>
-            <div className="flex gap-2">
-              {[5, 10, 20].map((count) => (
-                <button
-                  key={count}
-                  className={`rounded-full border px-4 py-2 text-sm transition ${
-                    limit === count
-                      ? "bg-purple-100 text-purple-700 border-purple-200"
-                      : "bg-white"
-                  }`}
-                  onClick={() => setLimit(count)}
-                >
-                  {count}
-                </button>
-              ))}
-            </div>
-          </div>
-          <Button
-            className="w-full h-12 text-base bg-gradient-to-r from-fuchsia-500 to-pink-500 text-white hover:opacity-90"
-            onClick={start}
-            disabled={!limit || selectedChapters.length === 0}
+          <select
+            className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
+            value={languageId}
+            onChange={(event) => setLanguageId(event.target.value)}
           >
-            Start
-          </Button>
+            {languages.map((language) => (
+              <option key={language.id} value={language.id}>
+                {language.title}
+              </option>
+            ))}
+          </select>
         </div>
-      </DialogContent>
-    </Dialog>
+        <div className="space-y-2">
+          <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            Level
+          </div>
+          <select
+            className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
+            value={levelId}
+            onChange={(event) => setLevelId(event.target.value)}
+          >
+            {levels.map((level) => (
+              <option key={level.id} value={level.id}>
+                {level.title}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="space-y-2">
+          <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            Lesson
+          </div>
+          <select
+            className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
+            value={chapterId}
+            onChange={(event) => setChapterId(event.target.value)}
+          >
+            {chapters.map((chapter) => (
+              <option key={chapter.id} value={chapter.id}>
+                {chapter.title}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+      <Button
+        className="w-full h-12 text-base bg-gradient-to-r from-blue-500 to-indigo-500 text-white hover:opacity-90"
+        onClick={start}
+        disabled={loading || !chapterId}
+      >
+        {loading ? "Loading..." : label}
+      </Button>
+    </div>
   );
 }

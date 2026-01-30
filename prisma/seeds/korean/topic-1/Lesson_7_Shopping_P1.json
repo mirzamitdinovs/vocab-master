@@ -1,0 +1,152 @@
+[
+  {
+    "order": 1,
+    "korean": "물건 사기",
+    "translation": "Buying things"
+  },
+  {
+    "order": 2,
+    "korean": "여러 개",
+    "translation": "Several things"
+  },
+  {
+    "order": 3,
+    "korean": "개",
+    "translation": "Piece, unit"
+  },
+  {
+    "order": 4,
+    "korean": "명/ 사람",
+    "translation": "Person"
+  },
+  {
+    "order": 5,
+    "korean": "마리",
+    "translation": "Counter for animals"
+  },
+  {
+    "order": 6,
+    "korean": "잔",
+    "translation": "Counter for glasses"
+  },
+  {
+    "order": 7,
+    "korean": "대",
+    "translation": "Counter for cars, planes, bicycles, machines,..."
+  },
+  {
+    "order": 8,
+    "korean": "병",
+    "translation": "Counter for bottles"
+  },
+  {
+    "order": 9,
+    "korean": "켤레",
+    "translation": "Counter for pairs of shoes"
+  },
+  {
+    "order": 10,
+    "korean": "권",
+    "translation": "Counter for books"
+  },
+  {
+    "order": 11,
+    "korean": "장",
+    "translation": "Counter for pieces of paper"
+  },
+  {
+    "order": 12,
+    "korean": "채소",
+    "translation": "Vegetable"
+  },
+  {
+    "order": 13,
+    "korean": "음료수",
+    "translation": "Drinking water"
+  },
+  {
+    "order": 14,
+    "korean": "구두",
+    "translation": "Shoes"
+  },
+  {
+    "order": 15,
+    "korean": "손님",
+    "translation": "Visitor, guest, customer"
+  },
+  {
+    "order": 16,
+    "korean": "주인",
+    "translation": "Owner"
+  },
+  {
+    "order": 17,
+    "korean": "발음",
+    "translation": "Pronunciation"
+  },
+  {
+    "order": 18,
+    "korean": "과자",
+    "translation": "Cracker, cookie, biscuit"
+  },
+  {
+    "order": 19,
+    "korean": "주스",
+    "translation": "Juice"
+  },
+  {
+    "order": 20,
+    "korean": "귤",
+    "translation": "Tangerine, mandarin orange"
+  },
+  {
+    "order": 21,
+    "korean": "카메라",
+    "translation": "Camera"
+  },
+  {
+    "order": 22,
+    "korean": "디자인",
+    "translation": "Design"
+  },
+  {
+    "order": 23,
+    "korean": "세일",
+    "translation": "Sale"
+  },
+  {
+    "order": 24,
+    "korean": "티셔츠",
+    "translation": "T-shirt"
+  },
+  {
+    "order": 25,
+    "korean": "마트",
+    "translation": "Mart"
+  },
+  {
+    "order": 26,
+    "korean": "소설책",
+    "translation": "Novel"
+  },
+  {
+    "order": 27,
+    "korean": "망고",
+    "translation": "Mango"
+  },
+  {
+    "order": 28,
+    "korean": "수박",
+    "translation": "Watermelon"
+  },
+  {
+    "order": 29,
+    "korean": "문구점",
+    "translation": "Stationery store"
+  },
+  {
+    "order": 30,
+    "korean": "전자상가",
+    "translation": "Electronic store"
+  }
+]

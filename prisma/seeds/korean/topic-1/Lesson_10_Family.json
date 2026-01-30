@@ -1,0 +1,312 @@
+[
+  {
+    "order": 1,
+    "korean": "가족",
+    "translation": "Family"
+  },
+  {
+    "order": 2,
+    "korean": "할아버지",
+    "translation": "Grandfather"
+  },
+  {
+    "order": 3,
+    "korean": "할머니",
+    "translation": "Grandmother"
+  },
+  {
+    "order": 4,
+    "korean": "외할아버지",
+    "translation": "Maternal grandfather"
+  },
+  {
+    "order": 5,
+    "korean": "외할머니",
+    "translation": "Maternal grandmother"
+  },
+  {
+    "order": 6,
+    "korean": "아버지",
+    "translation": "Father"
+  },
+  {
+    "order": 7,
+    "korean": "어머니",
+    "translation": "Mother"
+  },
+  {
+    "order": 8,
+    "korean": "오빠",
+    "translation": "Elder brother of a female"
+  },
+  {
+    "order": 9,
+    "korean": "언니",
+    "translation": "Elder sister of a female"
+  },
+  {
+    "order": 10,
+    "korean": "나",
+    "translation": "I"
+  },
+  {
+    "order": 11,
+    "korean": "남동생",
+    "translation": "Younger brother"
+  },
+  {
+    "order": 12,
+    "korean": "누나",
+    "translation": "Elder sister of a male"
+  },
+  {
+    "order": 13,
+    "korean": "형",
+    "translation": "Elder brother of a male"
+  },
+  {
+    "order": 14,
+    "korean": "여동생",
+    "translation": "Younger sister"
+  },
+  {
+    "order": 15,
+    "korean": "교수",
+    "translation": "Professor"
+  },
+  {
+    "order": 16,
+    "korean": "연구원",
+    "translation": "Researcher"
+  },
+  {
+    "order": 17,
+    "korean": "군인",
+    "translation": "Soldier"
+  },
+  {
+    "order": 18,
+    "korean": "사업가",
+    "translation": "Businessperson, entrepreneur"
+  },
+  {
+    "order": 19,
+    "korean": "변호사",
+    "translation": "Lawyer"
+  },
+  {
+    "order": 20,
+    "korean": "경찰관",
+    "translation": "Police officer"
+  },
+  {
+    "order": 21,
+    "korean": "통역사",
+    "translation": "Interpreter"
+  },
+  {
+    "order": 22,
+    "korean": "농부",
+    "translation": "Farmer"
+  },
+  {
+    "order": 23,
+    "korean": "사업을 하다",
+    "translation": "To run a business"
+  },
+  {
+    "order": 24,
+    "korean": "장사를 하다",
+    "translation": "To do business"
+  },
+  {
+    "order": 25,
+    "korean": "출장을 가다",
+    "translation": "To go on a business trip"
+  },
+  {
+    "order": 26,
+    "korean": "농사를 짓다",
+    "translation": "To farm, to do farming"
+  },
+  {
+    "order": 27,
+    "korean": "강아지",
+    "translation": "Puppy"
+  },
+  {
+    "order": 28,
+    "korean": "되다",
+    "translation": "To become"
+  },
+  {
+    "order": 29,
+    "korean": "연세",
+    "translation": "Age (honorific)"
+  },
+  {
+    "order": 30,
+    "korean": "결혼식",
+    "translation": "Wedding"
+  },
+  {
+    "order": 31,
+    "korean": "열심히",
+    "translation": "Hard, diligently"
+  },
+  {
+    "order": 32,
+    "korean": "계시다",
+    "translation": "To be, to stay (honorific)"
+  },
+  {
+    "order": 33,
+    "korean": "딸",
+    "translation": "Daughter"
+  },
+  {
+    "order": 34,
+    "korean": "올해",
+    "translation": "This year"
+  },
+  {
+    "order": 35,
+    "korean": "고모",
+    "translation": "Aunt, one's father's sister"
+  },
+  {
+    "order": 36,
+    "korean": "말씀",
+    "translation": "Words"
+  },
+  {
+    "order": 37,
+    "korean": "외동딸",
+    "translation": "Only daughter"
+  },
+  {
+    "order": 38,
+    "korean": "고모부",
+    "translation": "Uncle-in-law"
+  },
+  {
+    "order": 39,
+    "korean": "말씀하시다",
+    "translation": "To say, to speak (honorific)"
+  },
+  {
+    "order": 40,
+    "korean": "외아들",
+    "translation": "Only son"
+  },
+  {
+    "order": 41,
+    "korean": "분",
+    "translation": "Person (honorific)"
+  },
+  {
+    "order": 42,
+    "korean": "유치원생",
+    "translation": "Kindergartener"
+  },
+  {
+    "order": 43,
+    "korean": "사촌",
+    "translation": "Cousin"
+  },
+  {
+    "order": 44,
+    "korean": "잡수시다",
+    "translation": "To eat, to have (honorific)"
+  },
+  {
+    "order": 45,
+    "korean": "근무",
+    "translation": "Work"
+  },
+  {
+    "order": 46,
+    "korean": "삼촌",
+    "translation": "Uncle"
+  },
+  {
+    "order": 47,
+    "korean": "전공하다",
+    "translation": "To major in, to specialize in"
+  },
+  {
+    "order": 48,
+    "korean": "근처",
+    "translation": "Vicinity, neighborhood"
+  },
+  {
+    "order": 49,
+    "korean": "생신",
+    "translation": "Birthday (honorific)"
+  },
+  {
+    "order": 50,
+    "korean": "주무시다",
+    "translation": "To sleep (honorific)"
+  },
+  {
+    "order": 51,
+    "korean": "나중에",
+    "translation": "After, afterward, later"
+  },
+  {
+    "order": 52,
+    "korean": "성함",
+    "translation": "Name (honorific)"
+  },
+  {
+    "order": 53,
+    "korean": "진지",
+    "translation": "Meal (honorific)"
+  },
+  {
+    "order": 54,
+    "korean": "대가족",
+    "translation": "Large family, extended family"
+  },
+  {
+    "order": 55,
+    "korean": "술",
+    "translation": "Alcohol"
+  },
+  {
+    "order": 56,
+    "korean": "초등학생",
+    "translation": "Elementary school student, primary school student"
+  },
+  {
+    "order": 57,
+    "korean": "댁",
+    "translation": "Residence, house, home (honorific)"
+  },
+  {
+    "order": 58,
+    "korean": "아내",
+    "translation": "One's wife"
+  },
+  {
+    "order": 59,
+    "korean": "큰아버지",
+    "translation": "Uncle, the elder brother of one's father"
+  },
+  {
+    "order": 60,
+    "korean": "돌아가시다",
+    "translation": "To return, to pass away, to decease (honorific)"
+  },
+  {
+    "order": 61,
+    "korean": "아들",
+    "translation": "Son"
+  },
+  {
+    "order": 62,
+    "korean": "큰어머니",
+    "translation": "Aunt, the wife of the elder brother of one's father"
+  }
+]

@@ -1,0 +1,327 @@
+[
+  {
+    "order": 1,
+    "korean": "하루 일과",
+    "translation": "Daily routine"
+  },
+  {
+    "order": 2,
+    "korean": "오전",
+    "translation": "Morning"
+  },
+  {
+    "order": 3,
+    "korean": "오후",
+    "translation": "Afternoon"
+  },
+  {
+    "order": 4,
+    "korean": "낮",
+    "translation": "Day, daytime"
+  },
+  {
+    "order": 5,
+    "korean": "밤",
+    "translation": "Night, nighttime"
+  },
+  {
+    "order": 6,
+    "korean": "아침",
+    "translation": "Morning"
+  },
+  {
+    "order": 7,
+    "korean": "점심",
+    "translation": "Noon"
+  },
+  {
+    "order": 8,
+    "korean": "저녁",
+    "translation": "Evening"
+  },
+  {
+    "order": 9,
+    "korean": "새벽",
+    "translation": "Dawn"
+  },
+  {
+    "order": 10,
+    "korean": "일어나다",
+    "translation": "To get up"
+  },
+  {
+    "order": 11,
+    "korean": "이를 닦다",
+    "translation": "To brush one's teeth"
+  },
+  {
+    "order": 12,
+    "korean": "세수하다",
+    "translation": "To wash one's face"
+  },
+  {
+    "order": 13,
+    "korean": "다니다",
+    "translation": "To frequent"
+  },
+  {
+    "order": 14,
+    "korean": "배우다",
+    "translation": "To learn"
+  },
+  {
+    "order": 15,
+    "korean": "숙제하다",
+    "translation": "To do one's homework"
+  },
+  {
+    "order": 16,
+    "korean": "청소하다",
+    "translation": "To clean"
+  },
+  {
+    "order": 17,
+    "korean": "목욕하다",
+    "translation": "To take a bath"
+  },
+  {
+    "order": 18,
+    "korean": "출근하다",
+    "translation": "To go to work, to arrive at work"
+  },
+  {
+    "order": 19,
+    "korean": "퇴근하다",
+    "translation": "To leave work"
+  },
+  {
+    "order": 20,
+    "korean": "시작하다",
+    "translation": "To start, to begin"
+  },
+  {
+    "order": 21,
+    "korean": "끝나다",
+    "translation": "To end, to finish"
+  },
+  {
+    "order": 22,
+    "korean": "하나 (한)",
+    "translation": "1"
+  },
+  {
+    "order": 23,
+    "korean": "둘 (두)",
+    "translation": "2"
+  },
+  {
+    "order": 24,
+    "korean": "셋 (세)",
+    "translation": "3"
+  },
+  {
+    "order": 25,
+    "korean": "넷 (네)",
+    "translation": "4"
+  },
+  {
+    "order": 26,
+    "korean": "다섯",
+    "translation": "5"
+  },
+  {
+    "order": 27,
+    "korean": "여섯",
+    "translation": "6"
+  },
+  {
+    "order": 28,
+    "korean": "일곱",
+    "translation": "7"
+  },
+  {
+    "order": 29,
+    "korean": "여덟",
+    "translation": "8"
+  },
+  {
+    "order": 30,
+    "korean": "아홉",
+    "translation": "9"
+  },
+  {
+    "order": 31,
+    "korean": "열",
+    "translation": "10"
+  },
+  {
+    "order": 32,
+    "korean": "열하나",
+    "translation": "11"
+  },
+  {
+    "order": 33,
+    "korean": "스물 (스무)",
+    "translation": "20"
+  },
+  {
+    "order": 34,
+    "korean": "서른",
+    "translation": "30"
+  },
+  {
+    "order": 35,
+    "korean": "마흔",
+    "translation": "40"
+  },
+  {
+    "order": 36,
+    "korean": "쉰",
+    "translation": "50"
+  },
+  {
+    "order": 37,
+    "korean": "예순",
+    "translation": "60"
+  },
+  {
+    "order": 38,
+    "korean": "일흔",
+    "translation": "70"
+  },
+  {
+    "order": 39,
+    "korean": "여든",
+    "translation": "80"
+  },
+  {
+    "order": 40,
+    "korean": "아흔",
+    "translation": "90"
+  },
+  {
+    "order": 41,
+    "korean": "겨울",
+    "translation": "Winter"
+  },
+  {
+    "order": 42,
+    "korean": "수업",
+    "translation": "Class, lesson, course"
+  },
+  {
+    "order": 43,
+    "korean": "집",
+    "translation": "House"
+  },
+  {
+    "order": 44,
+    "korean": "고향",
+    "translation": "Home, hometown, birthplace"
+  },
+  {
+    "order": 45,
+    "korean": "수영",
+    "translation": "Swimming"
+  },
+  {
+    "order": 46,
+    "korean": "출근",
+    "translation": "Going to work, arriving at work"
+  },
+  {
+    "order": 47,
+    "korean": "공항",
+    "translation": "Airport"
+  },
+  {
+    "order": 48,
+    "korean": "시험을 보다",
+    "translation": "To take an examination, to undergo an examination"
+  },
+  {
+    "order": 49,
+    "korean": "출발하다",
+    "translation": "To depart, to leave"
+  },
+  {
+    "order": 50,
+    "korean": "날",
+    "translation": "Day"
+  },
+  {
+    "order": 51,
+    "korean": "여자",
+    "translation": "Woman, female, lady, girl"
+  },
+  {
+    "order": 52,
+    "korean": "후",
+    "translation": "After"
+  },
+  {
+    "order": 53,
+    "korean": "남자",
+    "translation": "Man, male, boy"
+  },
+  {
+    "order": 54,
+    "korean": "영문과",
+    "translation": "The department of English (language and) literature"
+  },
+  {
+    "order": 55,
+    "korean": "회사",
+    "translation": "Company, corporation"
+  },
+  {
+    "order": 56,
+    "korean": "노래방",
+    "translation": "Karaoke room"
+  },
+  {
+    "order": 57,
+    "korean": "영어",
+    "translation": "English"
+  },
+  {
+    "order": 58,
+    "korean": "회의",
+    "translation": "Meeting, conference"
+  },
+  {
+    "order": 59,
+    "korean": "받다",
+    "translation": "To receive"
+  },
+  {
+    "order": 60,
+    "korean": "운전하다",
+    "translation": "To drive"
+  },
+  {
+    "order": 61,
+    "korean": "PC방",
+    "translation": "Internet cafe"
+  },
+  {
+    "order": 62,
+    "korean": "밥",
+    "translation": "Cooked rice"
+  },
+  {
+    "order": 63,
+    "korean": "인터넷",
+    "translation": "Internet"
+  },
+  {
+    "order": 64,
+    "korean": "부모님",
+    "translation": "Parents"
+  },
+  {
+    "order": 65,
+    "korean": "일기",
+    "translation": "Diary, journal"
+  }
+]

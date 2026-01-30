@@ -12,10 +12,8 @@ type Vocabulary = {
   order?: number | null;
   korean: string;
   translation: string;
-  chapter: string;
 };
 
-type Mark = "correct" | "incorrect" | null;
 
 export default function QuizPage() {
   return (
@@ -26,11 +24,11 @@ export default function QuizPage() {
 }
 
 function QuizView({ user }: { user: User }) {
+  const storageKey = `quiz-session-${user.id}`;
   const [sessionWords, setSessionWords] = useState<Vocabulary[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [quizOptions, setQuizOptions] = useState<string[]>([]);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const [mark, setMark] = useState<Mark>(null);
   const [answers, setAnswers] = useState<
     { wordId: string; korean: string; selected: string; correct: string; isCorrect: boolean }[]
   >([]);
@@ -53,24 +51,41 @@ function QuizView({ user }: { user: User }) {
     if (currentWord) {
       buildQuiz();
       setSelectedOption(null);
-      setMark(null);
     }
   }, [currentWord, buildQuiz]);
 
-  async function startSession(chapters: string[], limit: number) {
+  useEffect(() => {
+    const stored = localStorage.getItem(storageKey);
+    if (!stored) return;
+    try {
+      const parsed = JSON.parse(stored) as {
+        wordId: string;
+        korean: string;
+        selected: string;
+        correct: string;
+        isCorrect: boolean;
+      }[];
+      setAnswers(parsed);
+    } catch {
+      localStorage.removeItem(storageKey);
+    }
+  }, [storageKey]);
+
+  async function startSession(chapterIds: string[], limit?: number | null) {
     const data = await graphqlRequest<{ sessionWords: Vocabulary[] }>(
-      `query SessionWords($userId: ID!, $chapters: [String!], $limit: Int) {
-        sessionWords(userId: $userId, chapters: $chapters, limit: $limit) {
-          id order korean translation chapter
+      `query SessionWords($userId: ID!, $chapterIds: [ID!]!, $limit: Int) {
+        sessionWords(userId: $userId, chapterIds: $chapterIds, limit: $limit) {
+          id order korean translation
         }
       }`,
-      { userId: user.id, chapters, limit }
+      { userId: user.id, chapterIds, limit }
     );
     const words = [...data.sessionWords].sort(() => Math.random() - 0.5);
     setSessionWords(words);
     setCurrentIndex(0);
     setAnswers([]);
     setShowResults(false);
+    localStorage.removeItem(storageKey);
   }
 
   async function handleAnswer(option: string) {
@@ -78,23 +93,20 @@ function QuizView({ user }: { user: User }) {
     if (selectedOption) return;
     setSelectedOption(option);
     const correct = option === currentWord.translation;
-    setMark(correct ? "correct" : "incorrect");
-    setAnswers((prev) => [
-      ...prev,
-      {
-        wordId: currentWord.id,
-        korean: currentWord.korean,
-        selected: option,
-        correct: currentWord.translation,
-        isCorrect: correct,
-      },
-    ]);
-    await graphqlRequest<{ recordAnswer: { id: string } }>(
-      `mutation Record($userId: ID!, $wordId: ID!, $correct: Boolean!) {
-        recordAnswer(userId: $userId, wordId: $wordId, correct: $correct) { id }
-      }`,
-      { userId: user.id, wordId: currentWord.id, correct }
-    );
+    setAnswers((prev) => {
+      const next = [
+        ...prev,
+        {
+          wordId: currentWord.id,
+          korean: currentWord.korean,
+          selected: option,
+          correct: currentWord.translation,
+          isCorrect: correct,
+        },
+      ];
+      localStorage.setItem(storageKey, JSON.stringify(next));
+      return next;
+    });
     setTimeout(() => {
       setCurrentIndex((prev) => Math.min(prev + 1, sessionWords.length - 1));
     }, 200);
@@ -106,6 +118,27 @@ function QuizView({ user }: { user: User }) {
 
   function prevWord() {
     setCurrentIndex((prev) => Math.max(prev - 1, 0));
+  }
+
+  async function finishQuiz() {
+    const payload = answers.map((answer) => ({
+      wordId: answer.wordId,
+      correct: answer.isCorrect,
+    }));
+    if (payload.length > 0) {
+      await graphqlRequest<{ recordAnswers: boolean }>(
+        `mutation RecordAnswers($userId: ID!, $answers: [AnswerInput!]!) {
+          recordAnswers(userId: $userId, answers: $answers)
+        }`,
+        { userId: user.id, answers: payload }
+      );
+    }
+    await graphqlRequest<{ completeSession: { wordsLearned: number } }>(
+      `mutation Complete($userId: ID!) { completeSession(userId: $userId) { wordsLearned } }`,
+      { userId: user.id }
+    );
+    localStorage.removeItem(storageKey);
+    setShowResults(true);
   }
 
   return (
@@ -176,6 +209,7 @@ function QuizView({ user }: { user: User }) {
                     setShowResults(false);
                     setCurrentIndex(0);
                     setAnswers([]);
+                    localStorage.removeItem(storageKey);
                   }}
                 >
                   Start over
@@ -216,7 +250,7 @@ function QuizView({ user }: { user: User }) {
                   Next
                 </Button>
                 {currentIndex === sessionWords.length - 1 && selectedOption && (
-                  <Button onClick={() => setShowResults(true)}>Finish quiz</Button>
+                  <Button onClick={finishQuiz}>Finish quiz</Button>
                 )}
               </div>
             </>

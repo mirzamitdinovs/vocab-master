@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Settings } from "lucide-react";
 import { graphqlRequest } from "@/lib/graphql/client";
 
 type User = {
@@ -81,7 +82,9 @@ export function TopNav() {
         </div>
       </div>
       <Button asChild variant="outline" size="icon" aria-label="Settings">
-        <Link href="/settings">⚙️</Link>
+        <Link href="/settings">
+          <Settings className="h-4 w-4" />
+        </Link>
       </Button>
     </div>
   );

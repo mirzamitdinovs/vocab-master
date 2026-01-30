@@ -1,0 +1,262 @@
+[
+  {
+    "order": 1,
+    "korean": "\ub0a0\uc528",
+    "translation": "Weather"
+  },
+  {
+    "order": 2,
+    "korean": "\ubd04",
+    "translation": "Spring"
+  },
+  {
+    "order": 3,
+    "korean": "\uc5ec\ub984",
+    "translation": "Summer"
+  },
+  {
+    "order": 4,
+    "korean": "\uac00\uc744",
+    "translation": "Fall, autumn"
+  },
+  {
+    "order": 5,
+    "korean": "\ub530\ub73b\ud558\ub2e4",
+    "translation": "To be warm"
+  },
+  {
+    "order": 6,
+    "korean": "\ub365\ub2e4",
+    "translation": "To be hot"
+  },
+  {
+    "order": 7,
+    "korean": "\uc300\uc300\ud558\ub2e4",
+    "translation": "To be chilly, to be cold, to be cool"
+  },
+  {
+    "order": 8,
+    "korean": "\ucda5\ub2e4",
+    "translation": "To be cold, to be chilly"
+  },
+  {
+    "order": 9,
+    "korean": "\ube44\uac00 \uc624\ub2e4/\ub0b4\ub9ac\ub2e4",
+    "translation": "To be rainy"
+  },
+  {
+    "order": 10,
+    "korean": "\ube44\uac00 \uadf8\uce58\ub2e4",
+    "translation": "To stop raining"
+  },
+  {
+    "order": 11,
+    "korean": "\ub208\uc774 \uc624\ub2e4/\ub0b4\ub9ac\ub2e4",
+    "translation": "To be snowy"
+  },
+  {
+    "order": 12,
+    "korean": "\ub208\uc774 \uadf8\uce58\ub2e4",
+    "translation": "To stop snowing"
+  },
+  {
+    "order": 13,
+    "korean": "\ub9d1\ub2e4",
+    "translation": "To be clear, to be sunny"
+  },
+  {
+    "order": 14,
+    "korean": "\ud750\ub9ac\ub2e4",
+    "translation": "To be overcast, to be cloudy"
+  },
+  {
+    "order": 15,
+    "korean": "\ubc14\ub78c\uc774 \ubd88\ub2e4",
+    "translation": "The wind rises"
+  },
+  {
+    "order": 16,
+    "korean": "\uad6c\ub984\uc774 \ub07c\ub2e4",
+    "translation": "To be cloudy"
+  },
+  {
+    "order": 17,
+    "korean": "\ud574 (\ud0dc\uc591)",
+    "translation": "The sun"
+  },
+  {
+    "order": 18,
+    "korean": "\ube44",
+    "translation": "Rain"
+  },
+  {
+    "order": 19,
+    "korean": "\ub208",
+    "translation": "Snow"
+  },
+  {
+    "order": 20,
+    "korean": "\uad6c\ub984",
+    "translation": "Cloud"
+  },
+  {
+    "order": 21,
+    "korean": "\uae30\uc628",
+    "translation": "Air temperature"
+  },
+  {
+    "order": 22,
+    "korean": "\uc601\uc0c1",
+    "translation": "Temperature above zero"
+  },
+  {
+    "order": 23,
+    "korean": "\uc601\ud558",
+    "translation": "Temperature below zero"
+  },
+  {
+    "order": 24,
+    "korean": "\ub3c4",
+    "translation": "Degree"
+  },
+  {
+    "order": 25,
+    "korean": "\uac00\uc7a5",
+    "translation": "Best, most"
+  },
+  {
+    "order": 26,
+    "korean": "\ubc18\ubc14\uc9c0",
+    "translation": "Short pants, shorts"
+  },
+  {
+    "order": 27,
+    "korean": "\uc785\ub2e4",
+    "translation": "To wear, to be dressed, to put on"
+  },
+  {
+    "order": 28,
+    "korean": "\uacf1\ub2e4",
+    "translation": "To be beautiful, to be pretty"
+  },
+  {
+    "order": 29,
+    "korean": "\ubc18\ud314 \uc637",
+    "translation": "Short-sleeved shirt"
+  },
+  {
+    "order": 30,
+    "korean": "\uc7a5\uac11",
+    "translation": "Gloves"
+  },
+  {
+    "order": 31,
+    "korean": "\uae34\ud314 \uc637",
+    "translation": "Long-sleeved shirt"
+  },
+  {
+    "order": 32,
+    "korean": "\ubd80\uce20",
+    "translation": "Boots"
+  },
+  {
+    "order": 33,
+    "korean": "\uc881\ub2e4",
+    "translation": "To be small, to be narrow"
+  },
+  {
+    "order": 34,
+    "korean": "\uae68\ub057\ud558\ub2e4",
+    "translation": "To be clean, to be spotless"
+  },
+  {
+    "order": 35,
+    "korean": "\ube44\uc2b7\ud558\ub2e4",
+    "translation": "To be similar, to be like"
+  },
+  {
+    "order": 36,
+    "korean": "\ucd94\uc5b5",
+    "translation": "Memory"
+  },
+  {
+    "order": 37,
+    "korean": "\ub178\ub780\uc0c9",
+    "translation": "Yellow"
+  },
+  {
+    "order": 38,
+    "korean": "\uc2a4\ub178\ubcf4\ub4dc",
+    "translation": "Snowboard"
+  },
+  {
+    "order": 39,
+    "korean": "\ud544\uc694\ud558\ub2e4",
+    "translation": "To be necessary, to be needed"
+  },
+  {
+    "order": 40,
+    "korean": "\ub2e8\ud48d",
+    "translation": "Autumn foliage, autumn leaves"
+  },
+  {
+    "order": 41,
+    "korean": "\uc2a4\ud0a4",
+    "translation": "Ski, skiing"
+  },
+  {
+    "order": 42,
+    "korean": "\ud558\ub298",
+    "translation": "Sky"
+  },
+  {
+    "order": 43,
+    "korean": "\ub2f5\uc7a5",
+    "translation": "Reply, answer"
+  },
+  {
+    "order": 44,
+    "korean": "\uc2a4\ud0a4\uc7a5",
+    "translation": "Ski resort"
+  },
+  {
+    "order": 45,
+    "korean": "\ud558\uc580\ub208",
+    "translation": "White snow"
+  },
+  {
+    "order": 46,
+    "korean": "\ub3c4\uc640\uc8fc\ub2e4",
+    "translation": "To help, to assist"
+  },
+  {
+    "order": 47,
+    "korean": "\uc2dc\ub044\ub7fd\ub2e4",
+    "translation": "To be loud, to be noisy"
+  },
+  {
+    "order": 48,
+    "korean": "\ud638\uc218",
+    "translation": "Lake"
+  },
+  {
+    "order": 49,
+    "korean": "\ub3d5\ub2e4",
+    "translation": "To help, to assist"
+  },
+  {
+    "order": 50,
+    "korean": "\uc544\ub984\ub2f5\ub2e4",
+    "translation": "To be beautiful, to be pretty"
+  },
+  {
+    "order": 51,
+    "korean": "\ubaa9\ub3c4\ub9ac",
+    "translation": "Scarf"
+  },
+  {
+    "order": 52,
+    "korean": "\uc6b0\uc0b0",
+    "translation": "Umbrella"
+  }
+]

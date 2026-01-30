@@ -1,0 +1,187 @@
+[
+  {
+    "order": 1,
+    "korean": "지난주",
+    "translation": "Last week"
+  },
+  {
+    "order": 2,
+    "korean": "이번 주",
+    "translation": "This week"
+  },
+  {
+    "order": 3,
+    "korean": "다음 주",
+    "translation": "Next week"
+  },
+  {
+    "order": 4,
+    "korean": "평일 (주중)",
+    "translation": "Weekday"
+  },
+  {
+    "order": 5,
+    "korean": "주말",
+    "translation": "Weekend"
+  },
+  {
+    "order": 6,
+    "korean": "공/ 영",
+    "translation": "0"
+  },
+  {
+    "order": 7,
+    "korean": "일",
+    "translation": "1"
+  },
+  {
+    "order": 8,
+    "korean": "십",
+    "translation": "10"
+  },
+  {
+    "order": 9,
+    "korean": "백",
+    "translation": "100"
+  },
+  {
+    "order": 10,
+    "korean": "천",
+    "translation": "1,000"
+  },
+  {
+    "order": 11,
+    "korean": "만",
+    "translation": "10,000"
+  },
+  {
+    "order": 12,
+    "korean": "십만",
+    "translation": "100,000"
+  },
+  {
+    "order": 13,
+    "korean": "백만",
+    "translation": "1,000,000"
+  },
+  {
+    "order": 14,
+    "korean": "강사",
+    "translation": "Teacher, instructor, lecturer"
+  },
+  {
+    "order": 15,
+    "korean": "설날",
+    "translation": "Lunar New Year's Day"
+  },
+  {
+    "order": 16,
+    "korean": "커피숍",
+    "translation": "Coffee shop"
+  },
+  {
+    "order": 17,
+    "korean": "계획표",
+    "translation": "Planning chart, schedule table"
+  },
+  {
+    "order": 18,
+    "korean": "숙제",
+    "translation": "Homework"
+  },
+  {
+    "order": 19,
+    "korean": "크리스마스",
+    "translation": "Christmas"
+  },
+  {
+    "order": 20,
+    "korean": "구경하다",
+    "translation": "To watch, to see, to look on"
+  },
+  {
+    "order": 21,
+    "korean": "시험",
+    "translation": "Test, examination"
+  },
+  {
+    "order": 22,
+    "korean": "파티를 하다",
+    "translation": "To have a party"
+  },
+  {
+    "order": 23,
+    "korean": "그리고",
+    "translation": "And"
+  },
+  {
+    "order": 24,
+    "korean": "아르바이트",
+    "translation": "Part-time job"
+  },
+  {
+    "order": 25,
+    "korean": "한글날",
+    "translation": "Hangul Day"
+  },
+  {
+    "order": 26,
+    "korean": "등산",
+    "translation": "Hiking, climbing"
+  },
+  {
+    "order": 27,
+    "korean": "아름답다",
+    "translation": "To be beautiful, to be pretty"
+  },
+  {
+    "order": 28,
+    "korean": "호",
+    "translation": "Room number"
+  },
+  {
+    "order": 29,
+    "korean": "명절",
+    "translation": "National holiday"
+  },
+  {
+    "order": 30,
+    "korean": "안내",
+    "translation": "Introduction, guidance"
+  },
+  {
+    "order": 31,
+    "korean": "회의하다",
+    "translation": "To discuss together"
+  },
+  {
+    "order": 32,
+    "korean": "방학",
+    "translation": "Vacation"
+  },
+  {
+    "order": 33,
+    "korean": "휴가",
+    "translation": "Leave, break, vacation"
+  },
+  {
+    "order": 34,
+    "korean": "산",
+    "translation": "Mountain"
+  },
+  {
+    "order": 35,
+    "korean": "졸업하다",
+    "translation": "To graduate"
+  },
+  {
+    "order": 36,
+    "korean": "생일 파티",
+    "translation": "Birthday party"
+  },
+  {
+    "order": 37,
+    "korean": "층",
+    "translation": "Floor"
+  }
+]

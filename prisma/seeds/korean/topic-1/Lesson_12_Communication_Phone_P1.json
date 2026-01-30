@@ -1,0 +1,262 @@
+[
+  {
+    "order": 1,
+    "korean": "집 전화",
+    "translation": "Home phone"
+  },
+  {
+    "order": 2,
+    "korean": "공중전화",
+    "translation": "Pay phone"
+  },
+  {
+    "order": 3,
+    "korean": "전화번호",
+    "translation": "Phone number"
+  },
+  {
+    "order": 4,
+    "korean": "전화 요금",
+    "translation": "Phone bill"
+  },
+  {
+    "order": 5,
+    "korean": "국내 전화",
+    "translation": "Domestic phone call"
+  },
+  {
+    "order": 6,
+    "korean": "수신자 부담",
+    "translation": "Collect call"
+  },
+  {
+    "order": 7,
+    "korean": "연락처",
+    "translation": "Contact information"
+  },
+  {
+    "order": 8,
+    "korean": "전화 카드",
+    "translation": "Phone card"
+  },
+  {
+    "order": 9,
+    "korean": "국제전화",
+    "translation": "International phone call"
+  },
+  {
+    "order": 10,
+    "korean": "인터넷 전화",
+    "translation": "Internet telephone"
+  },
+  {
+    "order": 11,
+    "korean": "국가 번호",
+    "translation": "Country code"
+  },
+  {
+    "order": 12,
+    "korean": "지역 번호",
+    "translation": "Area code"
+  },
+  {
+    "order": 13,
+    "korean": "전화를 걸다/하다",
+    "translation": "To make a phone call"
+  },
+  {
+    "order": 14,
+    "korean": "전화를 받다",
+    "translation": "To pick up the phone"
+  },
+  {
+    "order": 15,
+    "korean": "전화를 끊다",
+    "translation": "To hang up"
+  },
+  {
+    "order": 16,
+    "korean": "문자메시지를 보내다",
+    "translation": "To send a text message"
+  },
+  {
+    "order": 17,
+    "korean": "답장을 보내다",
+    "translation": "To reply to a letter"
+  },
+  {
+    "order": 18,
+    "korean": "전화가 오다",
+    "translation": "To get a call"
+  },
+  {
+    "order": 19,
+    "korean": "전화를 바꾸다",
+    "translation": "To put someone on the phone"
+  },
+  {
+    "order": 20,
+    "korean": "통화 중이다",
+    "translation": "To be on the phone"
+  },
+  {
+    "order": 21,
+    "korean": "문자메시지를 받다",
+    "translation": "To receive the text message"
+  },
+  {
+    "order": 22,
+    "korean": "답장을 받다",
+    "translation": "To receive an answer to one's letter"
+  },
+  {
+    "order": 23,
+    "korean": "여보세요?",
+    "translation": "Hello?"
+  },
+  {
+    "order": 24,
+    "korean": "거기 ...(이)지요?",
+    "translation": "Is that (...)?"
+  },
+  {
+    "order": 25,
+    "korean": "(...) 계세요?",
+    "translation": "Is (...) there?"
+  },
+  {
+    "order": 26,
+    "korean": "바꿔 주시겠어요?",
+    "translation": "Can I speak to (...)?"
+  },
+  {
+    "order": 27,
+    "korean": "메모 좀 전해 주세요.",
+    "translation": "Could you pass on my memo?"
+  },
+  {
+    "order": 28,
+    "korean": "말씀 좀 전해 주세요.",
+    "translation": "Could you pass on my message?"
+  },
+  {
+    "order": 29,
+    "korean": "다시 전화하겠습니다.",
+    "translation": "I'll call again."
+  },
+  {
+    "order": 30,
+    "korean": "그런데요?",
+    "translation": "So?"
+  },
+  {
+    "order": 31,
+    "korean": "실례지만 누구세요?",
+    "translation": "Excuse me, but who are you?"
+  },
+  {
+    "order": 32,
+    "korean": "지금 없는데요.",
+    "translation": "He/she is not in."
+  },
+  {
+    "order": 33,
+    "korean": "잠깐 외출하셨는데요.",
+    "translation": "He/she's out for a while."
+  },
+  {
+    "order": 34,
+    "korean": "메모 전해 드리겠습니다.",
+    "translation": "I'll deliver the memo."
+  },
+  {
+    "order": 35,
+    "korean": "말씀 전해 드리겠습니다.",
+    "translation": "I'll relay the message."
+  },
+  {
+    "order": 36,
+    "korean": "누구라고 전해 드릴까요?",
+    "translation": "Who shall I say is calling?"
+  },
+  {
+    "order": 37,
+    "korean": "그분",
+    "translation": "That person (honorific)"
+  },
+  {
+    "order": 38,
+    "korean": "깨우다",
+    "translation": "To wake up"
+  },
+  {
+    "order": 39,
+    "korean": "남기다",
+    "translation": "To leave, to hand down"
+  },
+  {
+    "order": 40,
+    "korean": "내다",
+    "translation": "To pay, to donate, to put, to place"
+  },
+  {
+    "order": 41,
+    "korean": "늦게",
+    "translation": "Late"
+  },
+  {
+    "order": 42,
+    "korean": "대사관",
+    "translation": "Embassy"
+  },
+  {
+    "order": 43,
+    "korean": "들어오다",
+    "translation": "To come in, to get in, to enter"
+  },
+  {
+    "order": 44,
+    "korean": "말씀드리다",
+    "translation": "To tell"
+  },
+  {
+    "order": 45,
+    "korean": "맞다",
+    "translation": "To be correct"
+  },
+  {
+    "order": 46,
+    "korean": "사장님",
+    "translation": "President, CEO, boss"
+  },
+  {
+    "order": 47,
+    "korean": "소리",
+    "translation": "Sound, voice"
+  },
+  {
+    "order": 48,
+    "korean": "약속",
+    "translation": "Appointment"
+  },
+  {
+    "order": 49,
+    "korean": "얼마나",
+    "translation": "How long, how much"
+  },
+  {
+    "order": 50,
+    "korean": "역사",
+    "translation": "History"
+  },
+  {
+    "order": 51,
+    "korean": "정하다",
+    "translation": "To decide"
+  },
+  {
+    "order": 52,
+    "korean": "짐",
+    "translation": "Baggage"
+  }
+]

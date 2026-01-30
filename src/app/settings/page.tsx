@@ -42,7 +42,7 @@ function SettingsView({ user }: { user: User }) {
   const handleUpdate = useCallback(async () => {
     const data = await graphqlRequest<{ updateUser: User }>(
       `mutation UpdateUser($userId: ID!, $name: String!, $phone: String!) {
-        updateUser(userId: $userId, name: $name, phone: $phone) { id name phone }
+        updateUser(userId: $userId, name: $name, phone: $phone) { id name phone isAdmin }
       }`,
       { userId: user.id, name: name.trim(), phone: phone.trim() }
     );

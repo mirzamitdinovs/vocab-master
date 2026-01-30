@@ -1,0 +1,257 @@
+[
+  {
+    "order": 1,
+    "korean": "학교",
+    "translation": "School"
+  },
+  {
+    "order": 2,
+    "korean": "도서관",
+    "translation": "Library"
+  },
+  {
+    "order": 3,
+    "korean": "식당",
+    "translation": "Cafeteria, restaurant"
+  },
+  {
+    "order": 4,
+    "korean": "호텔",
+    "translation": "Hotel"
+  },
+  {
+    "order": 5,
+    "korean": "극장",
+    "translation": "Theater, cinema"
+  },
+  {
+    "order": 6,
+    "korean": "우체국",
+    "translation": "Post office"
+  },
+  {
+    "order": 7,
+    "korean": "병원",
+    "translation": "Hospital, clinic"
+  },
+  {
+    "order": 8,
+    "korean": "백화점",
+    "translation": "Department store"
+  },
+  {
+    "order": 9,
+    "korean": "약국",
+    "translation": "Pharmacy"
+  },
+  {
+    "order": 10,
+    "korean": "가게",
+    "translation": "Shop, store"
+  },
+  {
+    "order": 11,
+    "korean": "사무실",
+    "translation": "Office, place of business, workplace"
+  },
+  {
+    "order": 12,
+    "korean": "강의실",
+    "translation": "Classroom, lecture room"
+  },
+  {
+    "order": 13,
+    "korean": "교실",
+    "translation": "Classroom, class"
+  },
+  {
+    "order": 14,
+    "korean": "화장실",
+    "translation": "Toilet, restroom, bathroom"
+  },
+  {
+    "order": 15,
+    "korean": "휴게실",
+    "translation": "Lounge, resting room"
+  },
+  {
+    "order": 16,
+    "korean": "랩실 (어학실)",
+    "translation": "Laboratory"
+  },
+  {
+    "order": 17,
+    "korean": "동아리방",
+    "translation": "Club room"
+  },
+  {
+    "order": 18,
+    "korean": "체육관",
+    "translation": "Gymnasium"
+  },
+  {
+    "order": 19,
+    "korean": "운동장",
+    "translation": "Stadium"
+  },
+  {
+    "order": 20,
+    "korean": "강당",
+    "translation": "Lecture hall, auditorium"
+  },
+  {
+    "order": 21,
+    "korean": "학생 식당",
+    "translation": "School cafeteria"
+  },
+  {
+    "order": 22,
+    "korean": "세미나실",
+    "translation": "Seminar room"
+  },
+  {
+    "order": 23,
+    "korean": "서점",
+    "translation": "Bookstore"
+  },
+  {
+    "order": 24,
+    "korean": "책상",
+    "translation": "Desk"
+  },
+  {
+    "order": 25,
+    "korean": "칠판",
+    "translation": "Blackboard"
+  },
+  {
+    "order": 26,
+    "korean": "문",
+    "translation": "Door"
+  },
+  {
+    "order": 27,
+    "korean": "창문",
+    "translation": "Window"
+  },
+  {
+    "order": 28,
+    "korean": "가방",
+    "translation": "Bag"
+  },
+  {
+    "order": 29,
+    "korean": "컴퓨터",
+    "translation": "Computer"
+  },
+  {
+    "order": 30,
+    "korean": "책",
+    "translation": "Book"
+  },
+  {
+    "order": 31,
+    "korean": "공책",
+    "translation": "Notebook"
+  },
+  {
+    "order": 32,
+    "korean": "사전",
+    "translation": "Dictionary"
+  },
+  {
+    "order": 33,
+    "korean": "지우개",
+    "translation": "Eraser"
+  },
+  {
+    "order": 34,
+    "korean": "지도",
+    "translation": "Map"
+  },
+  {
+    "order": 35,
+    "korean": "펜",
+    "translation": "Pen"
+  },
+  {
+    "order": 36,
+    "korean": "필통",
+    "translation": "Pencil case"
+  },
+  {
+    "order": 37,
+    "korean": "거기",
+    "translation": "There"
+  },
+  {
+    "order": 38,
+    "korean": "어디",
+    "translation": "Where"
+  },
+  {
+    "order": 39,
+    "korean": "저기",
+    "translation": "That place"
+  },
+  {
+    "order": 40,
+    "korean": "그것",
+    "translation": "That, it"
+  },
+  {
+    "order": 41,
+    "korean": "없다",
+    "translation": "Be not in, do not exist, there is no"
+  },
+  {
+    "order": 42,
+    "korean": "텔레비전",
+    "translation": "Television"
+  },
+  {
+    "order": 43,
+    "korean": "라디오",
+    "translation": "Radio"
+  },
+  {
+    "order": 44,
+    "korean": "여기",
+    "translation": "Here"
+  },
+  {
+    "order": 45,
+    "korean": "많이",
+    "translation": "A lot, very (adverb)"
+  },
+  {
+    "order": 46,
+    "korean": "이것",
+    "translation": "This"
+  },
+  {
+    "order": 47,
+    "korean": "휴대전화",
+    "translation": "Cellphone"
+  },
+  {
+    "order": 48,
+    "korean": "명동",
+    "translation": "Myeong-dong"
+  },
+  {
+    "order": 49,
+    "korean": "있다",
+    "translation": "Be, have, exist"
+  },
+  {
+    "order": 50,
+    "korean": "무엇",
+    "translation": "What"
+  },
+  {
+    "order": 51,
+    "korean": "저것",
+    "translation": "That"
+  }
+]

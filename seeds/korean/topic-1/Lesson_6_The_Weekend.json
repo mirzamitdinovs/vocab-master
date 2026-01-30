@@ -1,0 +1,242 @@
+[
+  {
+    "order": 1,
+    "korean": "\ubb34\uc2a8",
+    "translation": "What"
+  },
+  {
+    "order": 2,
+    "korean": "\uc5b4\ub5a4",
+    "translation": "What, which"
+  },
+  {
+    "order": 3,
+    "korean": "\uc5b4\ub290",
+    "translation": "Which"
+  },
+  {
+    "order": 4,
+    "korean": "\ub4f1\uc0b0\ud558\ub2e4",
+    "translation": "To hike, to climb"
+  },
+  {
+    "order": 5,
+    "korean": "\uc601\ud654\ub97c \ubcf4\ub2e4",
+    "translation": "To see a movie"
+  },
+  {
+    "order": 6,
+    "korean": "\uc6b4\ub3d9\ud558\ub2e4",
+    "translation": "To exercise, to take exercise"
+  },
+  {
+    "order": 7,
+    "korean": "\uc5ec\ud589\ud558\ub2e4",
+    "translation": "To travel"
+  },
+  {
+    "order": 8,
+    "korean": "\uc218\uc601\ud558\ub2e4",
+    "translation": "To swim"
+  },
+  {
+    "order": 9,
+    "korean": "\uc678\uc2dd\ud558\ub2e4",
+    "translation": "To eat out"
+  },
+  {
+    "order": 10,
+    "korean": "\uce5c\uad6c\ub97c \ub9cc\ub098\ub2e4",
+    "translation": "To see friend"
+  },
+  {
+    "order": 11,
+    "korean": "\uc18c\ud48d\uac00\ub2e4",
+    "translation": "To go on a picnic"
+  },
+  {
+    "order": 12,
+    "korean": "\ucc45\uc744 \uc77d\ub2e4",
+    "translation": "To read a book"
+  },
+  {
+    "order": 13,
+    "korean": "\uc0dd\ub7b5",
+    "translation": "Omission"
+  },
+  {
+    "order": 14,
+    "korean": "\ucd95\uc57d",
+    "translation": "Abbreviation"
+  },
+  {
+    "order": 15,
+    "korean": "\uac00\uc218",
+    "translation": "Singer"
+  },
+  {
+    "order": 16,
+    "korean": "\uc2eb\uc5b4\ud558\ub2e4",
+    "translation": "To hate, to dislike"
+  },
+  {
+    "order": 17,
+    "korean": "\uac08\ube44",
+    "translation": "Korean barbecued rib dish"
+  },
+  {
+    "order": 18,
+    "korean": "\ub77c\uba74",
+    "translation": "Ramen, instant noodles"
+  },
+  {
+    "order": 19,
+    "korean": "\uc561\uc158 \uc601\ud654",
+    "translation": "Action film"
+  },
+  {
+    "order": 20,
+    "korean": "\uac1c",
+    "translation": "Dog"
+  },
+  {
+    "order": 21,
+    "korean": "\uc57c\uad6c",
+    "translation": "Baseball"
+  },
+  {
+    "order": 22,
+    "korean": "\uace0\uc591\uc774",
+    "translation": "Cat"
+  },
+  {
+    "order": 23,
+    "korean": "\ubc14\ub2e4",
+    "translation": "Sea"
+  },
+  {
+    "order": 24,
+    "korean": "\uc694\ub9ac\ud558\ub2e4",
+    "translation": "To cook"
+  },
+  {
+    "order": 25,
+    "korean": "\uace8\ud504",
+    "translation": "Golf"
+  },
+  {
+    "order": 26,
+    "korean": "\uc77c\ucc0d",
+    "translation": "Early"
+  },
+  {
+    "order": 27,
+    "korean": "\uacf5\ud3ec \uc601\ud654",
+    "translation": "Horror film"
+  },
+  {
+    "order": 28,
+    "korean": "\ubc30",
+    "translation": "Pear"
+  },
+  {
+    "order": 29,
+    "korean": "\ucd95\uad6c",
+    "translation": "Soccer"
+  },
+  {
+    "order": 30,
+    "korean": "\uacfc\uc77c",
+    "translation": "Fruit"
+  },
+  {
+    "order": 31,
+    "korean": "\ubc30\uad6c",
+    "translation": "Volleyball"
+  },
+  {
+    "order": 32,
+    "korean": "\ucda4\uc744 \ucd94\ub2e4",
+    "translation": "To dance"
+  },
+  {
+    "order": 33,
+    "korean": "\uae40\ubc25",
+    "translation": "Gimbap"
+  },
+  {
+    "order": 34,
+    "korean": "\ubcf4\ub0b4\ub2e4",
+    "translation": "To spend"
+  },
+  {
+    "order": 35,
+    "korean": "\uce58\ub2e4",
+    "translation": "To play, to beat"
+  },
+  {
+    "order": 36,
+    "korean": "\ub098\ubb34",
+    "translation": "Tree, wood"
+  },
+  {
+    "order": 37,
+    "korean": "\ubd88\uace0\uae30",
+    "translation": "Bulgogi, barbequed beef"
+  },
+  {
+    "order": 38,
+    "korean": "\ub09a\uc2dc",
+    "translation": "Fishing"
+  },
+  {
+    "order": 39,
+    "korean": "\ube44\ube54\ubc25",
+    "translation": "Bibimbap, Korean mixed rice dish"
+  },
+  {
+    "order": 40,
+    "korean": "\ud14c\ub2c8\uc2a4",
+    "translation": "Tennis"
+  },
+  {
+    "order": 41,
+    "korean": "\ub18d\uad6c",
+    "translation": "Basketball"
+  },
+  {
+    "order": 42,
+    "korean": "\ube68\ub798\ud558\ub2e4",
+    "translation": "To wash clothes"
+  },
+  {
+    "order": 43,
+    "korean": "\ud3ec\ub3c4",
+    "translation": "Grape"
+  },
+  {
+    "order": 44,
+    "korean": "\ub3d9\ubb3c",
+    "translation": "Animal"
+  },
+  {
+    "order": 45,
+    "korean": "\uc0c8",
+    "translation": "Bird"
+  },
+  {
+    "order": 46,
+    "korean": "\ud53c\uace4\ud558\ub2e4",
+    "translation": "To be tired, to be exhausted"
+  },
+  {
+    "order": 47,
+    "korean": "\ub4dc\ub77c\ub9c8",
+    "translation": "Drama"
+  },
+  {
+    "order": 48,
+    "korean": "\uc120\ubb3c",
+    "translation": "Gift, present"
+  }
+]

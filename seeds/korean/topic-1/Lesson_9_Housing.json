@@ -1,0 +1,292 @@
+[
+  {
+    "order": 1,
+    "korean": "\uc544\ub798",
+    "translation": "The bottom"
+  },
+  {
+    "order": 2,
+    "korean": "\uc548",
+    "translation": "The inside"
+  },
+  {
+    "order": 3,
+    "korean": "\ubc16",
+    "translation": "The outside"
+  },
+  {
+    "order": 4,
+    "korean": "\uc606",
+    "translation": "Side"
+  },
+  {
+    "order": 5,
+    "korean": "\uc0ac\uc774",
+    "translation": "Space, gap"
+  },
+  {
+    "order": 6,
+    "korean": "\uc55e",
+    "translation": "Front, being previous"
+  },
+  {
+    "order": 7,
+    "korean": "\ub4a4",
+    "translation": "Back"
+  },
+  {
+    "order": 8,
+    "korean": "\uc67c\ucabd",
+    "translation": "The left"
+  },
+  {
+    "order": 9,
+    "korean": "\uc624\ub978\ucabd",
+    "translation": "The right"
+  },
+  {
+    "order": 10,
+    "korean": "\uc591\ucabd",
+    "translation": "Both sides"
+  },
+  {
+    "order": 12,
+    "korean": "\ub611\ubc14\ub85c/\ucb49",
+    "translation": "Straight"
+  },
+  {
+    "order": 13,
+    "korean": "\ub3d9",
+    "translation": "East"
+  },
+  {
+    "order": 14,
+    "korean": "\uc11c",
+    "translation": "West"
+  },
+  {
+    "order": 15,
+    "korean": "\ub0a8",
+    "translation": "South"
+  },
+  {
+    "order": 16,
+    "korean": "\ubd81",
+    "translation": "North"
+  },
+  {
+    "order": 17,
+    "korean": "\uc8fc\ud0dd",
+    "translation": "House"
+  },
+  {
+    "order": 18,
+    "korean": "\uc544\ud30c\ud2b8",
+    "translation": "Apartment, apartment building"
+  },
+  {
+    "order": 19,
+    "korean": "\uc548\ubc29",
+    "translation": "Main room"
+  },
+  {
+    "order": 20,
+    "korean": "\uacf5\ubd80\ubc29",
+    "translation": "Study room"
+  },
+  {
+    "order": 21,
+    "korean": "\uac70\uc2e4",
+    "translation": "Living room"
+  },
+  {
+    "order": 22,
+    "korean": "\ubd80\uc5cc",
+    "translation": "Kitchen"
+  },
+  {
+    "order": 23,
+    "korean": "\ud604\uad00",
+    "translation": "Entrance"
+  },
+  {
+    "order": 24,
+    "korean": "\ubca0\ub780\ub2e4",
+    "translation": "Veranda"
+  },
+  {
+    "order": 25,
+    "korean": "\uc624\ud53c\uc2a4\ud154",
+    "translation": "Officetel"
+  },
+  {
+    "order": 26,
+    "korean": "\uc138\ud0c1\uc2e4",
+    "translation": "Laundry room"
+  },
+  {
+    "order": 27,
+    "korean": "\uce68\uc2e4",
+    "translation": "Bedroom"
+  },
+  {
+    "order": 28,
+    "korean": "\uce68\ub300",
+    "translation": "Bed"
+  },
+  {
+    "order": 29,
+    "korean": "\ucc45\uc7a5",
+    "translation": "Bookshelf, bookcase"
+  },
+  {
+    "order": 30,
+    "korean": "\uc637\uc7a5",
+    "translation": "Wardrobe"
+  },
+  {
+    "order": 31,
+    "korean": "\uc18c\ud30c",
+    "translation": "Sofa, couch"
+  },
+  {
+    "order": 32,
+    "korean": "\ud0c1\uc790",
+    "translation": "Table"
+  },
+  {
+    "order": 33,
+    "korean": "\uc2dd\ud0c1",
+    "translation": "Dining table"
+  },
+  {
+    "order": 34,
+    "korean": "\ud654\uc7a5\ub300",
+    "translation": "Dressing table"
+  },
+  {
+    "order": 35,
+    "korean": "\uc2e0\ubc1c\uc7a5",
+    "translation": "Shoe rack, shoe closet"
+  },
+  {
+    "order": 36,
+    "korean": "\uc7a5",
+    "translation": "Wardrobe/chapter/sheet/ground"
+  },
+  {
+    "order": 37,
+    "korean": "\uacbd\ucc30\uc11c",
+    "translation": "Police station"
+  },
+  {
+    "order": 38,
+    "korean": "\uc138\ud0c1\uc18c",
+    "translation": "Laundry"
+  },
+  {
+    "order": 39,
+    "korean": "\ubc15\ubb3c\uad00",
+    "translation": "Museum"
+  },
+  {
+    "order": 40,
+    "korean": "\uc288\ud37c\ub9c8\uac9f",
+    "translation": "Supermarket"
+  },
+  {
+    "order": 41,
+    "korean": "\uc9c0\ud558\ucca0\uc5ed",
+    "translation": "Subway station"
+  },
+  {
+    "order": 42,
+    "korean": "\ubc84\uc2a4 \uc815\ub958\uc7a5",
+    "translation": "Bus stop, bus station"
+  },
+  {
+    "order": 43,
+    "korean": "\ube75\uc9d1",
+    "translation": "Bakery"
+  },
+  {
+    "order": 44,
+    "korean": "\uaf43\uc9d1",
+    "translation": "Flower shop"
+  },
+  {
+    "order": 45,
+    "korean": "\ubbf8\uc6a9\uc2e4",
+    "translation": "Beauty parlor, beauty salon"
+  },
+  {
+    "order": 46,
+    "korean": "\uae30\uc219\uc0ac",
+    "translation": "Dormitory"
+  },
+  {
+    "order": 47,
+    "korean": "\ud3b8\ub9ac\ud558\ub2e4",
+    "translation": "To be convenient"
+  },
+  {
+    "order": 48,
+    "korean": "\ub2e8\ub3c5\uc8fc\ud0dd",
+    "translation": "Detached house"
+  },
+  {
+    "order": 50,
+    "korean": "\ud3b8\ud558\ub2e4",
+    "translation": "To be comfortable"
+  },
+  {
+    "order": 51,
+    "korean": "\ubcf5\uc7a1\ud558\ub2e4",
+    "translation": "To be complex, to be complicated"
+  },
+  {
+    "order": 52,
+    "korean": "\uc9c0\ub0b4\ub2e4",
+    "translation": "To spend"
+  },
+  {
+    "order": 53,
+    "korean": "\ud558\uc219\uc9d1",
+    "translation": "Boarding house"
+  },
+  {
+    "order": 54,
+    "korean": "\uc9c0\ud558",
+    "translation": "Basement, underground"
+  },
+  {
+    "order": 55,
+    "korean": "\uc0ac\uc6a9\ud558\ub2e4",
+    "translation": "To use"
+  },
+  {
+    "order": 56,
+    "korean": "\uce5c\uc808\ud558\ub2e4",
+    "translation": "To be kind, to be hospitable"
+  },
+  {
+    "order": 57,
+    "korean": "\ud63c\uc790",
+    "translation": "Alone, by oneself, on one's own"
+  },
+  {
+    "order": 58,
+    "korean": "\uc815\uc6d0",
+    "translation": "Garden"
+  },
+  {
+    "order": 59,
+    "korean": "\ud558\uc219\ube44",
+    "translation": "Boarding expenses"
+  },
+  {
+    "order": 60,
+    "korean": "\ubd88\ud3b8\ud558\ub2e4",
+    "translation": "To be inconvenient, to be uncomfortable"
+  }
+]

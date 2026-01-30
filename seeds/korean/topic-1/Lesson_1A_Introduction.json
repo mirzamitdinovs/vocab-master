@@ -1,0 +1,172 @@
+[
+  {
+    "order": 1,
+    "korean": "\uc624\uc774",
+    "translation": "Cucumber"
+  },
+  {
+    "order": 2,
+    "korean": "\uc6b0\uc720",
+    "translation": "Milk"
+  },
+  {
+    "order": 3,
+    "korean": "\ubaa8\uc790",
+    "translation": "Hat"
+  },
+  {
+    "order": 4,
+    "korean": "\ubc14\uc9c0",
+    "translation": "Pants"
+  },
+  {
+    "order": 5,
+    "korean": "\uce58\ub9c8",
+    "translation": "Skirt"
+  },
+  {
+    "order": 6,
+    "korean": "\uc0ac\uacfc",
+    "translation": "Apple"
+  },
+  {
+    "order": 7,
+    "korean": "\uace0\uae30",
+    "translation": "Meat, fish"
+  },
+  {
+    "order": 8,
+    "korean": "\uc2dc\uacc4",
+    "translation": "Clock"
+  },
+  {
+    "order": 9,
+    "korean": "\ud734\uc9c0",
+    "translation": "Toilet paper"
+  },
+  {
+    "order": 10,
+    "korean": "\ub3fc\uc9c0",
+    "translation": "Pig"
+  },
+  {
+    "order": 11,
+    "korean": "\ud3ec\ub3c4",
+    "translation": "Grape"
+  },
+  {
+    "order": 12,
+    "korean": "\uc758\uc790",
+    "translation": "Chair, stool"
+  },
+  {
+    "order": 13,
+    "korean": "\ud53c\uc790",
+    "translation": "Pizza"
+  },
+  {
+    "order": 14,
+    "korean": "\uae30\ucc28",
+    "translation": "Train"
+  },
+  {
+    "order": 15,
+    "korean": "\ud1a0\ub07c",
+    "translation": "Rabbit"
+  },
+  {
+    "order": 16,
+    "korean": "\ub5a1",
+    "translation": "Tteok, rice cake"
+  },
+  {
+    "order": 17,
+    "korean": "\ub538\uae30",
+    "translation": "Strawberry"
+  },
+  {
+    "order": 18,
+    "korean": "\uc637",
+    "translation": "Clothes"
+  },
+  {
+    "order": 19,
+    "korean": "\uaf43",
+    "translation": "Flower"
+  },
+  {
+    "order": 20,
+    "korean": "\uc0dd\uc120",
+    "translation": "Fish"
+  },
+  {
+    "order": 21,
+    "korean": "\uc9c0\uac11",
+    "translation": "Wallet, purse"
+  },
+  {
+    "order": 22,
+    "korean": "\ubc1c",
+    "translation": "Foot"
+  },
+  {
+    "order": 23,
+    "korean": "\uc78e",
+    "translation": "Leaf"
+  },
+  {
+    "order": 24,
+    "korean": "\ub2ed",
+    "translation": "Chicken"
+  },
+  {
+    "order": 25,
+    "korean": "\ud0dc\uad6d",
+    "translation": "Thailand"
+  },
+  {
+    "order": 26,
+    "korean": "\ud638\uc8fc",
+    "translation": "Australia"
+  },
+  {
+    "order": 27,
+    "korean": "\ub9d0\ub808\uc774\uc2dc\uc544",
+    "translation": "Malaysia"
+  },
+  {
+    "order": 28,
+    "korean": "\ubabd\uace8",
+    "translation": "Mongolia"
+  },
+  {
+    "order": 29,
+    "korean": "\uc778\ub3c4\ub124\uc2dc\uc544",
+    "translation": "Indonesia"
+  },
+  {
+    "order": 30,
+    "korean": "\ud544\ub9ac\ud540",
+    "translation": "Philippines"
+  },
+  {
+    "order": 31,
+    "korean": "\uc778\ub3c4",
+    "translation": "India"
+  },
+  {
+    "order": 32,
+    "korean": "\ub3c5\uc77c",
+    "translation": "Germany"
+  },
+  {
+    "order": 33,
+    "korean": "\ud504\ub791\uc2a4",
+    "translation": "France"
+  },
+  {
+    "order": 34,
+    "korean": "\ub7ec\uc2dc\uc544",
+    "translation": "Russia"
+  }
+]

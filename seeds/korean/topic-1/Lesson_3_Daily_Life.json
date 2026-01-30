@@ -1,0 +1,267 @@
+[
+  {
+    "order": 1,
+    "korean": "\uc77c\uc0c1\uc0dd\ud65c",
+    "translation": "Everyday life, daily life"
+  },
+  {
+    "order": 2,
+    "korean": "\uac00\ub2e4",
+    "translation": "To go"
+  },
+  {
+    "order": 3,
+    "korean": "\uc624\ub2e4",
+    "translation": "To come"
+  },
+  {
+    "order": 4,
+    "korean": "\uc790\ub2e4",
+    "translation": "To sleep"
+  },
+  {
+    "order": 5,
+    "korean": "\uba39\ub2e4",
+    "translation": "To eat"
+  },
+  {
+    "order": 6,
+    "korean": "\ub9c8\uc2dc\ub2e4",
+    "translation": "To drink"
+  },
+  {
+    "order": 7,
+    "korean": "\uc774\uc57c\uae30\ud558\ub2e4",
+    "translation": "To tell, to say, to speak, to talk"
+  },
+  {
+    "order": 8,
+    "korean": "\uc77d\ub2e4",
+    "translation": "To read"
+  },
+  {
+    "order": 9,
+    "korean": "\ub4e3\ub2e4",
+    "translation": "To listen"
+  },
+  {
+    "order": 10,
+    "korean": "\ubcf4\ub2e4",
+    "translation": "To see, to look, to watch, to read"
+  },
+  {
+    "order": 11,
+    "korean": "\uc77c\ud558\ub2e4",
+    "translation": "To work"
+  },
+  {
+    "order": 12,
+    "korean": "\uacf5\ubd80\ud558\ub2e4",
+    "translation": "To study"
+  },
+  {
+    "order": 13,
+    "korean": "\uc6b4\ub3d9\ud558\ub2e4",
+    "translation": "To exercise"
+  },
+  {
+    "order": 14,
+    "korean": "\uc26c\ub2e4",
+    "translation": "To rest, to relax"
+  },
+  {
+    "order": 15,
+    "korean": "\ub9cc\ub098\ub2e4",
+    "translation": "To meet"
+  },
+  {
+    "order": 16,
+    "korean": "\uc0ac\ub2e4",
+    "translation": "To buy, to purchase"
+  },
+  {
+    "order": 17,
+    "korean": "\uc88b\uc544\ud558\ub2e4",
+    "translation": "To like, to love"
+  },
+  {
+    "order": 18,
+    "korean": "\ud06c\ub2e4",
+    "translation": "To be big, to be large"
+  },
+  {
+    "order": 19,
+    "korean": "\uc791\ub2e4",
+    "translation": "To be small, to be little"
+  },
+  {
+    "order": 20,
+    "korean": "\ub9ce\ub2e4",
+    "translation": "A lot of, lots of, many, much"
+  },
+  {
+    "order": 21,
+    "korean": "\uc801\ub2e4",
+    "translation": "Few, little, small"
+  },
+  {
+    "order": 22,
+    "korean": "\uc88b\ub2e4",
+    "translation": "To be good"
+  },
+  {
+    "order": 23,
+    "korean": "\ub098\uc058\ub2e4",
+    "translation": "To be bad"
+  },
+  {
+    "order": 24,
+    "korean": "\uc7ac\ubbf8\uc5c6\ub2e4",
+    "translation": "To be boring"
+  },
+  {
+    "order": 25,
+    "korean": "\ucc28",
+    "translation": "Tea"
+  },
+  {
+    "order": 26,
+    "korean": "\ucee4\ud53c",
+    "translation": "Coffee"
+  },
+  {
+    "order": 27,
+    "korean": "\ube75",
+    "translation": "Bread"
+  },
+  {
+    "order": 28,
+    "korean": "\uc601\ud654",
+    "translation": "Film, movie"
+  },
+  {
+    "order": 29,
+    "korean": "\uc74c\uc545",
+    "translation": "Music"
+  },
+  {
+    "order": 30,
+    "korean": "\uc2e0\ubb38",
+    "translation": "Newspaper"
+  },
+  {
+    "order": 31,
+    "korean": "\uce5c\uad6c",
+    "translation": "Friend"
+  },
+  {
+    "order": 32,
+    "korean": "\ub204\uad6c",
+    "translation": "Who"
+  },
+  {
+    "order": 33,
+    "korean": "\uc5b8\uc81c",
+    "translation": "When"
+  },
+  {
+    "order": 34,
+    "korean": "\uacf5\uc6d0",
+    "translation": "Park"
+  },
+  {
+    "order": 35,
+    "korean": "\uc2dc\uc7a5",
+    "translation": "Market"
+  },
+  {
+    "order": 36,
+    "korean": "\uc704",
+    "translation": "Top"
+  },
+  {
+    "order": 37,
+    "korean": "\ub178\ub798",
+    "translation": "Song, music"
+  },
+  {
+    "order": 38,
+    "korean": "\uc2dd\uc0ac\ud558\ub2e4",
+    "translation": "To eat"
+  },
+  {
+    "order": 39,
+    "korean": "\uc790\uc8fc",
+    "translation": "Often, frequently"
+  },
+  {
+    "order": 40,
+    "korean": "\ub300\ud55c\ube4c\ub529",
+    "translation": "Daehan building"
+  },
+  {
+    "order": 41,
+    "korean": "\uc804\ud654\ud558\ub2e4",
+    "translation": "To call, to phone"
+  },
+  {
+    "order": 42,
+    "korean": "\ubc29",
+    "translation": "Room"
+  },
+  {
+    "order": 43,
+    "korean": "\uc544\uc774\uc2a4\ud06c\ub9bc",
+    "translation": "Ice cream"
+  },
+  {
+    "order": 44,
+    "korean": "\uc9c0\uae08",
+    "translation": "Now"
+  },
+  {
+    "order": 45,
+    "korean": "\uc544\uc8fc",
+    "translation": "Very, so, extremely"
+  },
+  {
+    "order": 46,
+    "korean": "\ucd95\uad6c\ub97c \ud558\ub2e4",
+    "translation": "To play football"
+  },
+  {
+    "order": 47,
+    "korean": "\uc0b0\ucc45\ud558\ub2e4",
+    "translation": "To walk"
+  },
+  {
+    "order": 48,
+    "korean": "\uc5ec\ud589",
+    "translation": "Travel, trip"
+  },
+  {
+    "order": 49,
+    "korean": "\uce74\ud398",
+    "translation": "Coffee shop"
+  },
+  {
+    "order": 50,
+    "korean": "\uc1fc\ud551\ud558\ub2e4",
+    "translation": "To do the shopping"
+  },
+  {
+    "order": 51,
+    "korean": "\uc637",
+    "translation": "Clothes"
+  },
+  {
+    "order": 52,
+    "korean": "\ud5ec\uc2a4\ud074\ub7fd",
+    "translation": "Health club, fitness center"
+  },
+  {
+    "order": 53,
+    "korean": "\uc2dc\ub0b4",
+    "translation": "Downtown"
+  }
+]

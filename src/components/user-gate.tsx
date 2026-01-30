@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -11,6 +12,7 @@ export type User = {
   id: string;
   name: string;
   phone: string;
+  isAdmin?: boolean;
 };
 
 const STORAGE_KEY = "vocab-master-user";
@@ -20,8 +22,10 @@ export function UserGate({
 }: {
   children: (user: User) => React.ReactNode;
 }) {
+  const pathname = usePathname();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [step, setStep] = useState<"phone" | "name">("phone");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -35,7 +39,7 @@ export function UserGate({
 
     const parsed = JSON.parse(stored) as User;
     graphqlRequest<{ user: User | null }>(
-      `query User($id: ID) { user(id: $id) { id name phone } }`,
+      `query User($id: ID) { user(id: $id) { id name phone isAdmin } }`,
       { id: parsed.id }
     )
       .then((data) => {
@@ -55,20 +59,41 @@ export function UserGate({
 
   async function handleSubmit() {
     setError(null);
-    if (!name.trim() || !phone.trim()) {
-      setError("Name and phone are required.");
+    if (!phone.trim()) {
+      setError("Phone number is required.");
       return;
     }
 
     try {
-      const data = await graphqlRequest<{ upsertUser: User }>(
+      if (step === "phone") {
+        const lookup = await graphqlRequest<{ user: User | null }>(
+          `query UserByPhone($phone: String!) { user(phone: $phone) { id name phone isAdmin } }`,
+          { phone: phone.trim() }
+        );
+        if (lookup.user) {
+          setUser(lookup.user);
+          sessionStorage.setItem(STORAGE_KEY, JSON.stringify(lookup.user));
+          localStorage.removeItem(STORAGE_KEY);
+          window.dispatchEvent(new Event("user-updated"));
+          return;
+        }
+        setStep("name");
+        return;
+      }
+
+      if (!name.trim()) {
+        setError("Name is required to create an account.");
+        return;
+      }
+
+      const created = await graphqlRequest<{ upsertUser: User }>(
         `mutation Upsert($name: String!, $phone: String!) {
-          upsertUser(name: $name, phone: $phone) { id name phone }
+          upsertUser(name: $name, phone: $phone) { id name phone isAdmin }
         }`,
         { name: name.trim(), phone: phone.trim() }
       );
-      setUser(data.upsertUser);
-      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data.upsertUser));
+      setUser(created.upsertUser);
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(created.upsertUser));
       localStorage.removeItem(STORAGE_KEY);
       window.dispatchEvent(new Event("user-updated"));
     } catch (err) {
@@ -85,19 +110,14 @@ export function UserGate({
       <Card className="mx-auto max-w-xl glass">
         <CardHeader>
           <CardTitle className="heading-serif text-2xl">Welcome in</CardTitle>
-          <CardDescription>Enter your name and phone to continue.</CardDescription>
+          <CardDescription>
+            {step === "phone"
+              ? "Enter your phone number to continue."
+              : "We didn’t find this phone number. Add a name to create your account."}
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           {error && <div className="text-sm text-red-600">{error}</div>}
-          <div className="space-y-2">
-            <Label htmlFor="name">Name</Label>
-            <Input
-              id="name"
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-              placeholder="Your name"
-            />
-          </div>
           <div className="space-y-2">
             <Label htmlFor="phone">Phone</Label>
             <Input
@@ -105,14 +125,40 @@ export function UserGate({
               value={phone}
               onChange={(event) => setPhone(event.target.value)}
               placeholder="Phone number"
+              disabled={step === "name"}
             />
           </div>
+          {step === "name" && (
+            <>
+              <div className="space-y-2">
+                <Label htmlFor="name">Name</Label>
+                <Input
+                  id="name"
+                  value={name}
+                  onChange={(event) => setName(event.target.value)}
+                  placeholder="Your name"
+                />
+              </div>
+              <Button
+                variant="ghost"
+                className="h-auto p-0 text-xs text-muted-foreground"
+                onClick={() => setStep("phone")}
+              >
+                Change phone number
+              </Button>
+            </>
+          )}
           <Button className="w-full" onClick={handleSubmit}>
-            Continue
+            {step === "phone" ? "Continue" : "Create account"}
           </Button>
         </CardContent>
       </Card>
     );
+  }
+
+  if (user.isAdmin && !pathname.startsWith("/admin")) {
+    window.location.href = "/admin";
+    return null;
   }
 
   return <>{children(user)}</>;

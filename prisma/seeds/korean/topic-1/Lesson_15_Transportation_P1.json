@@ -1,0 +1,262 @@
+[
+  {
+    "order": 1,
+    "korean": "교통",
+    "translation": "Traffic"
+  },
+  {
+    "order": 2,
+    "korean": "버스",
+    "translation": "Bus"
+  },
+  {
+    "order": 3,
+    "korean": "택시",
+    "translation": "Taxi"
+  },
+  {
+    "order": 4,
+    "korean": "지하철",
+    "translation": "Subway"
+  },
+  {
+    "order": 5,
+    "korean": "자동차",
+    "translation": "Car, automobile"
+  },
+  {
+    "order": 6,
+    "korean": "배",
+    "translation": "Boat, ship"
+  },
+  {
+    "order": 7,
+    "korean": "비행기",
+    "translation": "Plane, airplane"
+  },
+  {
+    "order": 8,
+    "korean": "자전거",
+    "translation": "Bicycle"
+  },
+  {
+    "order": 9,
+    "korean": "전차",
+    "translation": "Streetcar"
+  },
+  {
+    "order": 10,
+    "korean": "오토바이 택시",
+    "translation": "Motorcycle taxi"
+  },
+  {
+    "order": 11,
+    "korean": "시클로",
+    "translation": "Cyclo"
+  },
+  {
+    "order": 12,
+    "korean": "어떻게",
+    "translation": "How"
+  },
+  {
+    "order": 13,
+    "korean": "왜",
+    "translation": "Why"
+  },
+  {
+    "order": 14,
+    "korean": "모범택시",
+    "translation": "Luxury taxi, deluxe taxi"
+  },
+  {
+    "order": 15,
+    "korean": "개인택시",
+    "translation": "Privately owned taxi"
+  },
+  {
+    "order": 16,
+    "korean": "요금",
+    "translation": "Charge, fee"
+  },
+  {
+    "order": 17,
+    "korean": "버스 정류장 (정거장)",
+    "translation": "Bus stop, bus station"
+  },
+  {
+    "order": 18,
+    "korean": "고속버스",
+    "translation": "Express bus"
+  },
+  {
+    "order": 19,
+    "korean": "시내버스",
+    "translation": "Intra-city bus"
+  },
+  {
+    "order": 20,
+    "korean": "버스 터미널",
+    "translation": "Bus terminal"
+  },
+  {
+    "order": 21,
+    "korean": "교통 카드",
+    "translation": "Transportation card"
+  },
+  {
+    "order": 22,
+    "korean": "마을버스",
+    "translation": "Shuttle bus"
+  },
+  {
+    "order": 23,
+    "korean": "매표소",
+    "translation": "Ticket office"
+  },
+  {
+    "order": 24,
+    "korean": "지하철 노선도",
+    "translation": "Subway linemap"
+  },
+  {
+    "order": 25,
+    "korean": "기차역",
+    "translation": "Train station"
+  },
+  {
+    "order": 26,
+    "korean": "주차장",
+    "translation": "Parking lot"
+  },
+  {
+    "order": 27,
+    "korean": "주유소",
+    "translation": "Gas station"
+  },
+  {
+    "order": 28,
+    "korean": "횡단보도",
+    "translation": "Crosswalk"
+  },
+  {
+    "order": 29,
+    "korean": "육교",
+    "translation": "Pedestrian overpass"
+  },
+  {
+    "order": 30,
+    "korean": "지하도",
+    "translation": "Underpass"
+  },
+  {
+    "order": 31,
+    "korean": "신호등",
+    "translation": "Traffic light, traffic signal"
+  },
+  {
+    "order": 32,
+    "korean": "고속도로",
+    "translation": "Expressway"
+  },
+  {
+    "order": 33,
+    "korean": "도로",
+    "translation": "Road"
+  },
+  {
+    "order": 34,
+    "korean": "타다",
+    "translation": "To ride, to get on, to board, to take"
+  },
+  {
+    "order": 35,
+    "korean": "내리다",
+    "translation": "To get off"
+  },
+  {
+    "order": 36,
+    "korean": "갈아타다",
+    "translation": "To transfer"
+  },
+  {
+    "order": 37,
+    "korean": "길이 막히다",
+    "translation": "A road is blocked"
+  },
+  {
+    "order": 38,
+    "korean": "시간이 걸리다",
+    "translation": "To take time"
+  },
+  {
+    "order": 39,
+    "korean": "교통사고가 나다",
+    "translation": "There is a car accident"
+  },
+  {
+    "order": 40,
+    "korean": "간식",
+    "translation": "Snack"
+  },
+  {
+    "order": 41,
+    "korean": "빨갛다",
+    "translation": "To be red"
+  },
+  {
+    "order": 42,
+    "korean": "파랗다",
+    "translation": "To be blue"
+  },
+  {
+    "order": 43,
+    "korean": "남산",
+    "translation": "Namsan mountain"
+  },
+  {
+    "order": 44,
+    "korean": "시내",
+    "translation": "Downtown"
+  },
+  {
+    "order": 45,
+    "korean": "편의점",
+    "translation": "Convenience store"
+  },
+  {
+    "order": 46,
+    "korean": "노랗다",
+    "translation": "Yellow"
+  },
+  {
+    "order": 47,
+    "korean": "야경",
+    "translation": "Night view, nightscape"
+  },
+  {
+    "order": 48,
+    "korean": "학생회관",
+    "translation": "Student union"
+  },
+  {
+    "order": 49,
+    "korean": "리무진 버스",
+    "translation": "Limousine bus"
+  },
+  {
+    "order": 50,
+    "korean": "요리 학원",
+    "translation": "Cooking school"
+  },
+  {
+    "order": 51,
+    "korean": "지각하다",
+    "translation": "To be behind time"
+  },
+  {
+    "order": 52,
+    "korean": "KTX",
+    "translation": "Korea Train Express"
+  }
+]

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { BookText, HelpCircle, Layers, PenLine, Settings } from "lucide-react";
 
 const navItems = [
@@ -14,6 +15,25 @@ const navItems = [
 
 export function BottomNav() {
   const pathname = usePathname();
+  const [hasUser, setHasUser] = useState(false);
+
+  useEffect(() => {
+    const stored = sessionStorage.getItem("vocab-master-user");
+    setHasUser(!!stored);
+
+    const handleUpdate = () => {
+      const next = sessionStorage.getItem("vocab-master-user");
+      setHasUser(!!next);
+    };
+    window.addEventListener("user-updated", handleUpdate);
+    return () => window.removeEventListener("user-updated", handleUpdate);
+  }, []);
+
+  if (pathname.startsWith("/admin")) {
+    return null;
+  }
+
+  if (!hasUser) return null;
 
   return (
     <nav className="fixed inset-x-0 bottom-0 z-50 sm:hidden">

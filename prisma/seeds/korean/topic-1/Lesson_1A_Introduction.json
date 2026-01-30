@@ -1,0 +1,172 @@
+[
+  {
+    "order": 1,
+    "korean": "오이",
+    "translation": "Cucumber"
+  },
+  {
+    "order": 2,
+    "korean": "우유",
+    "translation": "Milk"
+  },
+  {
+    "order": 3,
+    "korean": "모자",
+    "translation": "Hat"
+  },
+  {
+    "order": 4,
+    "korean": "바지",
+    "translation": "Pants"
+  },
+  {
+    "order": 5,
+    "korean": "치마",
+    "translation": "Skirt"
+  },
+  {
+    "order": 6,
+    "korean": "사과",
+    "translation": "Apple"
+  },
+  {
+    "order": 7,
+    "korean": "고기",
+    "translation": "Meat, fish"
+  },
+  {
+    "order": 8,
+    "korean": "시계",
+    "translation": "Clock"
+  },
+  {
+    "order": 9,
+    "korean": "휴지",
+    "translation": "Toilet paper"
+  },
+  {
+    "order": 10,
+    "korean": "돼지",
+    "translation": "Pig"
+  },
+  {
+    "order": 11,
+    "korean": "포도",
+    "translation": "Grape"
+  },
+  {
+    "order": 12,
+    "korean": "의자",
+    "translation": "Chair, stool"
+  },
+  {
+    "order": 13,
+    "korean": "피자",
+    "translation": "Pizza"
+  },
+  {
+    "order": 14,
+    "korean": "기차",
+    "translation": "Train"
+  },
+  {
+    "order": 15,
+    "korean": "토끼",
+    "translation": "Rabbit"
+  },
+  {
+    "order": 16,
+    "korean": "떡",
+    "translation": "Tteok, rice cake"
+  },
+  {
+    "order": 17,
+    "korean": "딸기",
+    "translation": "Strawberry"
+  },
+  {
+    "order": 18,
+    "korean": "옷",
+    "translation": "Clothes"
+  },
+  {
+    "order": 19,
+    "korean": "꽃",
+    "translation": "Flower"
+  },
+  {
+    "order": 20,
+    "korean": "생선",
+    "translation": "Fish"
+  },
+  {
+    "order": 21,
+    "korean": "지갑",
+    "translation": "Wallet, purse"
+  },
+  {
+    "order": 22,
+    "korean": "발",
+    "translation": "Foot"
+  },
+  {
+    "order": 23,
+    "korean": "잎",
+    "translation": "Leaf"
+  },
+  {
+    "order": 24,
+    "korean": "닭",
+    "translation": "Chicken"
+  },
+  {
+    "order": 25,
+    "korean": "태국",
+    "translation": "Thailand"
+  },
+  {
+    "order": 26,
+    "korean": "호주",
+    "translation": "Australia"
+  },
+  {
+    "order": 27,
+    "korean": "말레이시아",
+    "translation": "Malaysia"
+  },
+  {
+    "order": 28,
+    "korean": "몽골",
+    "translation": "Mongolia"
+  },
+  {
+    "order": 29,
+    "korean": "인도네시아",
+    "translation": "Indonesia"
+  },
+  {
+    "order": 30,
+    "korean": "필리핀",
+    "translation": "Philippines"
+  },
+  {
+    "order": 31,
+    "korean": "인도",
+    "translation": "India"
+  },
+  {
+    "order": 32,
+    "korean": "독일",
+    "translation": "Germany"
+  },
+  {
+    "order": 33,
+    "korean": "프랑스",
+    "translation": "France"
+  },
+  {
+    "order": 34,
+    "korean": "러시아",
+    "translation": "Russia"
+  }
+]

@@ -1,20 +1,54 @@
 import { makeExecutableSchema } from "@graphql-tools/schema";
 import { prisma } from "@/lib/prisma";
-import { parseCsvOrThrow } from "@/lib/csv";
+import { parseTopicCsvOrThrow } from "@/lib/csv";
 
 const typeDefs = /* GraphQL */ `
   type User {
     id: ID!
     name: String!
     phone: String!
+    isAdmin: Boolean!
   }
 
-  type Vocabulary {
+  type Language {
     id: ID!
-    order: Int
+    title: String!
+    description: String
+    order: Int!
+  }
+
+  type Level {
+    id: ID!
+    languageId: ID!
+    title: String!
+    order: Int!
+  }
+
+  type Chapter {
+    id: ID!
+    levelId: ID!
+    title: String!
+    order: Int!
+  }
+
+  type Word {
+    id: ID!
+    chapterId: ID!
     korean: String!
     translation: String!
-    chapter: String!
+    order: Int!
+    audioUrl: String
+  }
+
+  type LearningSettings {
+    id: ID!
+    userId: ID!
+    learnSessionSize: Int!
+    reviewSessionSize: Int!
+    speedReviewSessionSize: Int!
+    enableTyping: Boolean!
+    enableTapping: Boolean!
+    enableListening: Boolean!
   }
 
   type WordStat {
@@ -39,27 +73,45 @@ const typeDefs = /* GraphQL */ `
     errors: [String!]!
   }
 
+  input AnswerInput {
+    wordId: ID!
+    correct: Boolean!
+  }
+
   type Query {
     health: String!
     user(id: ID, phone: String): User
-    chapters(userId: ID!): [String!]!
-    vocabulary(userId: ID!): [Vocabulary!]!
-    sessionWords(userId: ID!, chapters: [String!], limit: Int): [Vocabulary!]!
+    languages: [Language!]!
+    levels(languageId: ID!): [Level!]!
+    chapters(levelId: ID!): [Chapter!]!
+    words(chapterId: ID!): [Word!]!
+    sessionWords(userId: ID!, chapterIds: [ID!]!, limit: Int): [Word!]!
     stats(userId: ID!): UserStatSummary!
+    learningSettings(userId: ID!): LearningSettings
   }
 
   type Mutation {
     upsertUser(name: String!, phone: String!): User!
-    importVocabulary(userId: ID!, csv: String!): ImportResult!
     recordAnswer(userId: ID!, wordId: ID!, correct: Boolean!): WordStat!
+    recordAnswers(userId: ID!, answers: [AnswerInput!]!): Boolean!
     completeSession(userId: ID!): UserStatSummary!
     updateUser(userId: ID!, name: String!, phone: String!): User!
     clearWords(userId: ID!): Boolean!
     deleteUser(userId: ID!): Boolean!
-    updateVocabulary(wordId: ID!, korean: String!, translation: String!, chapter: String!, order: Int): Vocabulary!
-    deleteVocabulary(wordId: ID!): Boolean!
-    deleteVocabularyMany(wordIds: [ID!]!): Boolean!
-    updateVocabularyMany(wordIds: [ID!]!, translation: String, chapter: String): Boolean!
+    createLanguage(userId: ID!, title: String!, description: String, order: Int): Language!
+    updateLanguage(userId: ID!, languageId: ID!, title: String!, description: String, order: Int): Language!
+    deleteLanguage(userId: ID!, languageId: ID!): Boolean!
+    createLevel(userId: ID!, languageId: ID!, title: String!, order: Int): Level!
+    updateLevel(userId: ID!, levelId: ID!, title: String!, order: Int): Level!
+    deleteLevel(userId: ID!, levelId: ID!): Boolean!
+    createChapter(userId: ID!, levelId: ID!, title: String!, order: Int): Chapter!
+    updateChapter(userId: ID!, chapterId: ID!, title: String!, order: Int): Chapter!
+    deleteChapter(userId: ID!, chapterId: ID!): Boolean!
+    createWord(userId: ID!, chapterId: ID!, korean: String!, translation: String!, order: Int): Word!
+    updateWord(userId: ID!, wordId: ID!, korean: String!, translation: String!, order: Int): Word!
+    deleteWord(userId: ID!, wordId: ID!): Boolean!
+    importWords(userId: ID!, chapterId: ID!, csv: String!): ImportResult!
+    updateLearningSettings(userId: ID!, learnSessionSize: Int, reviewSessionSize: Int, speedReviewSessionSize: Int, enableTyping: Boolean, enableTapping: Boolean, enableListening: Boolean): LearningSettings!
   }
 `;
 
@@ -75,35 +127,46 @@ const resolvers = {
       }
       return null;
     },
-    chapters: async (_: unknown, args: { userId: string }) => {
-      const rows = await prisma.vocabulary.findMany({
-        where: { userId: args.userId },
-        distinct: ["chapter"],
-        select: { chapter: true },
-        orderBy: { chapter: "asc" },
-      });
-      return rows.map((r: { chapter: string }) => r.chapter);
+    languages: async () => {
+      return prisma.language.findMany({ orderBy: { order: "asc" } });
     },
-    vocabulary: async (_: unknown, args: { userId: string }) => {
-      return prisma.vocabulary.findMany({
-        where: { userId: args.userId },
-        orderBy: [{ chapter: "asc" }, { order: "asc" }],
+    levels: async (_: unknown, args: { languageId: string }) => {
+      return prisma.level.findMany({
+        where: { languageId: args.languageId },
+        orderBy: { order: "asc" },
+      });
+    },
+    chapters: async (_: unknown, args: { levelId: string }) => {
+      return prisma.chapter.findMany({
+        where: { levelId: args.levelId },
+        orderBy: { order: "asc" },
+      });
+    },
+    words: async (_: unknown, args: { chapterId: string }) => {
+      return prisma.word.findMany({
+        where: { chapterId: args.chapterId },
+        orderBy: { order: "asc" },
       });
     },
     sessionWords: async (
       _: unknown,
-      args: { userId: string; chapters?: string[]; limit?: number }
+      args: { userId: string; chapterIds: string[]; limit?: number }
     ) => {
-      const take = Math.min(Math.max(args.limit ?? 20, 1), 200);
-      return prisma.vocabulary.findMany({
+      const take = args.limit == null ? undefined : Math.min(Math.max(args.limit, 1), 200);
+      return prisma.word.findMany({
         where: {
-          userId: args.userId,
-          ...(args.chapters && args.chapters.length > 0
-            ? { chapter: { in: args.chapters } }
-            : {}),
+          chapterId: { in: args.chapterIds },
+          NOT: {
+            progress: {
+              some: {
+                userId: args.userId,
+                learnedAt: { not: null },
+              },
+            },
+          },
         },
-        orderBy: { createdAt: "desc" },
-        take,
+        orderBy: { order: "asc" },
+        ...(take ? { take } : {}),
       });
     },
     stats: async (_: unknown, args: { userId: string }) => {
@@ -112,7 +175,7 @@ const resolvers = {
           where: { userId: args.userId },
           _sum: { correctCount: true, incorrectCount: true },
         }),
-        prisma.vocabulary.count({ where: { userId: args.userId } }),
+        prisma.word.count(),
         prisma.userStat.findUnique({ where: { userId: args.userId } }),
       ]);
 
@@ -124,88 +187,36 @@ const resolvers = {
         incorrectTotal: wordAgg._sum.incorrectCount ?? 0,
       };
     },
+    learningSettings: async (_: unknown, args: { userId: string }) => {
+      return prisma.learningSettings.findUnique({ where: { userId: args.userId } });
+    },
   },
   Mutation: {
     upsertUser: async (_: unknown, args: { name: string; phone: string }) => {
+      const isAdmin = args.phone === "+998901202467";
       const existing = await prisma.user.findUnique({ where: { phone: args.phone } });
       if (existing) {
         return prisma.user.update({
           where: { id: existing.id },
-          data: { name: args.name },
+          data: { name: args.name, isAdmin },
         });
       }
 
       const user = await prisma.user.create({
-        data: { name: args.name, phone: args.phone },
+        data: { name: args.name, phone: args.phone, isAdmin },
       });
       await prisma.userStat.create({ data: { userId: user.id } });
+      await prisma.learningSettings.create({ data: { userId: user.id } });
       return user;
     },
-    importVocabulary: async (_: unknown, args: { userId: string; csv: string }) => {
-      try {
-        const rows = parseCsvOrThrow(args.csv);
-        if (rows.length === 0) {
-          return { inserted: 0, skipped: 0, errors: ["CSV has no rows."] };
-        }
-
-        const data = rows.map((row) => ({
-          userId: args.userId,
-          order: row.order ?? undefined,
-          korean: row.korean,
-          translation: row.translation,
-          chapter: row.chapter,
-        }));
-
-        const result = await prisma.vocabulary.createMany({
-          data,
-          skipDuplicates: true,
-        });
-
-        return {
-          inserted: result.count,
-          skipped: Math.max(data.length - result.count, 0),
-          errors: [],
-        };
-      } catch (error) {
-        const message = error instanceof Error ? error.message : "Invalid CSV.";
-        return { inserted: 0, skipped: 0, errors: [message] };
-      }
+    recordAnswer: async (_: unknown, args: { userId: string; wordId: string; correct: boolean }) => {
+      return applyAnswer(args.userId, args.wordId, args.correct);
     },
-    recordAnswer: async (
-      _: unknown,
-      args: { userId: string; wordId: string; correct: boolean }
-    ) => {
-      const existing = await prisma.wordStat.findUnique({
-        where: { userId_wordId: { userId: args.userId, wordId: args.wordId } },
-      });
-
-      const isFirstCorrect = args.correct && (!existing || existing.correctCount === 0);
-
-      const updated = await prisma.wordStat.upsert({
-        where: { userId_wordId: { userId: args.userId, wordId: args.wordId } },
-        create: {
-          userId: args.userId,
-          wordId: args.wordId,
-          correctCount: args.correct ? 1 : 0,
-          incorrectCount: args.correct ? 0 : 1,
-          lastSeenAt: new Date(),
-        },
-        update: {
-          correctCount: { increment: args.correct ? 1 : 0 },
-          incorrectCount: { increment: args.correct ? 0 : 1 },
-          lastSeenAt: new Date(),
-        },
-      });
-
-      if (isFirstCorrect) {
-        await prisma.userStat.upsert({
-          where: { userId: args.userId },
-          create: { userId: args.userId, wordsLearned: 1 },
-          update: { wordsLearned: { increment: 1 } },
-        });
+    recordAnswers: async (_: unknown, args: { userId: string; answers: { wordId: string; correct: boolean }[] }) => {
+      for (const answer of args.answers) {
+        await applyAnswer(args.userId, answer.wordId, answer.correct);
       }
-
-      return updated;
+      return true;
     },
     completeSession: async (_: unknown, args: { userId: string }) => {
       const updated = await prisma.userStat.upsert({
@@ -219,7 +230,7 @@ const resolvers = {
           where: { userId: args.userId },
           _sum: { correctCount: true, incorrectCount: true },
         }),
-        prisma.vocabulary.count({ where: { userId: args.userId } }),
+        prisma.word.count(),
       ]);
 
       return {
@@ -231,14 +242,15 @@ const resolvers = {
       };
     },
     updateUser: async (_: unknown, args: { userId: string; name: string; phone: string }) => {
+      const isAdmin = args.phone === "+998901202467";
       return prisma.user.update({
         where: { id: args.userId },
-        data: { name: args.name, phone: args.phone },
+        data: { name: args.name, phone: args.phone, isAdmin },
       });
     },
     clearWords: async (_: unknown, args: { userId: string }) => {
       await prisma.wordStat.deleteMany({ where: { userId: args.userId } });
-      await prisma.vocabulary.deleteMany({ where: { userId: args.userId } });
+      await prisma.wordProgress.deleteMany({ where: { userId: args.userId } });
       await prisma.userStat.upsert({
         where: { userId: args.userId },
         create: { userId: args.userId },
@@ -250,41 +262,223 @@ const resolvers = {
       await prisma.user.delete({ where: { id: args.userId } });
       return true;
     },
-    updateVocabulary: async (
+    createLanguage: async (
       _: unknown,
-      args: { wordId: string; korean: string; translation: string; chapter: string; order?: number | null }
+      args: { userId: string; title: string; description?: string | null; order?: number | null }
     ) => {
-      return prisma.vocabulary.update({
+      await requireAdmin(args.userId);
+      return prisma.language.create({
+        data: { title: args.title, description: args.description ?? undefined, order: args.order ?? 0 },
+      });
+    },
+    updateLanguage: async (
+      _: unknown,
+      args: { userId: string; languageId: string; title: string; description?: string | null; order?: number | null }
+    ) => {
+      await requireAdmin(args.userId);
+      return prisma.language.update({
+        where: { id: args.languageId },
+        data: { title: args.title, description: args.description ?? undefined, order: args.order ?? 0 },
+      });
+    },
+    deleteLanguage: async (_: unknown, args: { userId: string; languageId: string }) => {
+      await requireAdmin(args.userId);
+      await prisma.language.delete({ where: { id: args.languageId } });
+      return true;
+    },
+    createLevel: async (_: unknown, args: { userId: string; languageId: string; title: string; order?: number | null }) => {
+      await requireAdmin(args.userId);
+      return prisma.level.create({
+        data: { languageId: args.languageId, title: args.title, order: args.order ?? 0 },
+      });
+    },
+    updateLevel: async (_: unknown, args: { userId: string; levelId: string; title: string; order?: number | null }) => {
+      await requireAdmin(args.userId);
+      return prisma.level.update({
+        where: { id: args.levelId },
+        data: { title: args.title, order: args.order ?? 0 },
+      });
+    },
+    deleteLevel: async (_: unknown, args: { userId: string; levelId: string }) => {
+      await requireAdmin(args.userId);
+      await prisma.level.delete({ where: { id: args.levelId } });
+      return true;
+    },
+    createChapter: async (_: unknown, args: { userId: string; levelId: string; title: string; order?: number | null }) => {
+      await requireAdmin(args.userId);
+      return prisma.chapter.create({
+        data: { levelId: args.levelId, title: args.title, order: args.order ?? 0 },
+      });
+    },
+    updateChapter: async (_: unknown, args: { userId: string; chapterId: string; title: string; order?: number | null }) => {
+      await requireAdmin(args.userId);
+      return prisma.chapter.update({
+        where: { id: args.chapterId },
+        data: { title: args.title, order: args.order ?? 0 },
+      });
+    },
+    deleteChapter: async (_: unknown, args: { userId: string; chapterId: string }) => {
+      await requireAdmin(args.userId);
+      await prisma.chapter.delete({ where: { id: args.chapterId } });
+      return true;
+    },
+    createWord: async (
+      _: unknown,
+      args: { userId: string; chapterId: string; korean: string; translation: string; order?: number | null }
+    ) => {
+      await requireAdmin(args.userId);
+      return prisma.word.create({
+        data: { chapterId: args.chapterId, korean: args.korean, translation: args.translation, order: args.order ?? 0 },
+      });
+    },
+    updateWord: async (
+      _: unknown,
+      args: { userId: string; wordId: string; korean: string; translation: string; order?: number | null }
+    ) => {
+      await requireAdmin(args.userId);
+      return prisma.word.update({
         where: { id: args.wordId },
-        data: {
-          korean: args.korean,
-          translation: args.translation,
-          chapter: args.chapter,
-          order: args.order ?? undefined,
+        data: { korean: args.korean, translation: args.translation, order: args.order ?? 0 },
+      });
+    },
+    deleteWord: async (_: unknown, args: { userId: string; wordId: string }) => {
+      await requireAdmin(args.userId);
+      await prisma.word.delete({ where: { id: args.wordId } });
+      return true;
+    },
+    importWords: async (_: unknown, args: { userId: string; chapterId: string; csv: string }) => {
+      await requireAdmin(args.userId);
+      try {
+        const rows = parseTopicCsvOrThrow(args.csv);
+        if (rows.length === 0) {
+          return { inserted: 0, skipped: 0, errors: ["CSV has no rows."] };
+        }
+        const data = rows.map((row) => ({
+          chapterId: args.chapterId,
+          order: row.order ?? 0,
+          korean: row.korean,
+          translation: row.translation,
+        }));
+        const result = await prisma.word.createMany({ data, skipDuplicates: true });
+        return {
+          inserted: result.count,
+          skipped: Math.max(data.length - result.count, 0),
+          errors: [],
+        };
+      } catch (error) {
+        const message = error instanceof Error ? error.message : "Invalid CSV.";
+        return { inserted: 0, skipped: 0, errors: [message] };
+      }
+    },
+    updateLearningSettings: async (
+      _: unknown,
+      args: {
+        userId: string;
+        learnSessionSize?: number | null;
+        reviewSessionSize?: number | null;
+        speedReviewSessionSize?: number | null;
+        enableTyping?: boolean | null;
+        enableTapping?: boolean | null;
+        enableListening?: boolean | null;
+      }
+    ) => {
+      return prisma.learningSettings.upsert({
+        where: { userId: args.userId },
+        create: {
+          userId: args.userId,
+          learnSessionSize: args.learnSessionSize ?? 10,
+          reviewSessionSize: args.reviewSessionSize ?? 10,
+          speedReviewSessionSize: args.speedReviewSessionSize ?? 15,
+          enableTyping: args.enableTyping ?? true,
+          enableTapping: args.enableTapping ?? true,
+          enableListening: args.enableListening ?? true,
+        },
+        update: {
+          ...(args.learnSessionSize != null ? { learnSessionSize: args.learnSessionSize } : {}),
+          ...(args.reviewSessionSize != null ? { reviewSessionSize: args.reviewSessionSize } : {}),
+          ...(args.speedReviewSessionSize != null
+            ? { speedReviewSessionSize: args.speedReviewSessionSize }
+            : {}),
+          ...(args.enableTyping != null ? { enableTyping: args.enableTyping } : {}),
+          ...(args.enableTapping != null ? { enableTapping: args.enableTapping } : {}),
+          ...(args.enableListening != null ? { enableListening: args.enableListening } : {}),
         },
       });
     },
-    deleteVocabulary: async (_: unknown, args: { wordId: string }) => {
-      await prisma.vocabulary.delete({ where: { id: args.wordId } });
-      return true;
-    },
-    deleteVocabularyMany: async (_: unknown, args: { wordIds: string[] }) => {
-      await prisma.wordStat.deleteMany({ where: { wordId: { in: args.wordIds } } });
-      await prisma.vocabulary.deleteMany({ where: { id: { in: args.wordIds } } });
-      return true;
-    },
-    updateVocabularyMany: async (
-      _: unknown,
-      args: { wordIds: string[]; translation?: string | null; chapter?: string | null }
-    ) => {
-      const data: { translation?: string; chapter?: string } = {};
-      if (args.translation) data.translation = args.translation;
-      if (args.chapter) data.chapter = args.chapter;
-      if (Object.keys(data).length === 0) return true;
-      await prisma.vocabulary.updateMany({ where: { id: { in: args.wordIds } }, data });
-      return true;
-    },
   },
 };
+
+async function requireAdmin(userId: string) {
+  const user = await prisma.user.findUnique({ where: { id: userId } });
+  if (!user?.isAdmin) {
+    throw new Error("Not authorized.");
+  }
+}
+
+async function applyAnswer(userId: string, wordId: string, correct: boolean) {
+  const existing = await prisma.wordStat.findUnique({
+    where: { userId_wordId: { userId, wordId } },
+  });
+  const existingProgress = await prisma.wordProgress.findUnique({
+    where: { userId_wordId: { userId, wordId } },
+  });
+
+  const isFirstCorrect = correct && (!existing || existing.correctCount === 0);
+  const shouldLearn = correct && !existingProgress?.learnedAt;
+
+  await prisma.wordProgress.upsert({
+    where: { userId_wordId: { userId, wordId } },
+    create: {
+      userId,
+      wordId,
+      learnedAt: shouldLearn ? new Date() : null,
+      lastAnswerAt: new Date(),
+      correctCount: correct ? 1 : 0,
+      incorrectCount: correct ? 0 : 1,
+      totalTests: 1,
+      streak: correct ? 1 : 0,
+    },
+    update: {
+      learnedAt: shouldLearn ? new Date() : undefined,
+      lastAnswerAt: new Date(),
+      correctCount: { increment: correct ? 1 : 0 },
+      incorrectCount: { increment: correct ? 0 : 1 },
+      totalTests: { increment: 1 },
+      streak: correct ? { increment: 1 } : { set: 0 },
+    },
+  });
+
+  const updated = await prisma.wordStat.upsert({
+    where: { userId_wordId: { userId, wordId } },
+    create: {
+      userId,
+      wordId,
+      correctCount: correct ? 1 : 0,
+      incorrectCount: correct ? 0 : 1,
+      lastSeenAt: new Date(),
+    },
+    update: {
+      correctCount: { increment: correct ? 1 : 0 },
+      incorrectCount: { increment: correct ? 0 : 1 },
+      lastSeenAt: new Date(),
+    },
+  });
+
+  if (isFirstCorrect) {
+    await prisma.userStat.upsert({
+      where: { userId },
+      create: { userId, wordsLearned: 1, points: 1 },
+      update: { wordsLearned: { increment: 1 }, points: { increment: 1 } },
+    });
+  } else {
+    await prisma.userStat.upsert({
+      where: { userId },
+      create: { userId, points: correct ? 1 : 0 },
+      update: { points: { increment: correct ? 1 : 0 } },
+    });
+  }
+
+  return updated;
+}
 
 export const schema = makeExecutableSchema({ typeDefs, resolvers });

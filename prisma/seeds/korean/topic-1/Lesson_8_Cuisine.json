@@ -1,0 +1,287 @@
+[
+  {
+    "order": 1,
+    "korean": "음식",
+    "translation": "Food"
+  },
+  {
+    "order": 2,
+    "korean": "국",
+    "translation": "Soup"
+  },
+  {
+    "order": 3,
+    "korean": "김치",
+    "translation": "Kimchi"
+  },
+  {
+    "order": 4,
+    "korean": "된장찌개",
+    "translation": "Soybean paste stew"
+  },
+  {
+    "order": 5,
+    "korean": "냉면",
+    "translation": "Cold noodles"
+  },
+  {
+    "order": 6,
+    "korean": "삼겹살",
+    "translation": "Grilled pork belly"
+  },
+  {
+    "order": 7,
+    "korean": "김치찌개",
+    "translation": "Kimchi stew"
+  },
+  {
+    "order": 8,
+    "korean": "갈비탕",
+    "translation": "Short rib soup"
+  },
+  {
+    "order": 9,
+    "korean": "삼계탕",
+    "translation": "Ginseng chicken soup"
+  },
+  {
+    "order": 10,
+    "korean": "볶음밥",
+    "translation": "Fried rice"
+  },
+  {
+    "order": 11,
+    "korean": "국수",
+    "translation": "Noodles"
+  },
+  {
+    "order": 12,
+    "korean": "맛있다",
+    "translation": "To be tasty, to be delicious"
+  },
+  {
+    "order": 13,
+    "korean": "맛없다",
+    "translation": "To be untasty"
+  },
+  {
+    "order": 14,
+    "korean": "달다",
+    "translation": "To be sweet"
+  },
+  {
+    "order": 15,
+    "korean": "쓰다",
+    "translation": "To be bitter"
+  },
+  {
+    "order": 16,
+    "korean": "짜다",
+    "translation": "To be salty"
+  },
+  {
+    "order": 17,
+    "korean": "시다",
+    "translation": "To be sour"
+  },
+  {
+    "order": 18,
+    "korean": "맵다",
+    "translation": "To be spicy"
+  },
+  {
+    "order": 19,
+    "korean": "싱겁다",
+    "translation": "To be not salty, to be bland"
+  },
+  {
+    "order": 20,
+    "korean": "숟가락",
+    "translation": "Spoon"
+  },
+  {
+    "order": 21,
+    "korean": "젓가락",
+    "translation": "Chopsticks"
+  },
+  {
+    "order": 22,
+    "korean": "메뉴",
+    "translation": "Menu"
+  },
+  {
+    "order": 23,
+    "korean": "컵",
+    "translation": "Cup"
+  },
+  {
+    "order": 24,
+    "korean": "테이블",
+    "translation": "Table"
+  },
+  {
+    "order": 25,
+    "korean": "종업원",
+    "translation": "Employee, worker"
+  },
+  {
+    "order": 26,
+    "korean": "흡연석",
+    "translation": "Smoking section"
+  },
+  {
+    "order": 27,
+    "korean": "금연석",
+    "translation": "No-smoking section"
+  },
+  {
+    "order": 28,
+    "korean": "영수증",
+    "translation": "Receipt"
+  },
+  {
+    "order": 29,
+    "korean": "주문하다",
+    "translation": "To place an order"
+  },
+  {
+    "order": 30,
+    "korean": "계산하다",
+    "translation": "To calculate"
+  },
+  {
+    "order": 31,
+    "korean": "계산서",
+    "translation": "Check, bill"
+  },
+  {
+    "order": 32,
+    "korean": "가지",
+    "translation": "Eggplant"
+  },
+  {
+    "order": 33,
+    "korean": "잠깐만",
+    "translation": "Just a minute"
+  },
+  {
+    "order": 34,
+    "korean": "고추",
+    "translation": "Chili"
+  },
+  {
+    "order": 35,
+    "korean": "보통",
+    "translation": "Usually, generally"
+  },
+  {
+    "order": 36,
+    "korean": "그래서",
+    "translation": "So, therefore"
+  },
+  {
+    "order": 37,
+    "korean": "기다리다",
+    "translation": "To wait"
+  },
+  {
+    "order": 38,
+    "korean": "소금",
+    "translation": "Salt"
+  },
+  {
+    "order": 39,
+    "korean": "좀",
+    "translation": "A little, a few"
+  },
+  {
+    "order": 40,
+    "korean": "남편",
+    "translation": "Husband"
+  },
+  {
+    "order": 41,
+    "korean": "주다",
+    "translation": "To give"
+  },
+  {
+    "order": 42,
+    "korean": "녹차",
+    "translation": "Green tea"
+  },
+  {
+    "order": 43,
+    "korean": "앉다",
+    "translation": "To sit"
+  },
+  {
+    "order": 44,
+    "korean": "더",
+    "translation": "More"
+  },
+  {
+    "order": 45,
+    "korean": "어서",
+    "translation": "Quickly"
+  },
+  {
+    "order": 46,
+    "korean": "드시다",
+    "translation": "To eat, to drink"
+  },
+  {
+    "order": 47,
+    "korean": "레몬",
+    "translation": "Lemon"
+  },
+  {
+    "order": 48,
+    "korean": "만들다",
+    "translation": "To make, to create, to produce, to manufacture"
+  },
+  {
+    "order": 49,
+    "korean": "케이크",
+    "translation": "Cake"
+  },
+  {
+    "order": 50,
+    "korean": "맛있게",
+    "translation": "Deliciously"
+  },
+  {
+    "order": 51,
+    "korean": "콜라",
+    "translation": "Coke"
+  },
+  {
+    "order": 52,
+    "korean": "물",
+    "translation": "Water"
+  },
+  {
+    "order": 53,
+    "korean": "인삼차",
+    "translation": "Ginseng tea"
+  },
+  {
+    "order": 54,
+    "korean": "특히",
+    "translation": "Specially, particularly, especially"
+  },
+  {
+    "order": 55,
+    "korean": "반찬",
+    "translation": "Side dish"
+  },
+  {
+    "order": 56,
+    "korean": "잔",
+    "translation": "Cup, glass"
+  },
+  {
+    "order": 57,
+    "korean": "항상",
+    "translation": "Always, all the time"
+  }
+]

@@ -1,0 +1,242 @@
+[
+  {
+    "order": 1,
+    "korean": "생일",
+    "translation": "Birthday"
+  },
+  {
+    "order": 2,
+    "korean": "축하 노래",
+    "translation": "Congratulatory song"
+  },
+  {
+    "order": 3,
+    "korean": "카드",
+    "translation": "Card"
+  },
+  {
+    "order": 4,
+    "korean": "잔치",
+    "translation": "Party, feast, banquet"
+  },
+  {
+    "order": 5,
+    "korean": "초대",
+    "translation": "Invitation"
+  },
+  {
+    "order": 6,
+    "korean": "나이",
+    "translation": "Age"
+  },
+  {
+    "order": 7,
+    "korean": "살",
+    "translation": "Age, years"
+  },
+  {
+    "order": 8,
+    "korean": "연세",
+    "translation": "Age (honorific form of 나이)"
+  },
+  {
+    "order": 9,
+    "korean": "세",
+    "translation": "Age (honorific form of 살)"
+  },
+  {
+    "order": 10,
+    "korean": "화장품",
+    "translation": "Cosmetics"
+  },
+  {
+    "order": 11,
+    "korean": "손수건",
+    "translation": "Handkerchief"
+  },
+  {
+    "order": 12,
+    "korean": "넥타이",
+    "translation": "Necktie"
+  },
+  {
+    "order": 13,
+    "korean": "귀걸이",
+    "translation": "Earrings"
+  },
+  {
+    "order": 14,
+    "korean": "목걸이",
+    "translation": "Necklace"
+  },
+  {
+    "order": 15,
+    "korean": "반지",
+    "translation": "Ring"
+  },
+  {
+    "order": 16,
+    "korean": "꽃다발",
+    "translation": "Bouquet, bunch of flowers"
+  },
+  {
+    "order": 17,
+    "korean": "선물을 주다",
+    "translation": "To give a gift"
+  },
+  {
+    "order": 18,
+    "korean": "선물을 드리다",
+    "translation": "To give a gift (honorific)"
+  },
+  {
+    "order": 19,
+    "korean": "선물을 받다",
+    "translation": "To receive a gift"
+  },
+  {
+    "order": 20,
+    "korean": "선물을 고르다",
+    "translation": "To choose a gift"
+  },
+  {
+    "order": 21,
+    "korean": "가볍다",
+    "translation": "To be light"
+  },
+  {
+    "order": 22,
+    "korean": "짧다",
+    "translation": "To be short"
+  },
+  {
+    "order": 23,
+    "korean": "금반지",
+    "translation": "Gold ring"
+  },
+  {
+    "order": 24,
+    "korean": "생활",
+    "translation": "Life, living, livelihood, live"
+  },
+  {
+    "order": 25,
+    "korean": "참",
+    "translation": "Truly, really, very"
+  },
+  {
+    "order": 26,
+    "korean": "길다",
+    "translation": "To be long"
+  },
+  {
+    "order": 27,
+    "korean": "스웨터",
+    "translation": "Sweater"
+  },
+  {
+    "order": 28,
+    "korean": "첫",
+    "translation": "First"
+  },
+  {
+    "order": 29,
+    "korean": "꼭",
+    "translation": "Surely, certainly, undoubtedly"
+  },
+  {
+    "order": 30,
+    "korean": "스파게티",
+    "translation": "Spaghetti"
+  },
+  {
+    "order": 31,
+    "korean": "끝나다",
+    "translation": "End, finish"
+  },
+  {
+    "order": 32,
+    "korean": "시청",
+    "translation": "City hall"
+  },
+  {
+    "order": 33,
+    "korean": "한식당",
+    "translation": "Korean restaurant"
+  },
+  {
+    "order": 34,
+    "korean": "아빠",
+    "translation": "Dad, daddy, father"
+  },
+  {
+    "order": 35,
+    "korean": "행복하다",
+    "translation": "To be happy"
+  },
+  {
+    "order": 36,
+    "korean": "레스토랑",
+    "translation": "Restaurant"
+  },
+  {
+    "order": 37,
+    "korean": "엄마",
+    "translation": "Mom, mommy, mother"
+  },
+  {
+    "order": 38,
+    "korean": "향수",
+    "translation": "Perfume"
+  },
+  {
+    "order": 39,
+    "korean": "먼저",
+    "translation": "First, earlier"
+  },
+  {
+    "order": 40,
+    "korean": "오래간만",
+    "translation": "After a long time"
+  },
+  {
+    "order": 41,
+    "korean": "화장하다",
+    "translation": "Put on make-up"
+  },
+  {
+    "order": 42,
+    "korean": "무겁다",
+    "translation": "To be heavy"
+  },
+  {
+    "order": 43,
+    "korean": "웃다",
+    "translation": "To smile, to laugh"
+  },
+  {
+    "order": 44,
+    "korean": "환갑",
+    "translation": "One's 60th birthday"
+  },
+  {
+    "order": 45,
+    "korean": "번째",
+    "translation": "A word to make ordinal numbers like first, second, third, etc"
+  },
+  {
+    "order": 46,
+    "korean": "이탈리아",
+    "translation": "Italy"
+  },
+  {
+    "order": 47,
+    "korean": "부르다",
+    "translation": "Call, sing"
+  },
+  {
+    "order": 48,
+    "korean": "장미",
+    "translation": "Rose"
+  }
+]

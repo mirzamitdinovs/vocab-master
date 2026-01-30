@@ -11,26 +11,12 @@ model User {
   id        String     @id @default(cuid())
   name      String
   phone     String     @unique
+  isAdmin   Boolean    @default(false)
   createdAt DateTime   @default(now())
-  vocabulary Vocabulary[]
   wordStats  WordStat[]
   userStats  UserStat?
-}
-
-model Vocabulary {
-  id        String   @id @default(cuid())
-  userId    String
-  order     Int?
-  korean    String
-  translation String
-  chapter   String
-  createdAt DateTime @default(now())
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  wordStats WordStat[]
-
-  @@unique([userId, korean, translation, chapter])
-  @@index([userId, chapter])
+  wordProgress WordProgress[]
+  learningSettings LearningSettings?
 }
 
 model WordStat {
@@ -42,7 +28,7 @@ model WordStat {
   lastSeenAt    DateTime?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  word Vocabulary @relation(fields: [wordId], references: [id], onDelete: Cascade)
+  word Word @relation(fields: [wordId], references: [id], onDelete: Cascade)
 
   @@unique([userId, wordId])
 }
@@ -52,7 +38,94 @@ model UserStat {
   userId            String   @unique
   wordsLearned      Int      @default(0)
   sessionsCompleted Int      @default(0)
+  points            Int      @default(0)
   updatedAt         DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Language {
+  id        String   @id @default(cuid())
+  title     String
+  description String?
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  levels    Level[]
+
+  @@unique([title])
+}
+
+model Level {
+  id        String   @id @default(cuid())
+  languageId  String
+  title     String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+
+  language Language @relation(fields: [languageId], references: [id], onDelete: Cascade)
+  chapters  Chapter[]
+
+  @@unique([languageId, title])
+}
+
+model Chapter {
+  id        String   @id @default(cuid())
+  levelId   String
+  title     String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+
+  level Level @relation(fields: [levelId], references: [id], onDelete: Cascade)
+  words  Word[]
+
+  @@unique([levelId, title])
+}
+
+model Word {
+  id        String   @id @default(cuid())
+  chapterId String
+  korean    String
+  translation String
+  order     Int      @default(0)
+  audioUrl  String?
+  createdAt DateTime @default(now())
+
+  chapter Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  progress WordProgress[]
+  wordStats WordStat[]
+
+  @@unique([chapterId, korean, translation])
+}
+
+model WordProgress {
+  id            String   @id @default(cuid())
+  userId        String
+  wordId        String
+  stage         Int      @default(0)
+  nextReviewAt  DateTime?
+  learnedAt     DateTime?
+  lastAnswerAt  DateTime?
+  incorrectCount Int     @default(0)
+  correctCount  Int      @default(0)
+  streak        Int      @default(0)
+  isDifficult   Boolean  @default(false)
+  totalTests    Int      @default(0)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  word Word @relation(fields: [wordId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, wordId])
+}
+
+model LearningSettings {
+  id                   String   @id @default(cuid())
+  userId               String   @unique
+  learnSessionSize     Int      @default(10)
+  reviewSessionSize    Int      @default(10)
+  speedReviewSessionSize Int    @default(15)
+  enableTyping         Boolean  @default(true)
+  enableTapping        Boolean  @default(true)
+  enableListening      Boolean  @default(true)
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

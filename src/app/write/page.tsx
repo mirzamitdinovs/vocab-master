@@ -11,7 +11,6 @@ type Vocabulary = {
   order?: number | null;
   korean: string;
   translation: string;
-  chapter: string;
 };
 
 export default function WritePage() {
@@ -23,11 +22,13 @@ export default function WritePage() {
 }
 
 function WriteView({ user }: { user: User }) {
+  const storageKey = `write-session-${user.id}`;
   const [sessionWords, setSessionWords] = useState<Vocabulary[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const drawingRef = useRef(false);
+  const [seenMap, setSeenMap] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -36,21 +37,34 @@ function WriteView({ user }: { user: User }) {
     };
   }, []);
 
+  useEffect(() => {
+    const stored = localStorage.getItem(storageKey);
+    if (!stored) return;
+    try {
+      const parsed = JSON.parse(stored) as Record<string, boolean>;
+      setSeenMap(parsed);
+    } catch {
+      localStorage.removeItem(storageKey);
+    }
+  }, [storageKey]);
+
   const currentWord = sessionWords[currentIndex];
 
-  async function startSession(chapters: string[], limit: number) {
+  async function startSession(chapterIds: string[], limit?: number | null) {
     const data = await graphqlRequest<{ sessionWords: Vocabulary[] }>(
-      `query SessionWords($userId: ID!, $chapters: [String!], $limit: Int) {
-        sessionWords(userId: $userId, chapters: $chapters, limit: $limit) {
-          id order korean translation chapter
+      `query SessionWords($userId: ID!, $chapterIds: [ID!]!, $limit: Int) {
+        sessionWords(userId: $userId, chapterIds: $chapterIds, limit: $limit) {
+          id order korean translation
         }
       }`,
-      { userId: user.id, chapters, limit }
+      { userId: user.id, chapterIds, limit }
     );
     const words = [...data.sessionWords].sort(() => Math.random() - 0.5);
     setSessionWords(words);
     setCurrentIndex(0);
     clearCanvas();
+    setSeenMap({});
+    localStorage.removeItem(storageKey);
     setStep(2);
   }
 
@@ -89,8 +103,18 @@ function WriteView({ user }: { user: User }) {
     drawingRef.current = false;
   }
 
+  function recordSeen() {
+    if (!currentWord) return;
+    setSeenMap((prev) => {
+      const next = { ...prev, [currentWord.id]: true };
+      localStorage.setItem(storageKey, JSON.stringify(next));
+      return next;
+    });
+  }
+
   function nextWord() {
     clearCanvas();
+    recordSeen();
     setCurrentIndex((prev) => {
       const next = Math.min(prev + 1, sessionWords.length - 1);
       if (next === sessionWords.length - 1 && prev === sessionWords.length - 1) {
@@ -103,6 +127,30 @@ function WriteView({ user }: { user: User }) {
   function prevWord() {
     clearCanvas();
     setCurrentIndex((prev) => Math.max(prev - 1, 0));
+  }
+
+  async function finishSession() {
+    const nextSeen = currentWord ? { ...seenMap, [currentWord.id]: true } : { ...seenMap };
+    setSeenMap(nextSeen);
+    localStorage.setItem(storageKey, JSON.stringify(nextSeen));
+    const payload = Object.keys(nextSeen).map((wordId) => ({
+      wordId,
+      correct: true,
+    }));
+    if (payload.length > 0) {
+      await graphqlRequest<{ recordAnswers: boolean }>(
+        `mutation RecordAnswers($userId: ID!, $answers: [AnswerInput!]!) {
+          recordAnswers(userId: $userId, answers: $answers)
+        }`,
+        { userId: user.id, answers: payload }
+      );
+    }
+    await graphqlRequest<{ completeSession: { wordsLearned: number } }>(
+      `mutation Complete($userId: ID!) { completeSession(userId: $userId) { wordsLearned } }`,
+      { userId: user.id }
+    );
+    localStorage.removeItem(storageKey);
+    setStep(3);
   }
 
   return (
@@ -148,7 +196,7 @@ function WriteView({ user }: { user: User }) {
                 Clear
               </Button>
               {currentIndex === sessionWords.length - 1 && (
-                <Button onClick={() => setStep(3)}>Finish</Button>
+                <Button onClick={finishSession}>Finish</Button>
               )}
             </div>
           </div>

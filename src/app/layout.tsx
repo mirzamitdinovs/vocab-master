@@ -1,6 +1,6 @@
 import './globals.css';
 import type { ReactNode } from 'react';
-import { BottomNav } from '@/components/bottom-nav';
+import { LayoutShell } from '@/components/layout-shell';
 
 export const metadata = {
   title: 'Vocab Master',
@@ -24,10 +24,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <div className="min-h-screen hero-bg pb-24 sm:pb-10">
-          <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6">{children}</div>
-        </div>
-        <BottomNav />
+        <LayoutShell>{children}</LayoutShell>
       </body>
     </html>
   );

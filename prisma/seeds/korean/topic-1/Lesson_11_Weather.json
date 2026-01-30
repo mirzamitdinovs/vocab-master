@@ -1,0 +1,262 @@
+[
+  {
+    "order": 1,
+    "korean": "날씨",
+    "translation": "Weather"
+  },
+  {
+    "order": 2,
+    "korean": "봄",
+    "translation": "Spring"
+  },
+  {
+    "order": 3,
+    "korean": "여름",
+    "translation": "Summer"
+  },
+  {
+    "order": 4,
+    "korean": "가을",
+    "translation": "Fall, autumn"
+  },
+  {
+    "order": 5,
+    "korean": "따뜻하다",
+    "translation": "To be warm"
+  },
+  {
+    "order": 6,
+    "korean": "덥다",
+    "translation": "To be hot"
+  },
+  {
+    "order": 7,
+    "korean": "쌀쌀하다",
+    "translation": "To be chilly, to be cold, to be cool"
+  },
+  {
+    "order": 8,
+    "korean": "춥다",
+    "translation": "To be cold, to be chilly"
+  },
+  {
+    "order": 9,
+    "korean": "비가 오다/내리다",
+    "translation": "To be rainy"
+  },
+  {
+    "order": 10,
+    "korean": "비가 그치다",
+    "translation": "To stop raining"
+  },
+  {
+    "order": 11,
+    "korean": "눈이 오다/내리다",
+    "translation": "To be snowy"
+  },
+  {
+    "order": 12,
+    "korean": "눈이 그치다",
+    "translation": "To stop snowing"
+  },
+  {
+    "order": 13,
+    "korean": "맑다",
+    "translation": "To be clear, to be sunny"
+  },
+  {
+    "order": 14,
+    "korean": "흐리다",
+    "translation": "To be overcast, to be cloudy"
+  },
+  {
+    "order": 15,
+    "korean": "바람이 불다",
+    "translation": "The wind rises"
+  },
+  {
+    "order": 16,
+    "korean": "구름이 끼다",
+    "translation": "To be cloudy"
+  },
+  {
+    "order": 17,
+    "korean": "해 (태양)",
+    "translation": "The sun"
+  },
+  {
+    "order": 18,
+    "korean": "비",
+    "translation": "Rain"
+  },
+  {
+    "order": 19,
+    "korean": "눈",
+    "translation": "Snow"
+  },
+  {
+    "order": 20,
+    "korean": "구름",
+    "translation": "Cloud"
+  },
+  {
+    "order": 21,
+    "korean": "기온",
+    "translation": "Air temperature"
+  },
+  {
+    "order": 22,
+    "korean": "영상",
+    "translation": "Temperature above zero"
+  },
+  {
+    "order": 23,
+    "korean": "영하",
+    "translation": "Temperature below zero"
+  },
+  {
+    "order": 24,
+    "korean": "도",
+    "translation": "Degree"
+  },
+  {
+    "order": 25,
+    "korean": "가장",
+    "translation": "Best, most"
+  },
+  {
+    "order": 26,
+    "korean": "반바지",
+    "translation": "Short pants, shorts"
+  },
+  {
+    "order": 27,
+    "korean": "입다",
+    "translation": "To wear, to be dressed, to put on"
+  },
+  {
+    "order": 28,
+    "korean": "곱다",
+    "translation": "To be beautiful, to be pretty"
+  },
+  {
+    "order": 29,
+    "korean": "반팔 옷",
+    "translation": "Short-sleeved shirt"
+  },
+  {
+    "order": 30,
+    "korean": "장갑",
+    "translation": "Gloves"
+  },
+  {
+    "order": 31,
+    "korean": "긴팔 옷",
+    "translation": "Long-sleeved shirt"
+  },
+  {
+    "order": 32,
+    "korean": "부츠",
+    "translation": "Boots"
+  },
+  {
+    "order": 33,
+    "korean": "좁다",
+    "translation": "To be small, to be narrow"
+  },
+  {
+    "order": 34,
+    "korean": "깨끗하다",
+    "translation": "To be clean, to be spotless"
+  },
+  {
+    "order": 35,
+    "korean": "비슷하다",
+    "translation": "To be similar, to be like"
+  },
+  {
+    "order": 36,
+    "korean": "추억",
+    "translation": "Memory"
+  },
+  {
+    "order": 37,
+    "korean": "노란색",
+    "translation": "Yellow"
+  },
+  {
+    "order": 38,
+    "korean": "스노보드",
+    "translation": "Snowboard"
+  },
+  {
+    "order": 39,
+    "korean": "필요하다",
+    "translation": "To be necessary, to be needed"
+  },
+  {
+    "order": 40,
+    "korean": "단풍",
+    "translation": "Autumn foliage, autumn leaves"
+  },
+  {
+    "order": 41,
+    "korean": "스키",
+    "translation": "Ski, skiing"
+  },
+  {
+    "order": 42,
+    "korean": "하늘",
+    "translation": "Sky"
+  },
+  {
+    "order": 43,
+    "korean": "답장",
+    "translation": "Reply, answer"
+  },
+  {
+    "order": 44,
+    "korean": "스키장",
+    "translation": "Ski resort"
+  },
+  {
+    "order": 45,
+    "korean": "하얀눈",
+    "translation": "White snow"
+  },
+  {
+    "order": 46,
+    "korean": "도와주다",
+    "translation": "To help, to assist"
+  },
+  {
+    "order": 47,
+    "korean": "시끄럽다",
+    "translation": "To be loud, to be noisy"
+  },
+  {
+    "order": 48,
+    "korean": "호수",
+    "translation": "Lake"
+  },
+  {
+    "order": 49,
+    "korean": "돕다",
+    "translation": "To help, to assist"
+  },
+  {
+    "order": 50,
+    "korean": "아름답다",
+    "translation": "To be beautiful, to be pretty"
+  },
+  {
+    "order": 51,
+    "korean": "목도리",
+    "translation": "Scarf"
+  },
+  {
+    "order": 52,
+    "korean": "우산",
+    "translation": "Umbrella"
+  }
+]
