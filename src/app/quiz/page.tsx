@@ -1,10 +1,17 @@
-"use client";
+'use client';
 
-import { useCallback, useEffect, useMemo, useState } from "react";
-import type { User } from "@/components/user-gate";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { graphqlRequest } from "@/lib/graphql/client";
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import type { User } from '@/components/user-gate';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { graphqlRequest } from '@/lib/graphql/client';
+import { cn } from '@/lib/utils';
 
 type Vocabulary = {
   id: string;
@@ -13,21 +20,26 @@ type Vocabulary = {
   translation: string;
 };
 
-
 export default function QuizPage() {
   return <QuizView />;
 }
 
 function QuizView() {
   const [user, setUser] = useState<User | null>(null);
-  const storageKey = `quiz-session-${user?.id ?? "guest"}`;
+  const storageKey = `quiz-session-${user?.id ?? 'guest'}`;
   const [autoStarted, setAutoStarted] = useState(false);
   const [sessionWords, setSessionWords] = useState<Vocabulary[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [quizOptions, setQuizOptions] = useState<string[]>([]);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [answers, setAnswers] = useState<
-    { wordId: string; korean: string; selected: string; correct: string; isCorrect: boolean }[]
+    {
+      wordId: string;
+      korean: string;
+      selected: string;
+      correct: string;
+      isCorrect: boolean;
+    }[]
   >([]);
   const [showResults, setShowResults] = useState(false);
   const [loadingLesson, setLoadingLesson] = useState(false);
@@ -39,7 +51,8 @@ function QuizView() {
     const options = new Set<string>();
     options.add(currentWord.translation);
     while (options.size < 4 && sessionWords.length > 1) {
-      const randomWord = sessionWords[Math.floor(Math.random() * sessionWords.length)];
+      const randomWord =
+        sessionWords[Math.floor(Math.random() * sessionWords.length)];
       options.add(randomWord.translation);
     }
     setQuizOptions(Array.from(options).sort(() => Math.random() - 0.5));
@@ -70,13 +83,13 @@ function QuizView() {
   }, [storageKey]);
 
   useEffect(() => {
-    const stored = sessionStorage.getItem("vocab-master-user");
+    const stored = sessionStorage.getItem('vocab-master-user');
     if (stored) {
       try {
         setUser(JSON.parse(stored) as User);
         return;
       } catch {
-        sessionStorage.removeItem("vocab-master-user");
+        sessionStorage.removeItem('vocab-master-user');
       }
     }
     async function createGuest() {
@@ -84,10 +97,13 @@ function QuizView() {
         `mutation Upsert($name: String!, $phone: String!) {
           upsertUser(name: $name, phone: $phone) { id name phone isAdmin }
         }`,
-        { name: "Guest", phone: "guest-quiz" }
+        { name: 'Guest', phone: 'guest-quiz' },
       );
-      sessionStorage.setItem("vocab-master-user", JSON.stringify(data.upsertUser));
-      window.dispatchEvent(new Event("user-updated"));
+      sessionStorage.setItem(
+        'vocab-master-user',
+        JSON.stringify(data.upsertUser),
+      );
+      window.dispatchEvent(new Event('user-updated'));
       setUser(data.upsertUser);
     }
     createGuest();
@@ -101,7 +117,7 @@ function QuizView() {
           id order korean translation
         }
       }`,
-      { userId: user.id, chapterIds, limit }
+      { userId: user.id, chapterIds, limit },
     );
     const words = [...data.sessionWords].sort(() => Math.random() - 0.5);
     setSessionWords(words);
@@ -154,12 +170,12 @@ function QuizView() {
         `mutation RecordAnswers($userId: ID!, $answers: [AnswerInput!]!) {
           recordAnswers(userId: $userId, answers: $answers)
         }`,
-        { userId: user.id, answers: payload }
+        { userId: user.id, answers: payload },
       );
     }
     await graphqlRequest<{ completeSession: { wordsLearned: number } }>(
       `mutation Complete($userId: ID!) { completeSession(userId: $userId) { wordsLearned } }`,
-      { userId: user.id }
+      { userId: user.id },
     );
     localStorage.removeItem(storageKey);
     setShowResults(true);
@@ -169,9 +185,9 @@ function QuizView() {
     if (!user || autoStarted) return;
     async function autoStart() {
       setLoadingLesson(true);
-      const languagesData = await graphqlRequest<{ languages: { id: string }[] }>(
-        `query { languages { id } }`
-      );
+      const languagesData = await graphqlRequest<{
+        languages: { id: string }[];
+      }>(`query { languages { id } }`);
       const languageId = languagesData.languages[0]?.id;
       if (!languageId) {
         setLoadingLesson(false);
@@ -179,7 +195,7 @@ function QuizView() {
       }
       const levelsData = await graphqlRequest<{ levels: { id: string }[] }>(
         `query Levels($languageId: ID!) { levels(languageId: $languageId) { id } }`,
-        { languageId }
+        { languageId },
       );
       const levelId = levelsData.levels[0]?.id;
       if (!levelId) {
@@ -188,7 +204,7 @@ function QuizView() {
       }
       const chaptersData = await graphqlRequest<{ chapters: { id: string }[] }>(
         `query Chapters($levelId: ID!) { chapters(levelId: $levelId) { id } }`,
-        { levelId }
+        { levelId },
       );
       const chapterId = chaptersData.chapters[0]?.id;
       if (!chapterId) {
@@ -203,7 +219,7 @@ function QuizView() {
   }, [user, autoStarted]);
 
   return (
-    <div className={sessionWords.length > 0 ? "space-y-0" : "space-y-6"}>
+    <div className={cn(sessionWords.length > 0 ? 'space-y-0' : 'space-y-6')}>
       {sessionWords.length === 0 && (
         <header className="space-y-2">
           <h1 className="heading-serif text-3xl font-semibold">Quiz</h1>
@@ -214,8 +230,8 @@ function QuizView() {
       <Card
         className={`glass ${
           sessionWords.length > 0
-            ? "fixed inset-0 z-50 m-3 flex h-[calc(100%-1.5rem)] flex-col rounded-3xl border bg-white sm:static sm:m-0 sm:h-auto sm:rounded-3xl sm:border"
-            : ""
+            ? ' m-3 flex flex-col rounded-3xl border bg-white   sm:rounded-3xl sm:border'
+            : ''
         }`}
       >
         <CardHeader>
@@ -223,20 +239,23 @@ function QuizView() {
           <CardDescription>
             {sessionWords.length > 0
               ? `Question ${currentIndex + 1} of ${sessionWords.length}`
-              : "Start a session to begin."}
+              : 'Start a session to begin.'}
           </CardDescription>
         </CardHeader>
-        <CardContent className={`space-y-4 ${sessionWords.length > 0 ? "flex-1" : ""}`}>
+        <CardContent
+          className={`space-y-4 ${sessionWords.length > 0 ? 'flex-1' : ''}`}
+        >
           {sessionWords.length === 0 ? (
             <p className="text-sm text-muted-foreground">
-              {loadingLesson ? "Loading quiz..." : "No session words loaded."}
+              {loadingLesson ? 'Loading quiz...' : 'No session words loaded.'}
             </p>
           ) : showResults ? (
             <div className="space-y-3">
               <div className="text-sm text-muted-foreground">Results</div>
               <div className="rounded-lg border bg-white p-4">
                 <div className="text-2xl font-semibold">
-                  {answers.filter((a) => a.isCorrect).length} / {answers.length} correct
+                  {answers.filter((a) => a.isCorrect).length} / {answers.length}{' '}
+                  correct
                 </div>
               </div>
               <div className="space-y-2">
@@ -244,18 +263,30 @@ function QuizView() {
                   <div
                     key={`${a.wordId}-${index}`}
                     className={`rounded-lg border p-3 text-sm ${
-                      a.isCorrect ? "bg-emerald-50" : "bg-rose-50"
+                      a.isCorrect ? 'bg-emerald-50' : 'bg-rose-50'
                     }`}
                   >
-                    <div className={a.isCorrect ? "text-emerald-700" : "text-rose-700"}>
-                      {a.isCorrect ? "Correct" : "Incorrect"}
+                    <div
+                      className={
+                        a.isCorrect ? 'text-emerald-700' : 'text-rose-700'
+                      }
+                    >
+                      {a.isCorrect ? 'Correct' : 'Incorrect'}
                     </div>
-                    <div className="text-base font-semibold text-foreground">{a.korean}</div>
-                    <div className="text-muted-foreground">
-                      Your answer: <span className="font-medium text-foreground">{a.selected}</span>
+                    <div className="text-base font-semibold text-foreground">
+                      {a.korean}
                     </div>
                     <div className="text-muted-foreground">
-                      Correct: <span className="font-semibold text-foreground">{a.correct}</span>
+                      Your answer:{' '}
+                      <span className="font-medium text-foreground">
+                        {a.selected}
+                      </span>
+                    </div>
+                    <div className="text-muted-foreground">
+                      Correct:{' '}
+                      <span className="font-semibold text-foreground">
+                        {a.correct}
+                      </span>
                     </div>
                   </div>
                 ))}
@@ -289,7 +320,7 @@ function QuizView() {
                     <button
                       key={option}
                       className={`rounded-md border px-4 py-3 text-left text-sm ${
-                        isSelected ? "border-primary bg-primary/5" : "bg-white"
+                        isSelected ? 'border-primary bg-primary/5' : 'bg-white'
                       }`}
                       onClick={() => handleAnswer(option)}
                       disabled={!!selectedOption}
@@ -300,7 +331,11 @@ function QuizView() {
                 })}
               </div>
               <div className="flex gap-2">
-                <Button variant="outline" onClick={prevWord} disabled={currentIndex === 0}>
+                <Button
+                  variant="outline"
+                  onClick={prevWord}
+                  disabled={currentIndex === 0}
+                >
                   Previous
                 </Button>
                 <Button

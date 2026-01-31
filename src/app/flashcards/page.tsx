@@ -174,7 +174,9 @@ function FlashcardsView({ user }: { user: User }) {
 
   return (
     <div className="space-y-6">
-      <header className={`space-y-2 ${step === 2 ? "hidden" : ""}`}>
+      <header
+        className={`space-y-2 ${step === 2 || step == 3 ? 'hidden' : ''}`}
+      >
         <h1 className="heading-serif text-3xl font-semibold">Flashcards</h1>
         <p className="text-muted-foreground">Study with a focused session.</p>
       </header>
@@ -182,37 +184,49 @@ function FlashcardsView({ user }: { user: User }) {
       <Card
         className={`glass ${
           step === 2 || step === 3
-            ? "fixed inset-x-0 top-2 z-40 mx-2 flex h-[calc(100%-9.5rem)] flex-col rounded-3xl border bg-white sm:static sm:m-0 sm:h-auto sm:rounded-3xl sm:border"
-            : ""
+            ? 'fixed inset-x-0 top-2 z-40 mx-2 flex h-[calc(100%-9.5rem)] flex-col rounded-3xl border bg-white sm:static sm:m-0 sm:h-auto sm:rounded-3xl sm:border'
+            : ''
         }`}
       >
-        <CardHeader className={step !== 1 ? "hidden" : ""}>
+        <CardHeader className={step !== 1 ? 'hidden' : ''}>
           <CardTitle>Step {step} of 3</CardTitle>
           <CardDescription>
-            {step === 1 && "Choose session size and chapters."}
-            {step === 2 && "Review flashcards and mark answers."}
-            {step === 3 && "Session summary."}
+            {step === 1 && 'Choose session size and chapters.'}
+            {step === 2 && 'Review flashcards and mark answers.'}
+            {step === 3 && 'Session summary.'}
           </CardDescription>
         </CardHeader>
-        <CardContent className={`space-y-6 ${step === 2 ? "flex-1" : ""}`}>
+        <CardContent
+          className={`space-y-6 ${step === 2 ? 'flex-1' : 'h-full overflow-y-auto'}`}
+        >
           {step === 1 && (
             <div className="space-y-4">
               <div className="space-y-2">
                 <div className="text-sm font-medium">Front language</div>
                 <div className="flex gap-2">
                   <Button
-                    className={frontLanguage === "korean" ? "bg-sky-100 text-sky-700" : ""}
-                    variant={frontLanguage === "korean" ? "secondary" : "outline"}
-                    onClick={() => setFrontLanguage("korean")}
+                    className={
+                      frontLanguage === 'korean'
+                        ? 'bg-sky-100 text-sky-700'
+                        : ''
+                    }
+                    variant={
+                      frontLanguage === 'korean' ? 'secondary' : 'outline'
+                    }
+                    onClick={() => setFrontLanguage('korean')}
                   >
                     Korean first
                   </Button>
                   <Button
                     className={
-                      frontLanguage === "translation" ? "bg-amber-100 text-amber-700" : ""
+                      frontLanguage === 'translation'
+                        ? 'bg-amber-100 text-amber-700'
+                        : ''
                     }
-                    variant={frontLanguage === "translation" ? "secondary" : "outline"}
-                    onClick={() => setFrontLanguage("translation")}
+                    variant={
+                      frontLanguage === 'translation' ? 'secondary' : 'outline'
+                    }
+                    onClick={() => setFrontLanguage('translation')}
                   >
                     Translation first
                   </Button>
@@ -225,19 +239,25 @@ function FlashcardsView({ user }: { user: User }) {
           {step === 2 && (
             <div className="flex h-full flex-col space-y-4 sm:space-y-6">
               {sessionWords.length === 0 ? (
-                <p className="text-sm text-muted-foreground">No session words loaded.</p>
+                <p className="text-sm text-muted-foreground">
+                  No session words loaded.
+                </p>
               ) : (
                 <>
                   <div className="space-y-1 pt-10 sm:hidden">
                     {lessonTitle && (
-                      <div className="text-base font-semibold text-foreground">{lessonTitle}</div>
+                      <div className="text-base font-semibold text-foreground">
+                        {lessonTitle}
+                      </div>
                     )}
                     <div className="text-sm text-muted-foreground">
                       Word {currentIndex + 1} of {sessionWords.length}
                     </div>
                   </div>
                   <div className="hidden sm:flex items-center justify-between pt-10 text-base text-muted-foreground">
-                    <div className="font-semibold text-foreground">{lessonTitle ?? "Lesson"}</div>
+                    <div className="font-semibold text-foreground">
+                      {lessonTitle ?? 'Lesson'}
+                    </div>
                     <div>
                       Word {currentIndex + 1} of {sessionWords.length}
                     </div>
@@ -245,13 +265,13 @@ function FlashcardsView({ user }: { user: User }) {
                   <div
                     className="relative flex flex-1 flex-col items-center justify-center rounded-2xl border bg-white px-6 py-8 text-center shadow-lg sm:p-12"
                     onTouchStart={(event) => {
-                      (event.currentTarget as HTMLElement).dataset.startX = String(
-                        event.touches[0].clientX,
-                      );
+                      (event.currentTarget as HTMLElement).dataset.startX =
+                        String(event.touches[0].clientX);
                     }}
                     onTouchEnd={(event) => {
                       const startX = Number(
-                        (event.currentTarget as HTMLElement).dataset.startX ?? 0,
+                        (event.currentTarget as HTMLElement).dataset.startX ??
+                          0,
                       );
                       const endX = event.changedTouches[0].clientX;
                       if (startX && Math.abs(endX - startX) > 50) {
@@ -283,18 +303,24 @@ function FlashcardsView({ user }: { user: User }) {
                       <div
                         key={currentWord?.id}
                         className={`text-7xl font-semibold transition-all duration-300 sm:text-8xl ${
-                          direction === "next"
-                            ? "animate-in slide-in-from-right-6 fade-in"
-                            : "animate-in slide-in-from-left-6 fade-in"
+                          direction === 'next'
+                            ? 'animate-in slide-in-from-right-6 fade-in'
+                            : 'animate-in slide-in-from-left-6 fade-in'
                         }`}
                       >
                         {showBack ? backText : frontText}
                       </div>
-                      <div className="mt-4 text-sm text-muted-foreground">Tap word to flip</div>
+                      <div className="mt-4 text-sm text-muted-foreground">
+                        Tap word to flip
+                      </div>
                     </button>
                   </div>
                   <div className="hidden gap-2 sm:flex">
-                    <Button variant="outline" onClick={prevWord} disabled={currentIndex === 0}>
+                    <Button
+                      variant="outline"
+                      onClick={prevWord}
+                      disabled={currentIndex === 0}
+                    >
                       Previous
                     </Button>
                     <Button
@@ -309,9 +335,9 @@ function FlashcardsView({ user }: { user: User }) {
                     <Button
                       variant="outline"
                       className={`border-emerald-400 text-emerald-700 bg-transparent hover:bg-transparent ${
-                        mark === "correct"
-                          ? "!bg-emerald-100 !text-emerald-800 !border-emerald-400"
-                          : "bg-transparent"
+                        mark === 'correct'
+                          ? '!bg-emerald-100 !text-emerald-800 !border-emerald-400'
+                          : 'bg-transparent'
                       }`}
                       onClick={() => handleRecordAnswer(true)}
                     >
@@ -320,9 +346,9 @@ function FlashcardsView({ user }: { user: User }) {
                     <Button
                       variant="outline"
                       className={`border-rose-400 text-rose-700 bg-transparent hover:bg-transparent ${
-                        mark === "incorrect"
-                          ? "!bg-rose-100 !text-rose-800 !border-rose-400"
-                          : "bg-transparent"
+                        mark === 'incorrect'
+                          ? '!bg-rose-100 !text-rose-800 !border-rose-400'
+                          : 'bg-transparent'
                       }`}
                       onClick={() => handleRecordAnswer(false)}
                     >
@@ -337,9 +363,9 @@ function FlashcardsView({ user }: { user: User }) {
                       <Button
                         variant="outline"
                         className={`w-full border-emerald-400 text-emerald-700 bg-transparent hover:bg-transparent ${
-                          mark === "correct"
-                            ? "!bg-emerald-100 !text-emerald-800 !border-emerald-400"
-                            : "bg-transparent"
+                          mark === 'correct'
+                            ? '!bg-emerald-100 !text-emerald-800 !border-emerald-400'
+                            : 'bg-transparent'
                         }`}
                         onClick={() => handleRecordAnswer(true)}
                       >
@@ -348,21 +374,28 @@ function FlashcardsView({ user }: { user: User }) {
                       <Button
                         variant="outline"
                         className={`w-full border-rose-400 text-rose-700 bg-transparent hover:bg-transparent ${
-                          mark === "incorrect"
-                            ? "!bg-rose-100 !text-rose-800 !border-rose-400"
-                            : "bg-transparent"
+                          mark === 'incorrect'
+                            ? '!bg-rose-100 !text-rose-800 !border-rose-400'
+                            : 'bg-transparent'
                         }`}
                         onClick={() => handleRecordAnswer(false)}
                       >
                         Mark incorrect
                       </Button>
                     </div>
-                    <Button className="w-full" variant="outline" onClick={handleCompleteSession}>
+                    <Button
+                      className="w-full"
+                      variant="outline"
+                      onClick={handleCompleteSession}
+                    >
                       End session
                     </Button>
                   </div>
                   {currentIndex === sessionWords.length - 1 && (
-                    <Button className="hidden w-full sm:inline-flex" onClick={handleCompleteSession}>
+                    <Button
+                      className="hidden w-full sm:inline-flex"
+                      onClick={handleCompleteSession}
+                    >
                       Finish session
                     </Button>
                   )}
@@ -372,9 +405,11 @@ function FlashcardsView({ user }: { user: User }) {
           )}
 
           {step === 3 && (
-            <div className="space-y-4">
-              <div className="text-base font-semibold text-foreground">Session Words</div>
-              <div className="max-h-[calc(100vh-12rem)] space-y-2 overflow-y-auto pr-1">
+            <div className="space-y-4 pt-5">
+              <div className="text-base font-semibold text-foreground ">
+                Session Words
+              </div>
+              <div className="space-y-2 overflow-y-auto pr-1">
                 {sessionOrder.length > 0
                   ? sessionOrder.map((wordId, index) => {
                       const word = sessionWords.find((w) => w.id === wordId);
@@ -382,20 +417,24 @@ function FlashcardsView({ user }: { user: User }) {
                       const status = answersMap[word.id];
                       const rowClass =
                         status === true
-                          ? "border-emerald-200 bg-emerald-50"
+                          ? 'border-emerald-200 bg-emerald-50'
                           : status === false
-                          ? "border-rose-200 bg-rose-50"
-                          : "border-muted bg-white";
+                            ? 'border-rose-200 bg-rose-50'
+                            : 'border-muted bg-white';
                       return (
                         <div
                           key={word.id}
                           className={`flex items-center justify-between rounded-xl border px-4 py-3 text-sm ${rowClass}`}
                         >
-                          <div className="text-xs text-muted-foreground">{index + 1}</div>
+                          <div className="text-xs text-muted-foreground">
+                            {index + 1}
+                          </div>
                           <div className="flex-1 px-4 text-lg font-semibold text-foreground">
                             {word.korean}
                           </div>
-                          <div className="text-sm text-muted-foreground">{word.translation}</div>
+                          <div className="text-sm text-muted-foreground">
+                            {word.translation}
+                          </div>
                         </div>
                       );
                     })
@@ -403,20 +442,24 @@ function FlashcardsView({ user }: { user: User }) {
                       const status = answersMap[word.id];
                       const rowClass =
                         status === true
-                          ? "border-emerald-200 bg-emerald-50"
+                          ? 'border-emerald-200 bg-emerald-50'
                           : status === false
-                          ? "border-rose-200 bg-rose-50"
-                          : "border-muted bg-white";
+                            ? 'border-rose-200 bg-rose-50'
+                            : 'border-muted bg-white';
                       return (
                         <div
                           key={word.id}
                           className={`flex items-center justify-between rounded-xl border px-4 py-3 text-sm ${rowClass}`}
                         >
-                          <div className="text-xs text-muted-foreground">{index + 1}</div>
+                          <div className="text-xs text-muted-foreground">
+                            {index + 1}
+                          </div>
                           <div className="flex-1 px-4 text-lg font-semibold text-foreground">
                             {word.korean}
                           </div>
-                          <div className="text-sm text-muted-foreground">{word.translation}</div>
+                          <div className="text-sm text-muted-foreground">
+                            {word.translation}
+                          </div>
                         </div>
                       );
                     })}
