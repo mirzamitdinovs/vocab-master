@@ -50,7 +50,11 @@ function WriteView({ user }: { user: User }) {
 
   const currentWord = sessionWords[currentIndex];
 
-  async function startSession(chapterIds: string[], limit?: number | null) {
+  async function startSession(
+    chapterIds: string[],
+    limit?: number | null,
+    _chapterTitle?: string,
+  ) {
     const data = await graphqlRequest<{ sessionWords: Vocabulary[] }>(
       `query SessionWords($userId: ID!, $chapterIds: [ID!]!, $limit: Int) {
         sessionWords(userId: $userId, chapterIds: $chapterIds, limit: $limit) {

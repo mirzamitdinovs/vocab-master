@@ -1,10 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { UserGate, type User } from "@/components/user-gate";
+import type { User } from "@/components/user-gate";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { SessionStarter } from "@/components/session-starter";
 import { graphqlRequest } from "@/lib/graphql/client";
 
 type Vocabulary = {
@@ -16,15 +15,13 @@ type Vocabulary = {
 
 
 export default function QuizPage() {
-  return (
-    <UserGate>
-      {(user) => <QuizView user={user} />}
-    </UserGate>
-  );
+  return <QuizView />;
 }
 
-function QuizView({ user }: { user: User }) {
-  const storageKey = `quiz-session-${user.id}`;
+function QuizView() {
+  const [user, setUser] = useState<User | null>(null);
+  const storageKey = `quiz-session-${user?.id ?? "guest"}`;
+  const [autoStarted, setAutoStarted] = useState(false);
   const [sessionWords, setSessionWords] = useState<Vocabulary[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [quizOptions, setQuizOptions] = useState<string[]>([]);
@@ -33,6 +30,7 @@ function QuizView({ user }: { user: User }) {
     { wordId: string; korean: string; selected: string; correct: string; isCorrect: boolean }[]
   >([]);
   const [showResults, setShowResults] = useState(false);
+  const [loadingLesson, setLoadingLesson] = useState(false);
 
   const currentWord = sessionWords[currentIndex];
 
@@ -71,7 +69,32 @@ function QuizView({ user }: { user: User }) {
     }
   }, [storageKey]);
 
+  useEffect(() => {
+    const stored = sessionStorage.getItem("vocab-master-user");
+    if (stored) {
+      try {
+        setUser(JSON.parse(stored) as User);
+        return;
+      } catch {
+        sessionStorage.removeItem("vocab-master-user");
+      }
+    }
+    async function createGuest() {
+      const data = await graphqlRequest<{ upsertUser: User }>(
+        `mutation Upsert($name: String!, $phone: String!) {
+          upsertUser(name: $name, phone: $phone) { id name phone isAdmin }
+        }`,
+        { name: "Guest", phone: "guest-quiz" }
+      );
+      sessionStorage.setItem("vocab-master-user", JSON.stringify(data.upsertUser));
+      window.dispatchEvent(new Event("user-updated"));
+      setUser(data.upsertUser);
+    }
+    createGuest();
+  }, []);
+
   async function startSession(chapterIds: string[], limit?: number | null) {
+    if (!user) return;
     const data = await graphqlRequest<{ sessionWords: Vocabulary[] }>(
       `query SessionWords($userId: ID!, $chapterIds: [ID!]!, $limit: Int) {
         sessionWords(userId: $userId, chapterIds: $chapterIds, limit: $limit) {
@@ -121,6 +144,7 @@ function QuizView({ user }: { user: User }) {
   }
 
   async function finishQuiz() {
+    if (!user) return;
     const payload = answers.map((answer) => ({
       wordId: answer.wordId,
       correct: answer.isCorrect,
@@ -141,24 +165,59 @@ function QuizView({ user }: { user: User }) {
     setShowResults(true);
   }
 
+  useEffect(() => {
+    if (!user || autoStarted) return;
+    async function autoStart() {
+      setLoadingLesson(true);
+      const languagesData = await graphqlRequest<{ languages: { id: string }[] }>(
+        `query { languages { id } }`
+      );
+      const languageId = languagesData.languages[0]?.id;
+      if (!languageId) {
+        setLoadingLesson(false);
+        return;
+      }
+      const levelsData = await graphqlRequest<{ levels: { id: string }[] }>(
+        `query Levels($languageId: ID!) { levels(languageId: $languageId) { id } }`,
+        { languageId }
+      );
+      const levelId = levelsData.levels[0]?.id;
+      if (!levelId) {
+        setLoadingLesson(false);
+        return;
+      }
+      const chaptersData = await graphqlRequest<{ chapters: { id: string }[] }>(
+        `query Chapters($levelId: ID!) { chapters(levelId: $levelId) { id } }`,
+        { levelId }
+      );
+      const chapterId = chaptersData.chapters[0]?.id;
+      if (!chapterId) {
+        setLoadingLesson(false);
+        return;
+      }
+      await startSession([chapterId], null);
+      setAutoStarted(true);
+      setLoadingLesson(false);
+    }
+    autoStart();
+  }, [user, autoStarted]);
+
   return (
-    <div className="space-y-6">
-      <header className="space-y-2">
-        <h1 className="heading-serif text-3xl font-semibold">Quiz</h1>
-        <p className="text-muted-foreground">Multiple-choice questions.</p>
-      </header>
+    <div className={sessionWords.length > 0 ? "space-y-0" : "space-y-6"}>
+      {sessionWords.length === 0 && (
+        <header className="space-y-2">
+          <h1 className="heading-serif text-3xl font-semibold">Quiz</h1>
+          <p className="text-muted-foreground">Multiple-choice questions.</p>
+        </header>
+      )}
 
-      <Card className="glass">
-        <CardHeader>
-          <CardTitle>Session setup</CardTitle>
-          <CardDescription>Select topics and size.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <SessionStarter userId={user.id} onStart={startSession} />
-        </CardContent>
-      </Card>
-
-      <Card className="glass">
+      <Card
+        className={`glass ${
+          sessionWords.length > 0
+            ? "fixed inset-0 z-50 m-3 flex h-[calc(100%-1.5rem)] flex-col rounded-3xl border bg-white sm:static sm:m-0 sm:h-auto sm:rounded-3xl sm:border"
+            : ""
+        }`}
+      >
         <CardHeader>
           <CardTitle>Quiz</CardTitle>
           <CardDescription>
@@ -167,9 +226,11 @@ function QuizView({ user }: { user: User }) {
               : "Start a session to begin."}
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className={`space-y-4 ${sessionWords.length > 0 ? "flex-1" : ""}`}>
           {sessionWords.length === 0 ? (
-            <p className="text-sm text-muted-foreground">No session words loaded.</p>
+            <p className="text-sm text-muted-foreground">
+              {loadingLesson ? "Loading quiz..." : "No session words loaded."}
+            </p>
           ) : showResults ? (
             <div className="space-y-3">
               <div className="text-sm text-muted-foreground">Results</div>

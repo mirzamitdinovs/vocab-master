@@ -1,5 +1,5 @@
-const { PrismaClient } = require('@prisma/client');
-const { downAll, upAll } = require('../seeds/index.cjs');
+import { PrismaClient } from "@prisma/client";
+import { downAll, upAll } from "../seeds";
 
 const prisma = new PrismaClient();
 

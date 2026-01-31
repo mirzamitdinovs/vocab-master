@@ -29,10 +29,35 @@ export function UserGate({
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const isAdminRoute = pathname.startsWith("/admin");
 
   useEffect(() => {
     const stored = sessionStorage.getItem(STORAGE_KEY);
     if (!stored) {
+      if (!isAdminRoute) {
+        const guestKey = "vocab-master-guest-id";
+        let guestId = sessionStorage.getItem(guestKey);
+        if (!guestId) {
+          guestId = globalThis.crypto?.randomUUID?.() ?? String(Date.now());
+          sessionStorage.setItem(guestKey, guestId);
+        }
+        graphqlRequest<{ upsertUser: User }>(
+          `mutation Upsert($name: String!, $phone: String!) {
+            upsertUser(name: $name, phone: $phone) { id name phone isAdmin }
+          }`,
+          { name: "Guest", phone: `guest-${guestId}` }
+        )
+          .then((data) => {
+            setUser(data.upsertUser);
+            sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data.upsertUser));
+            window.dispatchEvent(new Event("user-updated"));
+          })
+          .catch(() => {
+            setError("Failed to start guest session.");
+          })
+          .finally(() => setLoading(false));
+        return;
+      }
       setLoading(false);
       return;
     }
@@ -106,6 +131,9 @@ export function UserGate({
   }
 
   if (!user) {
+    if (!isAdminRoute) {
+      return <div className="text-sm text-muted-foreground">Loading...</div>;
+    }
     return (
       <Card className="mx-auto max-w-xl glass">
         <CardHeader>

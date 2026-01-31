@@ -10,7 +10,7 @@ export function SessionStarter({
   label = "Start session",
 }: {
   userId: string;
-  onStart: (chapterIds: string[], limit?: number | null) => void;
+  onStart: (chapterIds: string[], limit: number | null, chapterTitle?: string) => void;
   label?: string;
 }) {
   const [loading, setLoading] = useState(false);
@@ -67,7 +67,8 @@ export function SessionStarter({
   async function start() {
     if (!chapterId) return;
     setLoading(true);
-    onStart([chapterId], null);
+    const selectedChapter = chapters.find((chapter) => chapter.id === chapterId);
+    onStart([chapterId], null, selectedChapter?.title);
     setLoading(false);
   }
 

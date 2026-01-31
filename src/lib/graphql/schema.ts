@@ -1,6 +1,8 @@
 import { makeExecutableSchema } from "@graphql-tools/schema";
-import { prisma } from "@/lib/prisma";
+import { PrismaClient } from "@prisma/client";
 import { parseTopicCsvOrThrow } from "@/lib/csv";
+
+const prisma = new PrismaClient();
 
 const typeDefs = /* GraphQL */ `
   type User {
