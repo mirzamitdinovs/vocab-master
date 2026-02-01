@@ -10,14 +10,19 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { LearningLanguage } from '@/components/learning-language';
+import { LearningTopic } from '@/components/learning-topic';
+import { SessionStarter } from '@/components/session-starter';
 import { graphqlRequest } from '@/lib/graphql/client';
 import { cn } from '@/lib/utils';
+import { useLocale, useTranslations } from 'next-intl';
 
 type Vocabulary = {
   id: string;
   order?: number | null;
   korean: string;
-  translation: string;
+  translation?: string | null;
+  translations?: { en?: string | null; ru?: string | null; uz?: string | null };
 };
 
 export default function QuizPage() {
@@ -26,8 +31,9 @@ export default function QuizPage() {
 
 function QuizView() {
   const [user, setUser] = useState<User | null>(null);
+  const locale = useLocale();
+  const t = useTranslations();
   const storageKey = `quiz-session-${user?.id ?? 'guest'}`;
-  const [autoStarted, setAutoStarted] = useState(false);
   const [sessionWords, setSessionWords] = useState<Vocabulary[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [quizOptions, setQuizOptions] = useState<string[]>([]);
@@ -42,21 +48,34 @@ function QuizView() {
     }[]
   >([]);
   const [showResults, setShowResults] = useState(false);
-  const [loadingLesson, setLoadingLesson] = useState(false);
+  const wordsCachePrefix = 'vocab-master-words:chapter:';
 
   const currentWord = sessionWords[currentIndex];
+
+  const localizedTranslation = useCallback(
+    (word?: Vocabulary | null) => {
+      if (!word) return '';
+      const translations = word.translations ?? {};
+      return (
+        translations[locale as 'en' | 'ru' | 'uz'] ||
+        word.translation ||
+        ''
+      );
+    },
+    [locale],
+  );
 
   const buildQuiz = useCallback(() => {
     if (!currentWord) return;
     const options = new Set<string>();
-    options.add(currentWord.translation);
+    options.add(localizedTranslation(currentWord));
     while (options.size < 4 && sessionWords.length > 1) {
       const randomWord =
         sessionWords[Math.floor(Math.random() * sessionWords.length)];
-      options.add(randomWord.translation);
+      options.add(localizedTranslation(randomWord));
     }
     setQuizOptions(Array.from(options).sort(() => Math.random() - 0.5));
-  }, [currentWord, sessionWords]);
+  }, [currentWord, sessionWords, localizedTranslation]);
 
   useEffect(() => {
     if (currentWord) {
@@ -111,16 +130,41 @@ function QuizView() {
 
   async function startSession(chapterIds: string[], limit?: number | null) {
     if (!user) return;
-    const data = await graphqlRequest<{ sessionWords: Vocabulary[] }>(
-      `query SessionWords($userId: ID!, $chapterIds: [ID!]!, $limit: Int) {
-        sessionWords(userId: $userId, chapterIds: $chapterIds, limit: $limit) {
-          id order korean translation
+    const chapterId = chapterIds[0];
+    let words: Vocabulary[] | null = null;
+    if (chapterId) {
+      const cached = localStorage.getItem(`${wordsCachePrefix}${chapterId}`);
+      if (cached) {
+        try {
+          words = JSON.parse(cached) as Vocabulary[];
+        } catch {
+          localStorage.removeItem(`${wordsCachePrefix}${chapterId}`);
         }
-      }`,
-      { userId: user.id, chapterIds, limit },
-    );
-    const words = [...data.sessionWords].sort(() => Math.random() - 0.5);
-    setSessionWords(words);
+      }
+    }
+    if (!words) {
+      const data = await graphqlRequest<{ sessionWords: Vocabulary[] }>(
+        `query SessionWords($userId: ID!, $chapterIds: [ID!]!, $limit: Int) {
+          sessionWords(userId: $userId, chapterIds: $chapterIds, limit: $limit) {
+            id
+            order
+            korean
+            translations {
+              en
+              ru
+              uz
+            }
+          }
+        }`,
+        { userId: user.id, chapterIds, limit },
+      );
+      words = data.sessionWords ?? [];
+      if (chapterId) {
+        localStorage.setItem(`${wordsCachePrefix}${chapterId}`, JSON.stringify(words));
+      }
+    }
+    const shuffled = [...words].sort(() => Math.random() - 0.5);
+    setSessionWords(shuffled);
     setCurrentIndex(0);
     setAnswers([]);
     setShowResults(false);
@@ -131,7 +175,7 @@ function QuizView() {
     if (!currentWord) return;
     if (selectedOption) return;
     setSelectedOption(option);
-    const correct = option === currentWord.translation;
+    const correct = option === localizedTranslation(currentWord);
     setAnswers((prev) => {
       const next = [
         ...prev,
@@ -139,7 +183,7 @@ function QuizView() {
           wordId: currentWord.id,
           korean: currentWord.korean,
           selected: option,
-          correct: currentWord.translation,
+          correct: localizedTranslation(currentWord),
           isCorrect: correct,
         },
       ];
@@ -181,52 +225,8 @@ function QuizView() {
     setShowResults(true);
   }
 
-  useEffect(() => {
-    if (!user || autoStarted) return;
-    async function autoStart() {
-      setLoadingLesson(true);
-      const languagesData = await graphqlRequest<{
-        languages: { id: string }[];
-      }>(`query { languages { id } }`);
-      const languageId = languagesData.languages[0]?.id;
-      if (!languageId) {
-        setLoadingLesson(false);
-        return;
-      }
-      const levelsData = await graphqlRequest<{ levels: { id: string }[] }>(
-        `query Levels($languageId: ID!) { levels(languageId: $languageId) { id } }`,
-        { languageId },
-      );
-      const levelId = levelsData.levels[0]?.id;
-      if (!levelId) {
-        setLoadingLesson(false);
-        return;
-      }
-      const chaptersData = await graphqlRequest<{ chapters: { id: string }[] }>(
-        `query Chapters($levelId: ID!) { chapters(levelId: $levelId) { id } }`,
-        { levelId },
-      );
-      const chapterId = chaptersData.chapters[0]?.id;
-      if (!chapterId) {
-        setLoadingLesson(false);
-        return;
-      }
-      await startSession([chapterId], null);
-      setAutoStarted(true);
-      setLoadingLesson(false);
-    }
-    autoStart();
-  }, [user, autoStarted]);
-
   return (
     <div className={cn(sessionWords.length > 0 ? 'space-y-0' : 'space-y-6')}>
-      {sessionWords.length === 0 && (
-        <header className="space-y-2">
-          <h1 className="heading-serif text-3xl font-semibold">Quiz</h1>
-          <p className="text-muted-foreground">Multiple-choice questions.</p>
-        </header>
-      )}
-
       <Card
         className={`glass ${
           sessionWords.length > 0
@@ -234,28 +234,47 @@ function QuizView() {
             : ''
         }`}
       >
-        <CardHeader>
-          <CardTitle>Quiz</CardTitle>
+      <CardHeader>
+          <CardTitle>{t('quiz.title')}</CardTitle>
           <CardDescription>
             {sessionWords.length > 0
-              ? `Question ${currentIndex + 1} of ${sessionWords.length}`
-              : 'Start a session to begin.'}
+              ? t('quiz.questionCount', {
+                  current: currentIndex + 1,
+                  total: sessionWords.length,
+                })
+              : t('quiz.startHint')}
           </CardDescription>
         </CardHeader>
         <CardContent
           className={`space-y-4 ${sessionWords.length > 0 ? 'flex-1' : ''}`}
         >
           {sessionWords.length === 0 ? (
-            <p className="text-sm text-muted-foreground">
-              {loadingLesson ? 'Loading quiz...' : 'No session words loaded.'}
-            </p>
+            <div className="space-y-4">
+              <div className="grid gap-4 sm:grid-cols-2">
+                <LearningLanguage />
+                <LearningTopic />
+              </div>
+              <p className="text-sm text-muted-foreground">
+                {user ? t('quiz.chooseLesson') : t('quiz.loading')}
+              </p>
+              {user && (
+                <SessionStarter
+                  onStart={(chapterIds, _limit, _chapterTitle) =>
+                    startSession(chapterIds, null)
+                  }
+                  label={t('session.startSession')}
+                />
+              )}
+            </div>
           ) : showResults ? (
             <div className="space-y-3">
-              <div className="text-sm text-muted-foreground">Results</div>
+              <div className="text-sm text-muted-foreground">
+                {t('quiz.results')}
+              </div>
               <div className="rounded-lg border bg-white p-4">
                 <div className="text-2xl font-semibold">
                   {answers.filter((a) => a.isCorrect).length} / {answers.length}{' '}
-                  correct
+                  {t('quiz.correct')}
                 </div>
               </div>
               <div className="space-y-2">
@@ -271,7 +290,7 @@ function QuizView() {
                         a.isCorrect ? 'text-emerald-700' : 'text-rose-700'
                       }
                     >
-                      {a.isCorrect ? 'Correct' : 'Incorrect'}
+                      {a.isCorrect ? t('quiz.correct') : t('quiz.incorrect')}
                     </div>
                     <div className="text-base font-semibold text-foreground">
                       {a.korean}

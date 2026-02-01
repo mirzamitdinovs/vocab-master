@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Settings } from "lucide-react";
-import { graphqlRequest } from "@/lib/graphql/client";
+import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 type User = {
   id: string;
@@ -12,19 +13,14 @@ type User = {
   phone: string;
 };
 
-type UserStats = {
-  wordsLearned: number;
-  sessionsCompleted: number;
-  totalWords: number;
-  correctTotal: number;
-  incorrectTotal: number;
-};
-
 const STORAGE_KEY = "vocab-master-user";
 
 export function TopNav() {
   const [user, setUser] = useState<User | null>(null);
-  const [stats, setStats] = useState<UserStats | null>(null);
+  const pathname = usePathname();
+  const t = useTranslations();
+  const segments = pathname.split("/");
+  const locale = ["en", "ru", "uz"].includes(segments[1]) ? segments[1] : "en";
 
   useEffect(() => {
     function syncUser() {
@@ -46,43 +42,19 @@ export function TopNav() {
     return () => window.removeEventListener("user-updated", syncUser);
   }, []);
 
-  const fetchStats = useCallback(async () => {
-    if (!user) return;
-    const data = await graphqlRequest<{ stats: UserStats }>(
-      `query Stats($userId: ID!) { stats(userId: $userId) { wordsLearned sessionsCompleted totalWords correctTotal incorrectTotal } }`,
-      { userId: user.id }
-    );
-    setStats(data.stats);
-  }, [user]);
-
-  useEffect(() => {
-    fetchStats();
-  }, [fetchStats]);
-
   if (!user) return null;
 
   return (
     <div className="sticky top-0 z-40 mb-6 flex items-center justify-between rounded-2xl border bg-white/80 px-4 py-3 backdrop-blur">
       <div>
-        <div className="text-xs text-muted-foreground">Welcome</div>
+        <div className="text-xs text-muted-foreground">{t("topNav.welcome")}</div>
         <div className="font-semibold">{user.name}</div>
       </div>
-      <div className="hidden sm:flex items-center gap-4 text-xs text-muted-foreground">
-        <div>
-          <div className="text-xs">Progress</div>
-          <div className="text-sm font-semibold text-foreground">
-            {stats?.wordsLearned ?? 0}/{stats?.totalWords ?? 0}
-          </div>
-        </div>
-        <div>
-          <div className="text-xs">Sessions</div>
-          <div className="text-sm font-semibold text-foreground">
-            {stats?.sessionsCompleted ?? 0}
-          </div>
-        </div>
+      <div className="hidden sm:block text-xs text-muted-foreground">
+        {t("topNav.keepGoing")}
       </div>
-      <Button asChild variant="outline" size="icon" aria-label="Settings">
-        <Link href="/settings">
+      <Button asChild variant="outline" size="icon" aria-label={t("topNav.settings")}>
+        <Link href={`/${locale}/settings`}>
           <Settings className="h-4 w-4" />
         </Link>
       </Button>

@@ -29,7 +29,8 @@ import { Pencil, Trash2 } from "lucide-react";
 
 type Language = {
   id: string;
-  title: string;
+  key: string;
+  value: string;
   description?: string | null;
   order: number;
 };
@@ -44,14 +45,16 @@ export default function AdminCoursesPage() {
 
 function LanguagesView({ userId }: { userId: string }) {
   const [languages, setLanguages] = useState<Language[]>([]);
-  const [title, setTitle] = useState("");
+  const [key, setKey] = useState("");
+  const [value, setValue] = useState("");
   const [description, setDescription] = useState("");
   const [order, setOrder] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [editingLanguage, setEditingLanguage] = useState<Language | null>(null);
-  const [editTitle, setEditTitle] = useState("");
+  const [editKey, setEditKey] = useState("");
+  const [editValue, setEditValue] = useState("");
   const [editDescription, setEditDescription] = useState("");
   const [editOrder, setEditOrder] = useState(0);
 
@@ -59,7 +62,7 @@ function LanguagesView({ userId }: { userId: string }) {
     try {
       setError(null);
       const data = await graphqlRequest<{ languages: Language[] }>(
-        `query { languages { id title description order } }`
+        `query { languages { id key value description order } }`
       );
       setLanguages(data.languages);
     } catch (err) {
@@ -72,14 +75,15 @@ function LanguagesView({ userId }: { userId: string }) {
   }, [fetchLanguages]);
 
   async function handleCreate() {
-    if (!title.trim()) return;
+    if (!key.trim() || !value.trim()) return;
     await graphqlRequest<{ createLanguage: Language }>(
-      `mutation Create($userId: ID!, $title: String!, $description: String, $order: Int) {
-        createLanguage(userId: $userId, title: $title, description: $description, order: $order) { id }
+      `mutation Create($userId: ID!, $key: String!, $value: String!, $description: String, $order: Int) {
+        createLanguage(userId: $userId, key: $key, value: $value, description: $description, order: $order) { id }
       }`,
-      { userId, title: title.trim(), description: description.trim() || null, order }
+      { userId, key: key.trim(), value: value.trim(), description: description.trim() || null, order }
     );
-    setTitle("");
+    setKey("");
+    setValue("");
     setDescription("");
     setOrder(0);
     setOpen(false);
@@ -95,15 +99,16 @@ function LanguagesView({ userId }: { userId: string }) {
   }
 
   async function handleEditSave() {
-    if (!editingLanguage || !editTitle.trim()) return;
+    if (!editingLanguage || !editKey.trim() || !editValue.trim()) return;
     await graphqlRequest<{ updateLanguage: Language }>(
-      `mutation Update($userId: ID!, $languageId: ID!, $title: String!, $description: String, $order: Int) {
-        updateLanguage(userId: $userId, languageId: $languageId, title: $title, description: $description, order: $order) { id }
+      `mutation Update($userId: ID!, $languageId: ID!, $key: String!, $value: String!, $description: String, $order: Int) {
+        updateLanguage(userId: $userId, languageId: $languageId, key: $key, value: $value, description: $description, order: $order) { id }
       }`,
       {
         userId,
         languageId: editingLanguage.id,
-        title: editTitle.trim(),
+        key: editKey.trim(),
+        value: editValue.trim(),
         description: editDescription.trim() || null,
         order: editOrder,
       }
@@ -129,10 +134,14 @@ function LanguagesView({ userId }: { userId: string }) {
         <CardHeader>
           <CardTitle>Add language</CardTitle>
         </CardHeader>
-        <CardContent className="grid gap-4 md:grid-cols-3">
+        <CardContent className="grid gap-4 md:grid-cols-4">
           <div className="space-y-2 md:col-span-1">
-            <Label>Title</Label>
-            <Input value={title} onChange={(event) => setTitle(event.target.value)} />
+            <Label>Key</Label>
+            <Input value={key} onChange={(event) => setKey(event.target.value)} />
+          </div>
+          <div className="space-y-2 md:col-span-1">
+            <Label>Value</Label>
+            <Input value={value} onChange={(event) => setValue(event.target.value)} />
           </div>
           <div className="space-y-2 md:col-span-1">
             <Label>Description</Label>
@@ -154,10 +163,14 @@ function LanguagesView({ userId }: { userId: string }) {
             <DialogTitle>Add language</DialogTitle>
             <DialogDescription>Languages group levels.</DialogDescription>
           </DialogHeader>
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-4">
             <div className="space-y-2 md:col-span-1">
-              <Label>Title</Label>
-              <Input value={title} onChange={(event) => setTitle(event.target.value)} />
+              <Label>Key</Label>
+              <Input value={key} onChange={(event) => setKey(event.target.value)} />
+            </div>
+            <div className="space-y-2 md:col-span-1">
+              <Label>Value</Label>
+              <Input value={value} onChange={(event) => setValue(event.target.value)} />
             </div>
             <div className="space-y-2 md:col-span-1">
               <Label>Description</Label>
@@ -183,8 +196,10 @@ function LanguagesView({ userId }: { userId: string }) {
           {languages.map((language) => (
             <div key={language.id} className="flex items-center justify-between rounded-xl border bg-white px-4 py-3">
               <div>
-                <div className="font-semibold">{language.title}</div>
-                <div className="text-xs text-muted-foreground">Order {language.order}</div>
+                <div className="font-semibold">{language.value}</div>
+                <div className="text-xs text-muted-foreground">
+                  {language.key} · Order {language.order}
+                </div>
               </div>
               <div className="flex items-center gap-2">
                 <Button
@@ -192,7 +207,8 @@ function LanguagesView({ userId }: { userId: string }) {
                   variant="outline"
                   onClick={() => {
                     setEditingLanguage(language);
-                    setEditTitle(language.title);
+                    setEditKey(language.key);
+                    setEditValue(language.value);
                     setEditDescription(language.description ?? "");
                     setEditOrder(language.order);
                     setEditOpen(true);
@@ -236,10 +252,14 @@ function LanguagesView({ userId }: { userId: string }) {
             <DialogTitle>Edit language</DialogTitle>
             <DialogDescription>Update the language details.</DialogDescription>
           </DialogHeader>
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-4">
             <div className="space-y-2 md:col-span-1">
-              <Label>Title</Label>
-              <Input value={editTitle} onChange={(event) => setEditTitle(event.target.value)} />
+              <Label>Key</Label>
+              <Input value={editKey} onChange={(event) => setEditKey(event.target.value)} />
+            </div>
+            <div className="space-y-2 md:col-span-1">
+              <Label>Value</Label>
+              <Input value={editValue} onChange={(event) => setEditValue(event.target.value)} />
             </div>
             <div className="space-y-2 md:col-span-1">
               <Label>Description</Label>

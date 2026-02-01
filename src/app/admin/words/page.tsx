@@ -27,7 +27,7 @@ import { Label } from "@/components/ui/label";
 import { graphqlRequest } from "@/lib/graphql/client";
 import { Pencil, Trash2 } from "lucide-react";
 
-type Language = { id: string; title: string };
+type Language = { id: string; key: string; value: string };
 
 type Level = { id: string; languageId: string; title: string };
 
@@ -37,7 +37,8 @@ type Word = {
   id: string;
   chapterId: string;
   korean: string;
-  translation: string;
+  translation?: string | null;
+  translations?: { en?: string | null; ru?: string | null; uz?: string | null };
   order: number;
 };
 
@@ -74,11 +75,16 @@ function WordsView({ userId }: { userId: string }) {
   const [editChapterTitle, setEditChapterTitle] = useState("");
   const [editChapterOrder, setEditChapterOrder] = useState(0);
 
+  const resolveTranslation = useCallback((word: Word | null) => {
+    if (!word) return "";
+    return word.translations?.en ?? word.translation ?? "";
+  }, []);
+
   const fetchLanguages = useCallback(async () => {
     try {
       setError(null);
       const data = await graphqlRequest<{ languages: Language[] }>(
-        `query { languages { id title } }`
+        `query { languages { id key value } }`
       );
       setLanguages(data.languages);
       if (!languageId && data.languages.length > 0) {
@@ -128,7 +134,19 @@ function WordsView({ userId }: { userId: string }) {
     try {
       setError(null);
       const data = await graphqlRequest<{ words: Word[] }>(
-        `query Words($chapterId: ID!) { words(chapterId: $chapterId) { id chapterId korean translation order } }`,
+        `query Words($chapterId: ID!) {
+          words(chapterId: $chapterId) {
+            id
+            chapterId
+            korean
+            translations {
+              en
+              ru
+              uz
+            }
+            order
+          }
+        }`,
         { chapterId }
       );
       setWords(data.words);
@@ -273,7 +291,7 @@ function WordsView({ userId }: { userId: string }) {
               >
                 {languages.map((language) => (
                   <option key={language.id} value={language.id}>
-                    {language.title}
+                  {language.value}
                   </option>
                 ))}
               </select>
@@ -362,7 +380,7 @@ function WordsView({ userId }: { userId: string }) {
                 >
                   {languages.map((language) => (
                     <option key={language.id} value={language.id}>
-                      {language.title}
+                    {language.value}
                     </option>
                   ))}
                 </select>
@@ -443,7 +461,9 @@ function WordsView({ userId }: { userId: string }) {
             <div key={word.id} className="flex items-center justify-between rounded-xl border bg-white px-4 py-3">
               <div>
                 <div className="font-semibold">{word.korean}</div>
-                <div className="text-xs text-muted-foreground">{word.translation}</div>
+                <div className="text-xs text-muted-foreground">
+                  {resolveTranslation(word)}
+                </div>
               </div>
               <div className="flex items-center gap-2">
                 <Button
@@ -452,7 +472,7 @@ function WordsView({ userId }: { userId: string }) {
                   onClick={() => {
                     setEditingWord(word);
                     setEditKorean(word.korean);
-                    setEditTranslation(word.translation);
+                    setEditTranslation(resolveTranslation(word));
                     setEditOpen(true);
                   }}
                 >

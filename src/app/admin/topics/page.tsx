@@ -27,7 +27,7 @@ import { Label } from "@/components/ui/label";
 import { graphqlRequest } from "@/lib/graphql/client";
 import { Pencil, Trash2 } from "lucide-react";
 
-type Language = { id: string; title: string; order: number };
+type Language = { id: string; key: string; value: string; order: number };
 
 type Level = {
   id: string;
@@ -61,7 +61,7 @@ function LevelsView({ userId }: { userId: string }) {
     try {
       setError(null);
       const data = await graphqlRequest<{ languages: Language[] }>(
-        `query { languages { id title order } }`
+        `query { languages { id key value order } }`
       );
       setLanguages(data.languages);
       if (!languageId && data.languages.length > 0) {
@@ -161,7 +161,7 @@ function LevelsView({ userId }: { userId: string }) {
             >
               {languages.map((language) => (
                 <option key={language.id} value={language.id}>
-                  {language.title}
+                  {language.value}
                 </option>
               ))}
             </select>
@@ -196,7 +196,7 @@ function LevelsView({ userId }: { userId: string }) {
               >
                 {languages.map((language) => (
                   <option key={language.id} value={language.id}>
-                    {language.title}
+                    {language.value}
                   </option>
                 ))}
               </select>

@@ -4,6 +4,46 @@ import { parseTopicCsvOrThrow } from "@/lib/csv";
 
 const prisma = new PrismaClient();
 
+const normalizeTranslations = (value: unknown) => {
+  if (!value) {
+    return { en: "", ru: null, uz: null };
+  }
+  if (typeof value === "string") {
+    const trimmed = value.trim();
+    if (trimmed.startsWith("{") && trimmed.endsWith("}")) {
+      try {
+        const parsed = JSON.parse(trimmed) as { en?: string; ru?: string; uz?: string };
+        return {
+          en: parsed.en ?? "",
+          ru: parsed.ru ?? null,
+          uz: parsed.uz ?? null,
+        };
+      } catch {
+        return { en: value, ru: null, uz: null };
+      }
+    }
+    return { en: value, ru: null, uz: null };
+  }
+  if (typeof value !== "object") {
+    return { en: String(value), ru: null, uz: null };
+  }
+  const record = value as { en?: string; ru?: string; uz?: string };
+  return {
+    en: record.en ?? "",
+    ru: record.ru ?? null,
+    uz: record.uz ?? null,
+  };
+};
+
+const normalizeWord = (word: any) => {
+  const translations = normalizeTranslations(word.translation);
+  return {
+    ...word,
+    translation: translations.en ?? "",
+    translations,
+  };
+};
+
 const typeDefs = /* GraphQL */ `
   type User {
     id: ID!
@@ -14,7 +54,8 @@ const typeDefs = /* GraphQL */ `
 
   type Language {
     id: ID!
-    title: String!
+    key: String!
+    value: String!
     description: String
     order: Int!
   }
@@ -38,8 +79,50 @@ const typeDefs = /* GraphQL */ `
     chapterId: ID!
     korean: String!
     translation: String!
+    translations: Translations!
     order: Int!
-    audioUrl: String
+    audio: String
+  }
+
+  type CatalogWord {
+    id: ID!
+    chapterId: ID!
+    korean: String!
+    translation: String!
+    translations: Translations!
+    order: Int!
+    audio: String
+  }
+
+  type CatalogChapter {
+    id: ID!
+    levelId: ID!
+    title: String!
+    order: Int!
+    words: [CatalogWord!]!
+  }
+
+  type CatalogLevel {
+    id: ID!
+    languageId: ID!
+    title: String!
+    order: Int!
+    chapters: [CatalogChapter!]!
+  }
+
+  type CatalogLanguage {
+    id: ID!
+    key: String!
+    value: String!
+    description: String
+    order: Int!
+    levels: [CatalogLevel!]!
+  }
+
+  type Translations {
+    en: String
+    ru: String
+    uz: String
   }
 
   type LearningSettings {
@@ -87,6 +170,7 @@ const typeDefs = /* GraphQL */ `
     levels(languageId: ID!): [Level!]!
     chapters(levelId: ID!): [Chapter!]!
     words(chapterId: ID!): [Word!]!
+    wordsCatalog: [CatalogLanguage!]!
     sessionWords(userId: ID!, chapterIds: [ID!]!, limit: Int): [Word!]!
     stats(userId: ID!): UserStatSummary!
     learningSettings(userId: ID!): LearningSettings
@@ -100,8 +184,8 @@ const typeDefs = /* GraphQL */ `
     updateUser(userId: ID!, name: String!, phone: String!): User!
     clearWords(userId: ID!): Boolean!
     deleteUser(userId: ID!): Boolean!
-    createLanguage(userId: ID!, title: String!, description: String, order: Int): Language!
-    updateLanguage(userId: ID!, languageId: ID!, title: String!, description: String, order: Int): Language!
+    createLanguage(userId: ID!, key: String!, value: String!, description: String, order: Int): Language!
+    updateLanguage(userId: ID!, languageId: ID!, key: String!, value: String!, description: String, order: Int): Language!
     deleteLanguage(userId: ID!, languageId: ID!): Boolean!
     createLevel(userId: ID!, languageId: ID!, title: String!, order: Int): Level!
     updateLevel(userId: ID!, levelId: ID!, title: String!, order: Int): Level!
@@ -109,8 +193,8 @@ const typeDefs = /* GraphQL */ `
     createChapter(userId: ID!, levelId: ID!, title: String!, order: Int): Chapter!
     updateChapter(userId: ID!, chapterId: ID!, title: String!, order: Int): Chapter!
     deleteChapter(userId: ID!, chapterId: ID!): Boolean!
-    createWord(userId: ID!, chapterId: ID!, korean: String!, translation: String!, order: Int): Word!
-    updateWord(userId: ID!, wordId: ID!, korean: String!, translation: String!, order: Int): Word!
+    createWord(userId: ID!, chapterId: ID!, korean: String!, translation: String!, order: Int, audio: String): Word!
+    updateWord(userId: ID!, wordId: ID!, korean: String!, translation: String!, order: Int, audio: String): Word!
     deleteWord(userId: ID!, wordId: ID!): Boolean!
     importWords(userId: ID!, chapterId: ID!, csv: String!): ImportResult!
     updateLearningSettings(userId: ID!, learnSessionSize: Int, reviewSessionSize: Int, speedReviewSessionSize: Int, enableTyping: Boolean, enableTapping: Boolean, enableListening: Boolean): LearningSettings!
@@ -130,7 +214,17 @@ const resolvers = {
       return null;
     },
     languages: async () => {
-      return prisma.language.findMany({ orderBy: { order: "asc" } });
+      return prisma.language.findMany({
+        orderBy: { order: "asc" },
+        select: {
+          id: true,
+          key: true,
+          value: true,
+          description: true,
+          order: true,
+          createdAt: true,
+        },
+      });
     },
     levels: async (_: unknown, args: { languageId: string }) => {
       return prisma.level.findMany({
@@ -145,17 +239,47 @@ const resolvers = {
       });
     },
     words: async (_: unknown, args: { chapterId: string }) => {
-      return prisma.word.findMany({
+      const rows = await prisma.word.findMany({
         where: { chapterId: args.chapterId },
         orderBy: { order: "asc" },
       });
+      return rows.map(normalizeWord);
+    },
+    wordsCatalog: async () => {
+      const languages = await prisma.language.findMany({
+        orderBy: { order: "asc" },
+        include: {
+          levels: {
+            orderBy: { order: "asc" },
+            include: {
+              chapters: {
+                orderBy: { order: "asc" },
+                include: {
+                  words: { orderBy: { order: "asc" } },
+                },
+              },
+            },
+          },
+        },
+      });
+
+      return languages.map((language) => ({
+        ...language,
+        levels: language.levels.map((level) => ({
+          ...level,
+          chapters: level.chapters.map((chapter) => ({
+            ...chapter,
+            words: chapter.words.map(normalizeWord),
+          })),
+        })),
+      }));
     },
     sessionWords: async (
       _: unknown,
       args: { userId: string; chapterIds: string[]; limit?: number }
     ) => {
       const take = args.limit == null ? undefined : Math.min(Math.max(args.limit, 1), 200);
-      return prisma.word.findMany({
+      const rows = await prisma.word.findMany({
         where: {
           chapterId: { in: args.chapterIds },
           NOT: {
@@ -170,6 +294,7 @@ const resolvers = {
         orderBy: { order: "asc" },
         ...(take ? { take } : {}),
       });
+      return rows.map(normalizeWord);
     },
     stats: async (_: unknown, args: { userId: string }) => {
       const [wordAgg, totalWords, userStat] = await Promise.all([
@@ -266,21 +391,21 @@ const resolvers = {
     },
     createLanguage: async (
       _: unknown,
-      args: { userId: string; title: string; description?: string | null; order?: number | null }
+      args: { userId: string; key: string; value: string; description?: string | null; order?: number | null }
     ) => {
       await requireAdmin(args.userId);
       return prisma.language.create({
-        data: { title: args.title, description: args.description ?? undefined, order: args.order ?? 0 },
+        data: { key: args.key, value: args.value, description: args.description ?? undefined, order: args.order ?? 0 },
       });
     },
     updateLanguage: async (
       _: unknown,
-      args: { userId: string; languageId: string; title: string; description?: string | null; order?: number | null }
+      args: { userId: string; languageId: string; key: string; value: string; description?: string | null; order?: number | null }
     ) => {
       await requireAdmin(args.userId);
       return prisma.language.update({
         where: { id: args.languageId },
-        data: { title: args.title, description: args.description ?? undefined, order: args.order ?? 0 },
+        data: { key: args.key, value: args.value, description: args.description ?? undefined, order: args.order ?? 0 },
       });
     },
     deleteLanguage: async (_: unknown, args: { userId: string; languageId: string }) => {
@@ -326,22 +451,35 @@ const resolvers = {
     },
     createWord: async (
       _: unknown,
-      args: { userId: string; chapterId: string; korean: string; translation: string; order?: number | null }
+      args: { userId: string; chapterId: string; korean: string; translation: string; order?: number | null; audio?: string | null }
     ) => {
       await requireAdmin(args.userId);
-      return prisma.word.create({
-        data: { chapterId: args.chapterId, korean: args.korean, translation: args.translation, order: args.order ?? 0 },
+      const word = await prisma.word.create({
+        data: {
+          chapterId: args.chapterId,
+          korean: args.korean,
+          translation: { en: args.translation, ru: null, uz: null },
+          order: args.order ?? 0,
+          audio: args.audio ?? null,
+        },
       });
+      return normalizeWord(word);
     },
     updateWord: async (
       _: unknown,
-      args: { userId: string; wordId: string; korean: string; translation: string; order?: number | null }
+      args: { userId: string; wordId: string; korean: string; translation: string; order?: number | null; audio?: string | null }
     ) => {
       await requireAdmin(args.userId);
-      return prisma.word.update({
+      const word = await prisma.word.update({
         where: { id: args.wordId },
-        data: { korean: args.korean, translation: args.translation, order: args.order ?? 0 },
+        data: {
+          korean: args.korean,
+          translation: { en: args.translation, ru: null, uz: null },
+          order: args.order ?? 0,
+          audio: args.audio ?? null,
+        },
       });
+      return normalizeWord(word);
     },
     deleteWord: async (_: unknown, args: { userId: string; wordId: string }) => {
       await requireAdmin(args.userId);
@@ -359,7 +497,7 @@ const resolvers = {
           chapterId: args.chapterId,
           order: row.order ?? 0,
           korean: row.korean,
-          translation: row.translation,
+          translation: { en: row.translation, ru: null, uz: null },
         }));
         const result = await prisma.word.createMany({ data, skipDuplicates: true });
         return {

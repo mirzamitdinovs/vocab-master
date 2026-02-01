@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { LearningLanguage } from "@/components/learning-language";
+import { LearningTopic } from "@/components/learning-topic";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -18,8 +20,21 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { graphqlRequest } from "@/lib/graphql/client";
+import { useTranslations, useLocale } from "next-intl";
+import { usePathname, useRouter } from "next/navigation";
 
 const STORAGE_KEY = "vocab-master-user";
+const WORDS_CACHE_PREFIX = "vocab-master-words:chapter:";
+
+function clearCachedWords() {
+  if (typeof localStorage === "undefined") return;
+  for (let i = localStorage.length - 1; i >= 0; i -= 1) {
+    const key = localStorage.key(i);
+    if (key && key.startsWith(WORDS_CACHE_PREFIX)) {
+      localStorage.removeItem(key);
+    }
+  }
+}
 
 export default function SettingsPage() {
   return (
@@ -33,11 +48,16 @@ function SettingsView({ user }: { user: User }) {
   const [name, setName] = useState(user.name);
   const [phone, setPhone] = useState(user.phone);
   const [message, setMessage] = useState<string | null>(null);
+  const t = useTranslations();
+  const locale = useLocale();
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     setName(user.name);
     setPhone(user.phone);
   }, [user]);
+
 
   const handleUpdate = useCallback(async () => {
     const data = await graphqlRequest<{ updateUser: User }>(
@@ -47,16 +67,17 @@ function SettingsView({ user }: { user: User }) {
       { userId: user.id, name: name.trim(), phone: phone.trim() }
     );
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data.updateUser));
-    setMessage("Profile updated.");
-  }, [user.id, name, phone]);
+    setMessage(t("settings.save"));
+  }, [user.id, name, phone, t]);
 
   const handleClearWords = useCallback(async () => {
     await graphqlRequest<{ clearWords: boolean }>(
       `mutation ClearWords($userId: ID!) { clearWords(userId: $userId) }`,
       { userId: user.id }
     );
-    setMessage("All words cleared.");
-  }, [user.id]);
+    clearCachedWords();
+    setMessage(t("settings.clearWords"));
+  }, [user.id, t]);
 
   const handleDeleteAccount = useCallback(async () => {
     await graphqlRequest<{ deleteUser: boolean }>(
@@ -64,85 +85,122 @@ function SettingsView({ user }: { user: User }) {
       { userId: user.id }
     );
     sessionStorage.removeItem(STORAGE_KEY);
-    window.location.href = "/";
-  }, [user.id]);
+    window.location.href = `/${locale}`;
+  }, [user.id, locale]);
 
   const handleLogout = useCallback(() => {
     sessionStorage.removeItem(STORAGE_KEY);
-    window.location.href = "/";
-  }, []);
+    window.location.href = `/${locale}`;
+  }, [locale]);
 
   return (
     <div className="space-y-6">
-      <header className="space-y-2">
-        <h1 className="heading-serif text-3xl font-semibold">Settings</h1>
-        <p className="text-muted-foreground">Manage your profile and data.</p>
-      </header>
-
       {message && <div className="text-sm text-emerald-700">{message}</div>}
 
       <Card className="glass">
         <CardHeader>
-          <CardTitle>Profile</CardTitle>
-          <CardDescription>Update your name or phone.</CardDescription>
+          <CardTitle>{t("settings.profileTitle")}</CardTitle>
+          <CardDescription>{t("settings.profileDesc")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label>Name</Label>
+            <Label>{t("settings.name")}</Label>
             <Input value={name} onChange={(event) => setName(event.target.value)} />
           </div>
           <div className="space-y-2">
-            <Label>Phone</Label>
+            <Label>{t("settings.phone")}</Label>
             <Input value={phone} onChange={(event) => setPhone(event.target.value)} />
           </div>
-          <Button onClick={handleUpdate}>Save changes</Button>
+          <Button onClick={handleUpdate}>{t("settings.save")}</Button>
         </CardContent>
       </Card>
 
       <Card className="glass">
         <CardHeader>
-          <CardTitle>Data</CardTitle>
-          <CardDescription>Clear words or delete your account.</CardDescription>
+          <CardTitle>{t("settings.learningTitle")}</CardTitle>
+          <CardDescription>{t("settings.learningDesc")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
+          <LearningLanguage />
+          <LearningTopic />
+        </CardContent>
+      </Card>
+
+      <Card className="glass">
+        <CardHeader>
+          <CardTitle>{t("settings.dataTitle")}</CardTitle>
+          <CardDescription>{t("settings.dataDesc")}</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="space-y-2">
+            <Label>{t("settings.uiLanguage")}</Label>
+            <div className="flex gap-2">
+              {["en", "ru", "uz"].map((lng) => (
+                <Button
+                  key={lng}
+                  variant={locale === lng ? "secondary" : "outline"}
+                  onClick={() => {
+                    const segments = pathname.split("/");
+                    if (["en", "ru", "uz"].includes(segments[1])) {
+                      segments[1] = lng;
+                    } else {
+                      segments.splice(1, 0, lng);
+                    }
+                    router.push(segments.join("/") || `/${lng}`);
+                  }}
+                >
+                  {lng.toUpperCase()}
+                </Button>
+              ))}
+            </div>
+          </div>
+
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button variant="outline" className="w-full">Clear all words</Button>
+              <Button variant="outline" className="w-full">
+                {t("settings.clearWords")}
+              </Button>
             </AlertDialogTrigger>
             <AlertDialogContent className="left-1/2 top-auto bottom-0 w-full max-w-none translate-x-[-50%] translate-y-0 rounded-t-2xl sm:max-w-lg sm:rounded-lg">
               <AlertDialogHeader>
-                <AlertDialogTitle>Clear all words?</AlertDialogTitle>
+                <AlertDialogTitle>{t("settings.clearTitle")}</AlertDialogTitle>
                 <AlertDialogDescription>
-                  This will permanently remove all your vocabulary.
+                  {t("settings.clearDesc")}
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={handleClearWords}>Confirm</AlertDialogAction>
+                <AlertDialogCancel>{t("settings.cancel")}</AlertDialogCancel>
+                <AlertDialogAction onClick={handleClearWords}>
+                  {t("settings.confirm")}
+                </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
 
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button variant="destructive" className="w-full">Delete account</Button>
+              <Button variant="destructive" className="w-full">
+                {t("settings.deleteAccount")}
+              </Button>
             </AlertDialogTrigger>
             <AlertDialogContent className="left-1/2 top-auto bottom-0 w-full max-w-none translate-x-[-50%] translate-y-0 rounded-t-2xl sm:max-w-lg sm:rounded-lg">
               <AlertDialogHeader>
-                <AlertDialogTitle>Delete account?</AlertDialogTitle>
+                <AlertDialogTitle>{t("settings.deleteTitle")}</AlertDialogTitle>
                 <AlertDialogDescription>
-                  This will remove your profile and all stored words. This action cannot be undone.
+                  {t("settings.deleteDesc")}
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={handleDeleteAccount}>Delete</AlertDialogAction>
+                <AlertDialogCancel>{t("settings.cancel")}</AlertDialogCancel>
+                <AlertDialogAction onClick={handleDeleteAccount}>
+                  {t("settings.delete")}
+                </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
 
           <Button variant="ghost" className="w-full" onClick={handleLogout}>
-            Logout
+            {t("settings.logout")}
           </Button>
         </CardContent>
       </Card>

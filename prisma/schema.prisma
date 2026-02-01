@@ -46,13 +46,12 @@ model UserStat {
 
 model Language {
   id        String   @id @default(cuid())
-  title     String
+  key       String   @unique
+  value     String
   description String?
   order     Int      @default(0)
   createdAt DateTime @default(now())
   levels    Level[]
-
-  @@unique([title])
 }
 
 model Level {
@@ -85,16 +84,16 @@ model Word {
   id        String   @id @default(cuid())
   chapterId String
   korean    String
-  translation String
+  translation Json
   order     Int      @default(0)
-  audioUrl  String?
+  audio     String?
   createdAt DateTime @default(now())
 
   chapter Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
   progress WordProgress[]
   wordStats WordStat[]
 
-  @@unique([chapterId, korean, translation])
+  @@unique([chapterId, korean])
 }
 
 model WordProgress {

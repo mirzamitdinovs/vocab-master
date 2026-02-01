@@ -3,21 +3,12 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import {
-  BookText,
-  HelpCircle,
-  Layers,
-  PenLine,
-  Settings,
-  BarChart3,
-} from 'lucide-react';
+import { BookText, HelpCircle, Layers, Settings } from 'lucide-react';
 
 const navItems = [
   { href: '/words', label: 'Words', icon: BookText },
   { href: '/flashcards', label: 'Flashcards', icon: Layers },
   { href: '/quiz', label: 'Quiz', icon: HelpCircle },
-  { href: '/write', label: 'Write', icon: PenLine },
-  { href: '/stats', label: 'Stats', icon: BarChart3 },
   { href: '/settings', label: 'Settings', icon: Settings },
 ];
 
@@ -41,7 +32,7 @@ export function SideNav() {
   // if (!hasUser) return null;
 
   return (
-    <aside className="hidden md:flex md:flex-col md:gap-2 md:rounded-3xl md:border md:bg-white/80 md:p-4 md:backdrop-blur">
+    <aside className="hidden lg:flex md:flex-col md:gap-2 md:rounded-3xl md:border md:bg-white/80 md:p-4 md:backdrop-blur">
       <div className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
         Menu
       </div>

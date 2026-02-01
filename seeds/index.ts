@@ -1,6 +1,6 @@
-import koreanTopic1 from "./korean/topic-1";
+import koreanSnu from "./korean-snu";
 
-const seeders = [koreanTopic1];
+const seeders = [koreanSnu];
 
 export async function downAll(prisma: { [key: string]: any }) {
   // eslint-disable-next-line no-console

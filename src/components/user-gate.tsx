@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { graphqlRequest } from "@/lib/graphql/client";
+import { useLocale, useTranslations } from "next-intl";
 
 export type User = {
   id: string;
@@ -23,13 +24,15 @@ export function UserGate({
   children: (user: User) => React.ReactNode;
 }) {
   const pathname = usePathname();
+  const locale = useLocale();
+  const t = useTranslations();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [step, setStep] = useState<"phone" | "name">("phone");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const isAdminRoute = pathname.startsWith("/admin");
+  const isAdminRoute = pathname.startsWith(`/${locale}/admin`) || pathname.startsWith("/admin");
 
   useEffect(() => {
     const stored = sessionStorage.getItem(STORAGE_KEY);
@@ -45,7 +48,7 @@ export function UserGate({
           `mutation Upsert($name: String!, $phone: String!) {
             upsertUser(name: $name, phone: $phone) { id name phone isAdmin }
           }`,
-          { name: "Guest", phone: `guest-${guestId}` }
+          { name: t("auth.guestName"), phone: `guest-${guestId}` }
         )
           .then((data) => {
             setUser(data.upsertUser);
@@ -53,7 +56,7 @@ export function UserGate({
             window.dispatchEvent(new Event("user-updated"));
           })
           .catch(() => {
-            setError("Failed to start guest session.");
+            setError(t("auth.guestStartError"));
           })
           .finally(() => setLoading(false));
         return;
@@ -80,12 +83,12 @@ export function UserGate({
         window.dispatchEvent(new Event("user-updated"));
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [isAdminRoute, t]);
 
   async function handleSubmit() {
     setError(null);
     if (!phone.trim()) {
-      setError("Phone number is required.");
+      setError(t("auth.phoneRequired"));
       return;
     }
 
@@ -107,7 +110,7 @@ export function UserGate({
       }
 
       if (!name.trim()) {
-        setError("Name is required to create an account.");
+        setError(t("auth.nameRequired"));
         return;
       }
 
@@ -122,7 +125,7 @@ export function UserGate({
       localStorage.removeItem(STORAGE_KEY);
       window.dispatchEvent(new Event("user-updated"));
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to create user.");
+      setError(err instanceof Error ? err.message : t("auth.createUserFailed"));
     }
   }
 
@@ -136,39 +139,39 @@ export function UserGate({
 
   if (!user) {
     if (!isAdminRoute) {
-      return <div className="text-sm text-muted-foreground">Loading...</div>;
+      return <div className="text-sm text-muted-foreground">{t("auth.loading")}</div>;
     }
     return (
       <Card className="mx-auto max-w-xl glass">
         <CardHeader>
-          <CardTitle className="heading-serif text-2xl">Welcome in</CardTitle>
+          <CardTitle className="heading-serif text-2xl">{t("auth.welcome")}</CardTitle>
           <CardDescription>
             {step === "phone"
-              ? "Enter your phone number to continue."
-              : "We didn’t find this phone number. Add a name to create your account."}
+              ? t("auth.phonePrompt")
+              : t("auth.namePrompt")}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           {error && <div className="text-sm text-red-600">{error}</div>}
           <div className="space-y-2">
-            <Label htmlFor="phone">Phone</Label>
+            <Label htmlFor="phone">{t("auth.phoneLabel")}</Label>
             <Input
               id="phone"
               value={phone}
               onChange={(event) => setPhone(event.target.value)}
-              placeholder="Phone number"
+              placeholder={t("auth.phonePlaceholder")}
               disabled={step === "name"}
             />
           </div>
           {step === "name" && (
             <>
               <div className="space-y-2">
-                <Label htmlFor="name">Name</Label>
+                <Label htmlFor="name">{t("auth.nameLabel")}</Label>
                 <Input
                   id="name"
                   value={name}
                   onChange={(event) => setName(event.target.value)}
-                  placeholder="Your name"
+                  placeholder={t("auth.namePlaceholder")}
                 />
               </div>
               <Button
@@ -176,20 +179,20 @@ export function UserGate({
                 className="h-auto p-0 text-xs text-muted-foreground"
                 onClick={() => setStep("phone")}
               >
-                Change phone number
+                {t("auth.changePhone")}
               </Button>
             </>
           )}
           <Button className="w-full" onClick={handleSubmit}>
-            {step === "phone" ? "Continue" : "Create account"}
+            {step === "phone" ? t("auth.continue") : t("auth.createAccount")}
           </Button>
         </CardContent>
       </Card>
     );
   }
 
-  if (user.isAdmin && !pathname.startsWith("/admin")) {
-    window.location.href = "/admin";
+  if (user.isAdmin && !pathname.startsWith(`/${locale}/admin`)) {
+    window.location.href = `/${locale}/admin`;
     return null;
   }
 
