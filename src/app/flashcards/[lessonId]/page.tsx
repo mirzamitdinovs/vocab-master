@@ -7,6 +7,7 @@ import { ChevronLeft, Volume2, XCircle } from 'lucide-react';
 import { UserGate, type User } from '@/components/user-gate';
 import { Button } from '@/components/ui/button';
 import { graphqlRequest } from '@/lib/graphql/client';
+import { useAudioGate } from '@/lib/audio-gate';
 import { useLocale, useTranslations } from 'next-intl';
 
 type Vocabulary = {
@@ -38,6 +39,7 @@ function FlashcardLessonView({ user }: { user: User }) {
   const [direction, setDirection] = useState<'next' | 'prev'>('next');
   const [loading, setLoading] = useState(true);
   const [audioPlayer, setAudioPlayer] = useState<HTMLAudioElement | null>(null);
+  const { audioReady, unlockAudio } = useAudioGate();
   const [activeTap, setActiveTap] = useState<'prev' | 'next' | null>(null);
   const locale = useLocale();
   const t = useTranslations();
@@ -170,7 +172,11 @@ function FlashcardLessonView({ user }: { user: User }) {
     return `/api/audio/${audio}`;
   }
 
-  function playAudio() {
+  async function playAudio() {
+    if (!audioReady) {
+      const unlocked = await unlockAudio();
+      if (!unlocked) return;
+    }
     const src = resolveAudioSrc(currentWord?.audio);
     if (!src) return;
     if (audioPlayer) {

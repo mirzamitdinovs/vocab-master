@@ -10,6 +10,7 @@ import {
 import { graphqlRequest } from '@/lib/graphql/client';
 import { Button } from '@/components/ui/button';
 import { Volume2 } from 'lucide-react';
+import { useAudioGate } from '@/lib/audio-gate';
 import { useLocale, useTranslations } from 'next-intl';
 import {
   LANGUAGE_STORAGE_KEY,
@@ -50,6 +51,7 @@ type CatalogLanguage = Language & { levels: CatalogLevel[] };
 export default function WordsView() {
   const locale = useLocale();
   const t = useTranslations();
+  const { audioReady, unlockAudio } = useAudioGate();
   const [languages, setLanguages] = useState<CatalogLanguage[]>([]);
   const [openChapterByLevel, setOpenChapterByLevel] = useState<
     Record<string, string | undefined>
@@ -188,13 +190,17 @@ export default function WordsView() {
   }, []);
 
   const playAudio = useCallback(
-    (audio?: string | null) => {
+    async (audio?: string | null) => {
       const src = resolveAudioSrc(audio);
       if (!src) return;
+      if (!audioReady) {
+        const unlocked = await unlockAudio();
+        if (!unlocked) return;
+      }
       const player = new Audio(src);
       player.play().catch(() => null);
     },
-    [resolveAudioSrc],
+    [resolveAudioSrc, audioReady, unlockAudio],
   );
 
   return (
