@@ -44,7 +44,10 @@
     "translationFirst": "Translation first",
     "prevCard": "Previous card",
     "nextCard": "Next card",
-    "wordCount": "Word {current} of {total}"
+    "wordCount": "Word {current} of {total}",
+    "groupLabel": "Group {index}",
+    "groupRange": "Words {start}–{end}",
+    "groupCount": "{total} groups · {words} words"
   },
   "quiz": {
     "title": "Quiz",
@@ -55,7 +58,14 @@
     "results": "Results",
     "correct": "Correct",
     "incorrect": "Incorrect",
-    "finish": "Finish quiz"
+    "finish": "Finish quiz",
+    "prev": "Previous",
+    "next": "Next",
+    "reset": "Reset",
+    "backToQuiz": "Back to quiz",
+    "groupLabel": "Group {index}",
+    "groupRange": "Questions {start}–{end}",
+    "groupCount": "{total} groups · {words} questions"
   },
   "words": {
     "empty": "No languages yet.",
@@ -85,7 +95,12 @@
     "confirm": "Confirm",
     "delete": "Delete",
     "logout": "Logout",
-    "uiLanguage": "App language"
+    "uiLanguage": "App language",
+    "lang": {
+      "en": "English",
+      "ru": "Russian",
+      "uz": "Uzbek"
+    }
   },
   "learning": {
     "learningLanguage": "Learning language",
@@ -104,8 +119,10 @@
     "start": "Start",
     "lesson": "Lesson",
     "selectLesson": "Select lesson",
-    "startSession": "Start session",
-    "continueSession": "Continue session",
+    "selectTopicFirst": "Select topic first.",
+    "updateLesson": "Update lesson",
+    "startSession": "Start",
+    "continueSession": "Continue",
     "loading": "Loading...",
     "apiCheckStart": "Checking API data...",
     "apiNoLanguages": "API check: 0 languages found.",

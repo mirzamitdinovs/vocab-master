@@ -16,18 +16,15 @@ type Vocabulary = {
   korean: string;
   translation?: string | null;
   translations?: { en?: string | null; ru?: string | null; uz?: string | null };
-  audio?: string | null;
 };
 
 const GROUP_SIZE = 20;
 
-export default function FlashcardLessonGroupsPage() {
-  return (
-    <UserGate>{(user) => <FlashcardLessonGroupsView user={user} />}</UserGate>
-  );
+export default function QuizLessonGroupsPage() {
+  return <UserGate>{(user) => <QuizLessonGroupsView user={user} />}</UserGate>;
 }
 
-function FlashcardLessonGroupsView({ user }: { user: User }) {
+function QuizLessonGroupsView({ user }: { user: User }) {
   const params = useParams();
   const router = useRouter();
   const lessonId = Array.isArray(params.lessonId)
@@ -35,37 +32,10 @@ function FlashcardLessonGroupsView({ user }: { user: User }) {
     : params.lessonId;
   const locale = useLocale();
   const t = useTranslations();
-  const [lessonTitle, setLessonTitle] = useState<string | null>(null);
-  const [frontLanguage, setFrontLanguage] = useState<'korean' | 'translation'>(
-    'korean',
-  );
   const [words, setWords] = useState<Vocabulary[]>([]);
   const [loading, setLoading] = useState(true);
   const wordsCachePrefix = 'vocab-master-words:chapter:';
-  const resumePrefix = lessonId ? `flashcards-session:${lessonId}:group:` : '';
-
-  useEffect(() => {
-    if (!lessonId) return;
-    const storedTitle = sessionStorage.getItem(
-      `flashcards-lesson-title-${lessonId}`,
-    );
-    if (storedTitle) {
-      try {
-        const parsed = JSON.parse(storedTitle) as Record<string, string>;
-        setLessonTitle(
-          parsed[locale as 'en' | 'ru' | 'uz' | 'ko'] ??
-            parsed.en ??
-            parsed.ko ??
-            storedTitle,
-        );
-      } catch {
-        setLessonTitle(storedTitle);
-      }
-    }
-    const storedFront =
-      sessionStorage.getItem('flashcards-front-language') ?? 'korean';
-    setFrontLanguage(storedFront === 'translation' ? 'translation' : 'korean');
-  }, [lessonId, locale]);
+  const resumePrefix = lessonId ? `quiz-session:${lessonId}:group:` : '';
 
   useEffect(() => {
     async function loadWords() {
@@ -93,7 +63,6 @@ function FlashcardLessonGroupsView({ user }: { user: User }) {
                 ru
                 uz
               }
-              audio
             }
           }`,
           { userId: user.id, chapterIds: [lessonId], limit: null },
@@ -103,7 +72,9 @@ function FlashcardLessonGroupsView({ user }: { user: User }) {
       }
       if (list.length > 0 && list.some((word) => word.order != null)) {
         list = [...list].sort(
-          (a, b) => (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER),
+          (a, b) =>
+            (a.order ?? Number.MAX_SAFE_INTEGER) -
+            (b.order ?? Number.MAX_SAFE_INTEGER),
         );
       }
       setWords(list);
@@ -132,18 +103,18 @@ function FlashcardLessonGroupsView({ user }: { user: User }) {
             size="icon"
             aria-label={t('flashcards.back')}
           >
-            <Link href={`/${locale}/flashcards`}>
+            <Link href={`/${locale}/quiz`}>
               <ChevronLeft className="h-5 w-5" />
             </Link>
           </Button>
           <div className="flex-1 text-center">
             <div className="text-sm font-semibold text-foreground">
-              {lessonTitle ?? t('flashcards.lesson')}
+              {t('quiz.title')}
             </div>
             <div className="text-xs text-muted-foreground">
               {loading
                 ? t('flashcards.loading')
-                : t('flashcards.groupCount', {
+                : t('quiz.groupCount', {
                     total: totalGroups,
                     words: words.length,
                   })}
@@ -152,49 +123,6 @@ function FlashcardLessonGroupsView({ user }: { user: User }) {
           <div className="w-9" />
         </div>
       </header>
-
-      <Card className="border bg-white/90 shadow-sm">
-        <CardContent className="space-y-4 p-4">
-          <div className="space-y-2">
-            <div className="text-sm font-medium">
-              {t('flashcards.frontLanguage')}
-            </div>
-            <div className="grid gap-2 grid-cols-2">
-              <Button
-                className={`w-full ${
-                  frontLanguage === 'korean'
-                    ? '!bg-emerald-100 !text-emerald-800'
-                    : '!bg-slate-100 !text-slate-700'
-                }`}
-                variant="outline"
-                onClick={() => {
-                  setFrontLanguage('korean');
-                  sessionStorage.setItem('flashcards-front-language', 'korean');
-                }}
-              >
-                {t('flashcards.koreanFirst')}
-              </Button>
-              <Button
-                className={`w-full ${
-                  frontLanguage === 'translation'
-                    ? '!bg-emerald-100 !text-emerald-800'
-                    : '!bg-slate-100 !text-slate-700'
-                }`}
-                variant="outline"
-                onClick={() => {
-                  setFrontLanguage('translation');
-                  sessionStorage.setItem(
-                    'flashcards-front-language',
-                    'translation',
-                  );
-                }}
-              >
-                {t('flashcards.translationFirst')}
-              </Button>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
 
       {loading ? (
         <div className="text-center text-sm text-muted-foreground">
@@ -217,10 +145,10 @@ function FlashcardLessonGroupsView({ user }: { user: User }) {
                 <CardContent className="flex items-center justify-between gap-4 p-4">
                   <div>
                     <div className="text-base font-semibold">
-                      {t('flashcards.groupLabel', { index: groupId })}
+                      {t('quiz.groupLabel', { index: groupId })}
                     </div>
                     <div className="text-xs text-muted-foreground">
-                      {t('flashcards.groupRange', { start, end })}
+                      {t('quiz.groupRange', { start, end })}
                     </div>
                   </div>
                   <Button
@@ -236,10 +164,15 @@ function FlashcardLessonGroupsView({ user }: { user: User }) {
                           .map((word) => word.id);
                         localStorage.setItem(
                           resumeKey,
-                          JSON.stringify({ index: 0, orderIds }),
+                          JSON.stringify({
+                            index: 0,
+                            orderIds,
+                            answers: [],
+                            showResults: false,
+                          }),
                         );
                       }
-                      router.push(`/${locale}/flashcards/${lessonId}/${groupId}`);
+                      router.push(`/${locale}/quiz/${lessonId}/${groupId}`);
                     }}
                   >
                     {hasResume

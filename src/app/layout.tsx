@@ -1,9 +1,6 @@
 import './globals.css';
 import type { ReactNode } from 'react';
 import { headers } from 'next/headers';
-import { NextIntlClientProvider } from 'next-intl';
-import { LayoutShell } from '@/components/layout-shell';
-import { getMessages } from '@/i18n/messages';
 
 export const metadata = {
   title: 'Vocab Master',
@@ -28,15 +25,19 @@ export default async function RootLayout({
 }: {
   children: ReactNode;
 }) {
-  const locale = headers().get('x-locale') ?? 'en';
-  const messages = await getMessages(locale);
+  const headerLocale = headers().get('x-locale') ?? '';
+  const nextUrl = headers().get('next-url') ?? '';
+  const pathLocale = nextUrl.split('/')[1] ?? '';
+  const locales = new Set(['en', 'ru', 'uz']);
+  const locale =
+    (locales.has(pathLocale) && pathLocale) ||
+    (locales.has(headerLocale) && headerLocale) ||
+    'en';
 
   return (
     <html lang={locale}>
       <body>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <LayoutShell>{children}</LayoutShell>
-        </NextIntlClientProvider>
+        {children}
       </body>
     </html>
   );

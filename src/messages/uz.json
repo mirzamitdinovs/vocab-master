@@ -44,7 +44,10 @@
     "translationFirst": "Avval tarjima",
     "prevCard": "Oldingi karta",
     "nextCard": "Keyingi karta",
-    "wordCount": "{current} / {total} so‘z"
+    "wordCount": "{current} / {total} so‘z",
+    "groupLabel": "{index}-guruh",
+    "groupRange": "{start}–{end} so‘z",
+    "groupCount": "{total} ta guruh · {words} ta so‘z"
   },
   "quiz": {
     "title": "Test",
@@ -55,7 +58,14 @@
     "results": "Natijalar",
     "correct": "To‘g‘ri",
     "incorrect": "Noto‘g‘ri",
-    "finish": "Testni tugatish"
+    "finish": "Testni tugatish",
+    "prev": "Oldingi",
+    "next": "Keyingi",
+    "reset": "Qayta boshlash",
+    "backToQuiz": "Testga qaytish",
+    "groupLabel": "{index}-guruh",
+    "groupRange": "{start}–{end} savollar",
+    "groupCount": "{total} ta guruh · {words} ta savol"
   },
   "words": {
     "empty": "Hali tillar yo‘q.",
@@ -85,7 +95,12 @@
     "confirm": "Tasdiqlash",
     "delete": "O‘chirish",
     "logout": "Chiqish",
-    "uiLanguage": "Ilova tili"
+    "uiLanguage": "Ilova tili",
+    "lang": {
+      "en": "Inglizcha",
+      "ru": "Ruscha",
+      "uz": "O‘zbekcha"
+    }
   },
   "learning": {
     "learningLanguage": "O‘rganish tili",
@@ -104,8 +119,10 @@
     "start": "Boshlash",
     "lesson": "Dars",
     "selectLesson": "Darsni tanlang",
-    "startSession": "Sessiyani boshlash",
-    "continueSession": "Sessiyani davom ettirish",
+    "selectTopicFirst": "Avval mavzuni tanlang.",
+    "updateLesson": "Darsni yangilash",
+    "startSession": "Boshlash",
+    "continueSession": "Davom ettirish",
     "loading": "Yuklanmoqda...",
     "apiCheckStart": "API ma’lumotlari tekshirilmoqda...",
     "apiNoLanguages": "API tekshiruvi: tillar topilmadi.",

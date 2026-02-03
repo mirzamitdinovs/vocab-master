@@ -44,7 +44,10 @@
     "translationFirst": "Сначала перевод",
     "prevCard": "Предыдущая карточка",
     "nextCard": "Следующая карточка",
-    "wordCount": "Слово {current} из {total}"
+    "wordCount": "Слово {current} из {total}",
+    "groupLabel": "Группа {index}",
+    "groupRange": "Слова {start}–{end}",
+    "groupCount": "{total} групп · {words} слов"
   },
   "quiz": {
     "title": "Тест",
@@ -55,7 +58,14 @@
     "results": "Результаты",
     "correct": "Правильно",
     "incorrect": "Неправильно",
-    "finish": "Завершить тест"
+    "finish": "Завершить тест",
+    "prev": "Предыдущий",
+    "next": "Следующий",
+    "reset": "Сброс",
+    "backToQuiz": "Назад к тесту",
+    "groupLabel": "Группа {index}",
+    "groupRange": "Вопросы {start}–{end}",
+    "groupCount": "{total} групп · {words} вопросов"
   },
   "words": {
     "empty": "Языки ещё не добавлены.",
@@ -85,7 +95,12 @@
     "confirm": "Подтвердить",
     "delete": "Удалить",
     "logout": "Выйти",
-    "uiLanguage": "Язык приложения"
+    "uiLanguage": "Язык приложения",
+    "lang": {
+      "en": "Английский",
+      "ru": "Русский",
+      "uz": "Узбекский"
+    }
   },
   "learning": {
     "learningLanguage": "Язык обучения",
@@ -104,8 +119,10 @@
     "start": "Начать",
     "lesson": "Урок",
     "selectLesson": "Выберите урок",
-    "startSession": "Начать сессию",
-    "continueSession": "Продолжить сессию",
+    "selectTopicFirst": "Сначала выберите тему.",
+    "updateLesson": "Обновить урок",
+    "startSession": "Начать",
+    "continueSession": "Продолжить",
     "loading": "Загрузка...",
     "apiCheckStart": "Проверяем данные API...",
     "apiNoLanguages": "Проверка API: языков нет.",
