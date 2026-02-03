@@ -7,7 +7,6 @@ import { ChevronLeft, Volume2, XCircle } from 'lucide-react';
 import { UserGate, type User } from '@/components/user-gate';
 import { Button } from '@/components/ui/button';
 import { graphqlRequest } from '@/lib/graphql/client';
-import { useAudioGate } from '@/lib/audio-gate';
 import { useLocale, useTranslations } from 'next-intl';
 
 type Vocabulary = {
@@ -39,7 +38,6 @@ function FlashcardLessonView({ user }: { user: User }) {
   const [direction, setDirection] = useState<'next' | 'prev'>('next');
   const [loading, setLoading] = useState(true);
   const [audioPlayer, setAudioPlayer] = useState<HTMLAudioElement | null>(null);
-  const { audioReady, unlockAudio } = useAudioGate();
   const [activeTap, setActiveTap] = useState<'prev' | 'next' | null>(null);
   const locale = useLocale();
   const t = useTranslations();
@@ -166,13 +164,33 @@ function FlashcardLessonView({ user }: { user: User }) {
       setLoading(false);
     }
     loadSession();
-  }, [lessonId, user.id]);
+  }, [lessonId, user.id, resumeKey]);
 
   useEffect(() => {
     if (!resumeKey || sessionWords.length === 0) return;
     const orderIds = sessionWords.map((word) => word.id);
     const payload = { index: currentIndex, orderIds };
     localStorage.setItem(resumeKey, JSON.stringify(payload));
+  }, [resumeKey, sessionWords, currentIndex]);
+
+  useEffect(() => {
+    if (!resumeKey || sessionWords.length === 0) return;
+    const persist = () => {
+      const orderIds = sessionWords.map((word) => word.id);
+      const payload = { index: currentIndex, orderIds };
+      localStorage.setItem(resumeKey, JSON.stringify(payload));
+    };
+    const handleVisibility = () => {
+      if (document.visibilityState === 'hidden') {
+        persist();
+      }
+    };
+    window.addEventListener('beforeunload', persist);
+    document.addEventListener('visibilitychange', handleVisibility);
+    return () => {
+      window.removeEventListener('beforeunload', persist);
+      document.removeEventListener('visibilitychange', handleVisibility);
+    };
   }, [resumeKey, sessionWords, currentIndex]);
 
   function nextWord() {
@@ -193,10 +211,6 @@ function FlashcardLessonView({ user }: { user: User }) {
 
   function resolveAudioSrc(audio?: string | null) {
     if (!audio) return null;
-    if (audio.startsWith('https://storage.googleapis.com/snu-1b-5b-audio/')) {
-      const suffix = audio.replace('https://storage.googleapis.com/snu-1b-5b-audio/', '');
-      return `/api/audio/korean/snu/${suffix}`;
-    }
     if (audio.startsWith('http')) return audio;
     if (audio.startsWith('/api/audio/')) return audio;
     if (audio.startsWith('audio/')) {
@@ -205,12 +219,7 @@ function FlashcardLessonView({ user }: { user: User }) {
     return `/api/audio/${audio}`;
   }
 
-  async function playAudio() {
-    if (!audioReady) {
-      const unlocked = await unlockAudio();
-      if (!unlocked) return;
-      return;
-    }
+  function playAudio() {
     const src = resolveAudioSrc(currentWord?.audio);
     if (!src) return;
     if (audioPlayer) {
@@ -341,7 +350,7 @@ function FlashcardLessonView({ user }: { user: User }) {
       {currentWord?.audio ? (
         <Button className="w-full h-12 text-base" onClick={playAudio}>
           <Volume2 className="mr-2 h-4 w-4" />
-          {audioReady ? t('flashcards.playAudio') : t('flashcards.enableAudio')}
+          {t('flashcards.playAudio')}
         </Button>
       ) : null}
     </div>

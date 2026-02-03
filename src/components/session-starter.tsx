@@ -152,7 +152,10 @@ export function SessionStarter({
       );
       setChapters(data.chapters);
       if (data.chapters[0]) {
-        setChapterId(data.chapters[0].id);
+        const resumed = data.chapters.find((chapter) =>
+          localStorage.getItem(`${resumePrefix}${chapter.id}`),
+        );
+        setChapterId(resumed?.id ?? data.chapters[0].id);
       }
     }
     loadChapters();
