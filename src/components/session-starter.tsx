@@ -37,10 +37,12 @@ export function SessionStarter({
   const [selectedLanguageId, setSelectedLanguageId] = useState('');
   const [missingSelectionsOpen, setMissingSelectionsOpen] = useState(false);
   const [debugStatus, setDebugStatus] = useState('');
+  const [hasResume, setHasResume] = useState(false);
   const t = useTranslations();
   const locale = useLocale();
   const startLabel = label ?? t('session.startSession');
   const wordsCachePrefix = 'vocab-master-words:chapter:';
+  const resumePrefix = 'flashcards-session:';
 
   useEffect(() => {
     const storedLevel = localStorage.getItem(LEVEL_STORAGE_KEY) ?? '';
@@ -156,9 +158,21 @@ export function SessionStarter({
     loadChapters();
   }, [selectedLevelId]);
 
-  async function start() {
+  useEffect(() => {
+    if (!chapterId) {
+      setHasResume(false);
+      return;
+    }
+    setHasResume(Boolean(localStorage.getItem(`${resumePrefix}${chapterId}`)));
+  }, [chapterId]);
+
+  async function start(clearResume = false) {
     if (!chapterId) return;
     setLoading(true);
+    if (clearResume) {
+      localStorage.removeItem(`${resumePrefix}${chapterId}`);
+      setHasResume(false);
+    }
     const selectedChapter = chapters.find(
       (chapter) => chapter.id === chapterId,
     );
@@ -307,13 +321,24 @@ export function SessionStarter({
           </Dialog>
         </div>
       </div>
-      <Button
-        className="w-full h-12 text-base bg-gradient-to-r from-blue-500 to-indigo-500 text-white hover:opacity-90"
-        onClick={start}
-        disabled={loading || !chapterId}
-      >
-        {loading ? t('session.loading') : startLabel}
-      </Button>
+      <div className="space-y-2">
+        {hasResume ? (
+          <Button
+            className="w-full h-12 text-base bg-gradient-to-r from-emerald-500 to-teal-500 text-white hover:opacity-90"
+            onClick={() => start(false)}
+            disabled={loading || !chapterId}
+          >
+            {loading ? t('session.loading') : t('session.continueSession')}
+          </Button>
+        ) : null}
+        <Button
+          className="w-full h-12 text-base bg-gradient-to-r from-blue-500 to-indigo-500 text-white hover:opacity-90"
+          onClick={() => start(true)}
+          disabled={loading || !chapterId}
+        >
+          {loading ? t('session.loading') : startLabel}
+        </Button>
+      </div>
     </div>
   );
 }

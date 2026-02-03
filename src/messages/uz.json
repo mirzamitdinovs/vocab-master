@@ -106,6 +106,7 @@
     "lesson": "Dars",
     "selectLesson": "Darsni tanlang",
     "startSession": "Sessiyani boshlash",
+    "continueSession": "Sessiyani davom ettirish",
     "loading": "Yuklanmoqda...",
     "apiCheckStart": "API ma’lumotlari tekshirilmoqda...",
     "apiNoLanguages": "API tekshiruvi: tillar topilmadi.",

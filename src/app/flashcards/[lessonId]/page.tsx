@@ -44,6 +44,7 @@ function FlashcardLessonView({ user }: { user: User }) {
   const locale = useLocale();
   const t = useTranslations();
   const wordsCachePrefix = 'vocab-master-words:chapter:';
+  const resumeKey = lessonId ? `flashcards-session:${lessonId}` : '';
 
   const currentWord = sessionWords[currentIndex];
 
@@ -133,14 +134,46 @@ function FlashcardLessonView({ user }: { user: User }) {
         words = data.sessionWords ?? [];
         localStorage.setItem(cacheKey, JSON.stringify(words));
       }
-      const shuffled = [...words].sort(() => Math.random() - 0.5);
-      setSessionWords(shuffled);
-      setCurrentIndex(0);
+      let orderedWords = [...words];
+      let startIndex = 0;
+      if (resumeKey) {
+        const stored = localStorage.getItem(resumeKey);
+        if (stored) {
+          try {
+            const parsed = JSON.parse(stored) as {
+              index: number;
+              orderIds: string[];
+            };
+            const wordMap = new Map(words.map((w) => [w.id, w]));
+            const restored = parsed.orderIds
+              .map((id) => wordMap.get(id))
+              .filter(Boolean) as Vocabulary[];
+            if (restored.length > 0) {
+              orderedWords = restored;
+              startIndex = Math.min(parsed.index ?? 0, restored.length - 1);
+            }
+          } catch {
+            localStorage.removeItem(resumeKey);
+          }
+        }
+      }
+      if (startIndex === 0 && orderedWords.length === words.length) {
+        orderedWords = [...words].sort(() => Math.random() - 0.5);
+      }
+      setSessionWords(orderedWords);
+      setCurrentIndex(startIndex);
       setShowBack(false);
       setLoading(false);
     }
     loadSession();
   }, [lessonId, user.id]);
+
+  useEffect(() => {
+    if (!resumeKey || sessionWords.length === 0) return;
+    const orderIds = sessionWords.map((word) => word.id);
+    const payload = { index: currentIndex, orderIds };
+    localStorage.setItem(resumeKey, JSON.stringify(payload));
+  }, [resumeKey, sessionWords, currentIndex]);
 
   function nextWord() {
     setShowBack(false);
@@ -195,6 +228,9 @@ function FlashcardLessonView({ user }: { user: User }) {
       }`,
       { userId: user.id },
     );
+    if (resumeKey) {
+      localStorage.removeItem(resumeKey);
+    }
     router.push(`/${locale}/flashcards`);
   }
 

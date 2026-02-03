@@ -106,6 +106,7 @@
     "lesson": "Урок",
     "selectLesson": "Выберите урок",
     "startSession": "Начать сессию",
+    "continueSession": "Продолжить сессию",
     "loading": "Загрузка...",
     "apiCheckStart": "Проверяем данные API...",
     "apiNoLanguages": "Проверка API: языков нет.",

@@ -106,6 +106,7 @@
     "lesson": "Lesson",
     "selectLesson": "Select lesson",
     "startSession": "Start session",
+    "continueSession": "Continue session",
     "loading": "Loading...",
     "apiCheckStart": "Checking API data...",
     "apiNoLanguages": "API check: 0 languages found.",
