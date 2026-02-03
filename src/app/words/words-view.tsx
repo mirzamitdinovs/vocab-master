@@ -196,6 +196,7 @@ export default function WordsView() {
       if (!audioReady) {
         const unlocked = await unlockAudio();
         if (!unlocked) return;
+        return;
       }
       const player = new Audio(src);
       player.play().catch(() => null);

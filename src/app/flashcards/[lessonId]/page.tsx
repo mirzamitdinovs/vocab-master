@@ -176,6 +176,7 @@ function FlashcardLessonView({ user }: { user: User }) {
     if (!audioReady) {
       const unlocked = await unlockAudio();
       if (!unlocked) return;
+      return;
     }
     const src = resolveAudioSrc(currentWord?.audio);
     if (!src) return;
@@ -304,7 +305,7 @@ function FlashcardLessonView({ user }: { user: User }) {
       {currentWord?.audio ? (
         <Button className="w-full h-12 text-base" onClick={playAudio}>
           <Volume2 className="mr-2 h-4 w-4" />
-          {t('flashcards.playAudio')}
+          {audioReady ? t('flashcards.playAudio') : t('flashcards.enableAudio')}
         </Button>
       ) : null}
     </div>
